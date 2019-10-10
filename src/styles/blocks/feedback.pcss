@@ -1,0 +1,73 @@
+.feedback {position: relative;
+
+    &::before {content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-top: 100px solid #fff;
+        border-left: 49vw solid transparent;
+        border-right: 49vw solid transparent;
+    }
+    
+}
+.container--feedback {padding-top: 250px;}
+.feedback__article {display: flex;
+    margin-left: 30px;
+}
+.quotes-list {display: flex; margin-top: 70px;margin-left: 30px;}
+.quotes-list__item {width: 300px;
+    position: relative;
+    margin-left: 150px;
+    &:first-child {margin-left: 110px;}
+&::before{content:"";
+    position: absolute;
+    left: -110px;
+    width: 80px;
+    height: 80px;
+    top: 0;
+    background: url('~images\content\quote.png') no-repeat center;
+    background-size: contain
+}}
+
+.feedback__headline {font-weight: 700; font-size: 36px}
+.feedback__button {border-radius: 50%;
+     border: 1px solid #464d62;
+     height: 20px;
+     width: 20px;
+     padding: 20px;
+     background: svg-load('arrow-down.svg', fill = #464d62, width = 75%, height = 75% ) no-repeat center;
+     background-size: 30%;
+     margin-left: 30px;
+     
+     }
+.feedback__button--left {transform: rotate(180deg);margin-left: 100px;}
+
+.quotes-list__text, .quotes-list__speaker-position {color: rgba(#464e63, 0.5)}
+
+.quotes-list__speaker-name {font-weight:700}
+
+.quotes-list__speaker-position {font-size: 12px;
+margin-top: 10px;}
+
+.quotes-list__speaker-photo {border-radius: 50%;
+height: 90px;
+width: 90px;}
+.quotes-list__speaker-info {display:flex;
+margin-top: 25px;}
+.quotes-list__speaker-photo--kovalchuk {background: url('~images\content\kovalchuk.png') no-repeat;
+    background-position-x: center;
+    background-size: 135%;
+    background-position-y: 15%;
+    }
+
+.quotes-list__speaker-photo--sabantsev {background: url('~images\content\sabantsev.png') no-repeat;
+        background-position-x: center;
+        ;
+    background-size: 135%; }
+
+.quotes-list__speaker-textcontent {display: flex;
+flex-direction: column;
+justify-content: center;
+margin-left: 25px;}
+
+

@@ -1,0 +1,42 @@
+.jobs__headline {font-weight:700; font-size: 36px}
+.jobs__content {display: flex; margin-top: 50px;}
+.jobs__preview {position: relative; max-width: 975px}
+.jobs__small-previews {position: absolute; right: 0; bottom: 50px; width: 175px}
+.jobs__button {overflow: hidden;}
+.jobs__button--active {border: 3px solid #dc9322}
+.jobs__arrows {display: flex; width: 100%; justify-content: flex-end; color: #fff}
+.jobs__arrow {background: svg-load('arrow-down.svg', fill = #5d6471, width = 75%, height = 75% ) no-repeat center;
+    background-color: #353e4e; height: 50px; width: 50px;
+    padding: 20px;
+    background-size: 30%;
+   
+    
+
+    &:hover {background: svg-load('arrow-down.svg', fill = #fff, width = 100%, height = 100% ) no-repeat center;
+        background-size: 30%;
+        background-color: #353e4e}
+    
+        
+        
+}
+.jobs__arrow--down {transform:rotate(90deg);}
+.jobs__arrow--up {transform:rotate(270deg);}
+.jobs__description {margin-left: 120px;}
+
+.tech-list {display: flex; margin-bottom: 30px;}
+.tech-list__item {background: #f3f5f9;
+border-radius: 15px;
+padding: 5px 10px;
+
+margin-right: 20px;
+&:last-child {margin-right: 0;}}
+
+.jobs__paragraph {font-size: 16px;
+    color: rgba(#464e63, 0.5); margin-bottom: 30px;}
+
+.jobs__link {color: #586fd3;
+font-weight: 900}
+
+.jobs__icon-link {fill: #586fd3; height: 0.9rem; margin-right: 20px; margin-bottom: -2px; }
+
+.jobs__headline--description-list {margin-bottom: 30px;}

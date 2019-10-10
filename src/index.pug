@@ -9,10 +9,306 @@ html(lang="en")
     title Portfolio | main page
   body
     .wrapper
-      .maincontent
-        +image('content/user.jpg', 'user-pic')
-        +icon('link', 'link-class')
-        .icon-bg
+     .wallpaper.wallpaper--mountain
+     
+       header.header
+        .container.container--header
+         a(href="#").logo-link на 
+         ul.navigation
+           li.navigation__item
+            a(href="#").navigation__link Главная
+           li.navigation__item
+            a(href="#hello").navigation__link Обо мне
+           li.navigation__item
+            a(href="#skills").navigation__link Навыки
+           li.navigation__item
+            a(href="#jobs").navigation__link Работы
+           li.navigation__item
+            a(href="#feedback").navigation__link Отзывы
+           li.navigation__item
+            a(href="#contacts").navigation__link Связаться
+         ul.socials
+          li.socials__item
+           a(href="https://www.instagram.com/tema.nikitin/").socials__link
+            +icon ('insta')
+          li.socials__item
+           a(href="https://vk.com/bestintheworldatwhathedoes").socials__link
+            +icon ('vk')
+          li.socials__item  
+           a(href="https://github.com/dontshoot11").socials__link
+            +icon ('github')
+        .container  
+         .title
+          p.text-alpha Личный сайт <br> веб разработчика
+          h1.headline Никитин Артём
+        a(href="#").button.button--scroll Скролл
+         +icon ('scroll', 'icon-scroll')
+       section(id="hello").section.hello
+        .container.container--hello
+          .welcome-card 
+            .welcome-card__info
+             .welcome-card__photo
+              +image('content/me.jpg','my-photo')
+             .welcome-card__description
+              .welcome-card__col
+                .welcome-card__row
+                  p.welcome-card__text Проживаю
+                .welcome-card__row
+                  p.welcome-card__text Возраст
+                .welcome-card__row
+                  p.welcome-card__text Родился
+              .welcome-card__col.welcome-card__col--dark
+                .welcome-card__row
+                    p.welcome-card__text Санкт-Петербург
+                .welcome-card__row
+                  p.welcome-card__text 30
+                .welcome-card__row
+                  p.welcome-card__text 7 февраля 1989
+            .welcome-card__textcontent
+              .welcome-card__upper-part
+                .welcome-card__row
+                  p.welcome-card__text Привет, меня зовут
+                .welcome-card__row
+                  h2.welcome-card__headline Никитин Артём
+                .welcome-card__row
+                   p.welcome-card__text Я занимаюсь разработкой современных сайтов и приложений
+                   p.welcome-card__text Мне нравится делать интересные и современные проекты
+              p.welcome-card__text Этот сайт я сделал в рамках обучения в Школе онлайн образования<br> Loftschool. Чуть позже я освежу в нём свой контент. А пока <br> посмотрите, как тут всё классно и красиво!
+    section(id='skills').section.skills
+      .container.container--skills
+        .backpack-picture
+        .why-me
+          h2.why-me__headline Чем я могу быть полезен вам
+          p.why-me__text Этот сайт я сделал в рамках обучения в Школе онлайн образования<br> Loftschool. Чуть позже я освежу в нём свой контент. А пока <br> посмотрите, как тут всё классно и красиво!
+          .skills-list
+            h2.why-me__headline.why-me__headline--skills-list Front-end
+            ul.why-me__skills-list
+             li.why-me__list-item 
+              svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none', ).percentage
+                circle(cx ='50', cy = '50', r = '40').circle.circle__under
+                circle(cx ='50', cy = '50', r = '40', style = "animation-delay: -65s").circle.circle__above 
+              span.why-me__skill-name HTML5
+             li.why-me__list-item
+              svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none').percentage
+                circle(cx ='50', cy = '50', r = '40').circle.circle__under
+                circle(cx ='50', cy = '50', r = '40', style = "animation-delay: -69s").circle.circle__above 
+              span.why-me__skill-name CSS3
+             li.why-me__list-item
+              svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none').percentage
+                circle(cx ='50', cy = '50', r = '40').circle.circle__under
+                circle(cx ='50', cy = '50', r = '40', style = "animation-delay: -33s").circle.circle__above 
+              span.why-me__skill-name JavaScript
+             li.why-me__list-item
+              svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none').percentage
+                circle(cx ='50', cy = '50', r = '40').circle.circle__under
+                circle(cx ='50', cy = '50', r = '40', style = "animation-delay: -20s").circle.circle__above 
+              span.why-me__skill-name Jquery <br> и Vue.js
+            h2.why-me__headline.why-me__headline--skills-list Workflow
+            ul.why-me__skills-list
+              li.why-me__list-item
+                svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none').percentage
+                  circle(cx ='50', cy = '50', r = '40').circle.circle__under
+                  circle(cx ='50', cy = '50', r = '40',style = "animation-delay: -70s").circle.circle__above 
+                span.why-me__skill-name GIT
+              li.why-me__list-item
+                svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none').percentage
+                  circle(cx ='50', cy = '50', r = '40').circle.circle__under
+                  circle(cx ='50', cy = '50', r = '40', style = "animation-delay: -20s").circle.circle__above 
+                span.why-me__skill-name Terminal
+              li.why-me__list-item
+                svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none').percentage
+                  circle(cx ='50', cy = '50', r = '40').circle.circle__under
+                  circle(cx ='50', cy = '50', r = '40', style = "animation-delay: -25s").circle.circle__above 
+                span.why-me__skill-name Gulp
+              li.why-me__list-item
+                svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none').percentage
+                  circle(cx ='50', cy = '50', r = '40').circle.circle__under
+                  circle(cx ='50', cy = '50', r = '40', style = "animation-delay: -20s").circle.circle__above 
+                span.why-me__skill-name Webpack
+    section(id='jobs').section.jobs
+      .container.container--jobs
+        h2.jobs__headline Мои работы
+        .jobs__content
+          .jobs__slider
+           .jobs__preview
+            +image('content/bigPreview.png','bigPreview')
+            ul.jobs__small-previews
+              li.jobs__small-preview
+               button.jobs__button.jobs__button--active
+                +image('content/smallPreview1.png', 'smallPreview')
+              li.jobs__small-preview
+                button.jobs__button
+                  +image('content/smallPreview2.png', 'smallPreview')
+              li.jobs__small-preview 
+                button.jobs__button
+                  +image('content/smallPreview3.png', 'smallPreview')
+              li.jobs__small-preview
+                button.jobs__button
+                  +image('content/smallPreview4.png', 'smallPreview')
+            .jobs__arrows
+              button.jobs__arrow.jobs__arrow--up
+              button.jobs__arrow.jobs__arrow--down 
+                
+          .jobs__description 
+            ul.tech-list
+              li.tech-list__item HTML
+              li.tech-list__item CSS
+              li.tech-list__item JavaScript
+            h2.jobs__headline.jobs__headline--description-list Сайт школы образования
+            p.jobs__paragraph Этот парень проходил обучение веб-разработке <br> не где-то, а в LoftSchool! 2 месяца только самых <br> тяжелых испытаний и бессонных ночей!
+            a(href="#").jobs__link 
+             +icon('link', 'jobs__icon-link')
+             span.jobs__link Посмотреть сайт
+    .wallpaper.wallpaper--shangrila
+      section(id="feedback").section.feedback 
+        .container.container--feedback
+          .feedback__article
+            h2.feedback__headline Что обо мне говорят
+            button.feedback__button.feedback__button--left
+            button.feedback__button.feedback__button--right 
+          ul.quotes-list
+            li.quotes-list__item
+              p.quotes-list__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4.5 месяца самых тяжелых испытаяний и бессонных ночей!
+              .quotes-list__speaker-info
+                .quotes-list__speaker-photo.quotes-list__speaker-photo--kovalchuk
+                .quotes-list__speaker-textcontent
+                  .quotes-list__speaker-name Ковальчук Дмитрий
+                  .quotes-list__speaker-position Основатель Loftschool
+            li.quotes-list__item
+              p.quotes-list__text Этот код выдержит любые испытания. Только, пожалуйста, не загружайте сайт на слишком старых браузерах.
+              .quotes-list__speaker-info
+                .quotes-list__speaker-photo.quotes-list__speaker-photo--sabantsev
+                .quotes-list__speaker-textcontent
+                  .quotes-list__speaker-name Владимир Сабанцев
+                  .quotes-list__speaker-position Преподаватель 
+
+      section(id="contacts").section.contacts
+        .container.container--contacts
+          form.form
+            span.form__row
+              h2.form__headline Связаться со мной
+            span.form__row  
+              span.form__col.form__col--name
+                label(for = "name" ).form__label Введите ваше имя
+                input(type = 'text', name = "name" placeholder="Ковальчук Дмитрий").form__input
+              span.form__col.form__col--mail
+                label(for = "mail").form__label Введите ваш email
+                input(type = 'email', name = "mail" placeholder="loftschool@study.com").form__input
+            span.form__row
+              span.form__col.form__col--message
+                label(for = "message").form__label Сообщение к письму
+                input(type = 'textarea', name = "message" rows ="2" placeholder="Требуется ваша помощь в создании сайта, интересуют сроки и цена вопроса").form__input.form__input--textarea
+            span.form__row
+              button(type="submit").form__button Отправить
+
+
+
+
+
+
+
+            
+            
+
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    footer.footer
+      .container.container--footer
+      
+        .footer__col
+          
+            
+          .footer__element.footer__element--copyright &#169 2019
+        .footer__col
+
+            
+          .footer__element.footer__element--name никитин <br> артём
+          .footer__description Личный сайт <br> веб разработчика
+
+            
+         
+            
+        .footer__col
+          .footer__element.footer__element--navigation
+            ul.navigation.navigation--footer
+              li.navigation__item.navigation__item--footer
+                a(href="#").navigation__link Главная
+              li.navigation__item.navigation__item--footer
+                a(href="#hello").navigation__link Обо мне
+              li.navigation__item.navigation__item--footer
+                a(href="#skills").navigation__link Навыки
+              li.navigation__item.navigation__item--footer
+                a(href="#jobs").navigation__link Работы
+              li.navigation__item.navigation__item--footer
+                a(href="#feedback").navigation__link Отзывы
+              li.navigation__item.navigation__item--footer
+                a(href="#contacts").navigation__link Связаться
+          .footer__row
+            .footer__col 
+             .footer__description--school.footer__description Этот сайт я сделал в рамках обучения в <br> Школе онлайн образования Loftschool
+              ul.socials.footer__description
+                li.socials__item.socials__item--footer
+                  a(href="https://www.instagram.com/tema.nikitin/").socials__link.socials__link--insta
+                   
+                li.socials__item.socials__item--footer
+                  a(href="https://vk.com/bestintheworldatwhathedoes").socials__link.socials__link--vk
+                   
+                li.socials__item.socials__item--footer  
+                 a(href="https://github.com/dontshoot11").socials__link.socials__link--github
+                   
+            .footer__col 
+              .footer__description.footer__description--wisdom Всегда пишите код так, будто сопровождать его будет <br> склонный к насилию психопат, который знает, где вы <br> живете
+              .footer__description.footer__description--credits Martin Golding
+        
+        
+           
+          
+
+
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+          
+
+        
+         
+         
+       
+
+        
+
+
+      
+
+    
+      
 
 
         
