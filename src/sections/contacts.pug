@@ -1,0 +1,18 @@
+section(id="contacts").section.contacts
+        .container.container--contacts
+          form.form
+            span.form__row
+              h2.h2.form__headline Связаться со мной
+            span.form__row  
+              span.form__col.form__col--name
+                label(for = "name" ).form__label Введите ваше имя
+                input(type = 'text', id = "name" placeholder="Ковальчук Дмитрий").form__input
+              span.form__col.form__col--mail
+                label(for = "mail").form__label Введите ваш email
+                input(type = 'email', id = "mail" placeholder="loftschool@study.com").form__input
+            span.form__row
+              span.form__col.form__col--message
+                label(for = "message").form__label Сообщение к письму
+                textarea(cols="30", rows="2", resize: none, id = "message", placeholder="Требуется ваша помощь в создании сайта, интересуют сроки и цена вопроса").form__input.form__input--textarea
+            span.form__row
+              button(type="submit").form__button Отправить

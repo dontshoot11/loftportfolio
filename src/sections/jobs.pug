@@ -1,0 +1,34 @@
+section(id='jobs').section.jobs
+      .container.container--jobs
+        h2.h2.jobs__headline Мои работы
+        .jobs__content
+          .jobs__slider
+           .jobs__preview
+            +image('content/bigPreview.png','bigPreview')
+            ul.jobs__small-previews
+              li.jobs__small-preview
+               button.jobs__button.jobs__button--active
+                +image('content/smallPreview1.png', 'smallPreview')
+              li.jobs__small-preview
+                button.jobs__button
+                  +image('content/smallPreview2.png', 'smallPreview')
+              li.jobs__small-preview 
+                button.jobs__button
+                  +image('content/smallPreview3.png', 'smallPreview')
+              li.jobs__small-preview
+                button.jobs__button
+                  +image('content/smallPreview4.png', 'smallPreview')
+            .jobs__arrows
+              button.jobs__arrow.jobs__arrow--up
+              button.jobs__arrow.jobs__arrow--down 
+                
+          .jobs__description 
+            ul.tech-list
+              li.tech-list__item HTML
+              li.tech-list__item CSS
+              li.tech-list__item JavaScript
+            h2.h2.jobs__headline.jobs__headline--description-list Сайт школы образования
+            p.jobs__paragraph Этот парень проходил обучение веб-разработке <br> не где-то, а в LoftSchool! 2 месяца только самых <br> тяжелых испытаний и бессонных ночей!
+            a(href="#").jobs__link 
+             +icon('link', 'jobs__icon-link')
+             span.jobs__link Посмотреть сайт

@@ -1,0 +1,23 @@
+section(id="feedback").section.feedback 
+        .container.container--feedback
+          .feedback__article
+            h2.h2.feedback__headline Что обо мне говорят
+            button.feedback__button.feedback__button--left
+            button.feedback__button.feedback__button--right 
+          ul.quotes-list
+            li.quotes-list__item
+              p.quotes-list__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4.5 месяца самых тяжелых испытаяний и бессонных ночей!
+              .quotes-list__speaker-info
+                .quotes-list__speaker-photo
+                 +image('content/kovalchuk.png', 'quotes-list__speaker-png')
+                .quotes-list__speaker-textcontent
+                  .quotes-list__speaker-name Ковальчук Дмитрий
+                  .quotes-list__speaker-position Основатель Loftschool
+            li.quotes-list__item
+              p.quotes-list__text Этот код выдержит любые испытания. Только, пожалуйста, не загружайте сайт на слишком старых браузерах.
+              .quotes-list__speaker-info
+                .quotes-list__speaker-photo
+                  +image('content/sabantsev.png', 'quotes-list__speaker-png')
+                .quotes-list__speaker-textcontent
+                  .quotes-list__speaker-name Владимир Сабанцев
+                  .quotes-list__speaker-position Преподаватель 
