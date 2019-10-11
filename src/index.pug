@@ -69,7 +69,7 @@ html(lang="en")
                 .welcome-card__row
                   p.welcome-card__text Привет, меня зовут
                 .welcome-card__row
-                  h2.welcome-card__headline Никитин Артём
+                  h2.h2.welcome-card__headline Никитин Артём
                 .welcome-card__row
                    p.welcome-card__text Я занимаюсь разработкой современных сайтов и приложений
                    p.welcome-card__text Мне нравится делать интересные и современные проекты
@@ -78,10 +78,10 @@ html(lang="en")
       .container.container--skills
         .backpack-picture
         .why-me
-          h2.why-me__headline Чем я могу быть полезен вам
+          h2.h2.why-me__headline Чем я могу быть полезен вам
           p.why-me__text Этот сайт я сделал в рамках обучения в Школе онлайн образования<br> Loftschool. Чуть позже я освежу в нём свой контент. А пока <br> посмотрите, как тут всё классно и красиво!
           .skills-list
-            h2.why-me__headline.why-me__headline--skills-list Front-end
+            h2.h2.why-me__headline.why-me__headline--skills-list Front-end
             ul.why-me__skills-list
              li.why-me__list-item 
               svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none', ).percentage
@@ -103,7 +103,7 @@ html(lang="en")
                 circle(cx ='50', cy = '50', r = '40').circle.circle__under
                 circle(cx ='50', cy = '50', r = '40', style = "animation-delay: -20s").circle.circle__above 
               span.why-me__skill-name Jquery <br> и Vue.js
-            h2.why-me__headline.why-me__headline--skills-list Workflow
+            h2.h2.why-me__headline.why-me__headline--skills-list Workflow
             ul.why-me__skills-list
               li.why-me__list-item
                 svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none').percentage
@@ -127,7 +127,7 @@ html(lang="en")
                 span.why-me__skill-name Webpack
     section(id='jobs').section.jobs
       .container.container--jobs
-        h2.jobs__headline Мои работы
+        h2.h2.jobs__headline Мои работы
         .jobs__content
           .jobs__slider
            .jobs__preview
@@ -154,7 +154,7 @@ html(lang="en")
               li.tech-list__item HTML
               li.tech-list__item CSS
               li.tech-list__item JavaScript
-            h2.jobs__headline.jobs__headline--description-list Сайт школы образования
+            h2.h2.jobs__headline.jobs__headline--description-list Сайт школы образования
             p.jobs__paragraph Этот парень проходил обучение веб-разработке <br> не где-то, а в LoftSchool! 2 месяца только самых <br> тяжелых испытаний и бессонных ночей!
             a(href="#").jobs__link 
              +icon('link', 'jobs__icon-link')
@@ -163,21 +163,23 @@ html(lang="en")
       section(id="feedback").section.feedback 
         .container.container--feedback
           .feedback__article
-            h2.feedback__headline Что обо мне говорят
+            h2.h2.feedback__headline Что обо мне говорят
             button.feedback__button.feedback__button--left
             button.feedback__button.feedback__button--right 
           ul.quotes-list
             li.quotes-list__item
               p.quotes-list__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4.5 месяца самых тяжелых испытаяний и бессонных ночей!
               .quotes-list__speaker-info
-                .quotes-list__speaker-photo.quotes-list__speaker-photo--kovalchuk
+                .quotes-list__speaker-photo
+                 +image('content/kovalchuk.png', 'quotes-list__speaker-png')
                 .quotes-list__speaker-textcontent
                   .quotes-list__speaker-name Ковальчук Дмитрий
                   .quotes-list__speaker-position Основатель Loftschool
             li.quotes-list__item
               p.quotes-list__text Этот код выдержит любые испытания. Только, пожалуйста, не загружайте сайт на слишком старых браузерах.
               .quotes-list__speaker-info
-                .quotes-list__speaker-photo.quotes-list__speaker-photo--sabantsev
+                .quotes-list__speaker-photo
+                  +image('content/sabantsev.png', 'quotes-list__speaker-png')
                 .quotes-list__speaker-textcontent
                   .quotes-list__speaker-name Владимир Сабанцев
                   .quotes-list__speaker-position Преподаватель 
@@ -186,18 +188,18 @@ html(lang="en")
         .container.container--contacts
           form.form
             span.form__row
-              h2.form__headline Связаться со мной
+              h2.h2.form__headline Связаться со мной
             span.form__row  
               span.form__col.form__col--name
                 label(for = "name" ).form__label Введите ваше имя
-                input(type = 'text', name = "name" placeholder="Ковальчук Дмитрий").form__input
+                input(type = 'text', id = "name" placeholder="Ковальчук Дмитрий").form__input
               span.form__col.form__col--mail
                 label(for = "mail").form__label Введите ваш email
-                input(type = 'email', name = "mail" placeholder="loftschool@study.com").form__input
+                input(type = 'email', id = "mail" placeholder="loftschool@study.com").form__input
             span.form__row
               span.form__col.form__col--message
                 label(for = "message").form__label Сообщение к письму
-                input(type = 'textarea', name = "message" rows ="2" placeholder="Требуется ваша помощь в создании сайта, интересуют сроки и цена вопроса").form__input.form__input--textarea
+                textarea(cols="30", rows="2", resize: none, id = "message", placeholder="Требуется ваша помощь в создании сайта, интересуют сроки и цена вопроса").form__input.form__input--textarea
             span.form__row
               button(type="submit").form__button Отправить
 
