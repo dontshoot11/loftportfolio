@@ -1,7 +1,9 @@
 
 .jobs__content {display: flex; margin-top: 50px;}
 .jobs__preview {position: relative; max-width: 975px}
-.jobs__small-previews {position: absolute; right: 0; bottom: 50px; width: 175px}
+.jobs__small-previews {position: absolute; right: 0; bottom: 50px; width: 17%;
+}
+.jobs__small-preview {&:hover{transform:translateX(-20%); width: 125%}}
 .jobs__button {overflow: hidden;}
 .jobs__button--active {border: 3px solid #dc9322}
 .jobs__arrows {display: flex; width: 100%; justify-content: flex-end; color: #fff}
@@ -34,9 +36,13 @@ margin-right: 20px;
 .jobs__paragraph {font-size: 16px;
     color: rgba(#464e63, 0.5); margin-bottom: 30px;}
 
-.jobs__link {color: #586fd3;
-font-weight: 900}
+.jobs__link {color: #586fd3; 
+font-weight: 900; border-bottom: 2px solid transparent; transition: 0.3s;
+&:hover {border-bottom: 2px solid  #586fd3; transition: 0.3s; }
+}
 
-.jobs__icon-link {fill: #586fd3; height: 0.9rem; margin-right: 20px; margin-bottom: -2px; }
+.jobs__icon-link {fill: #586fd3; height: 0.9rem; margin-right: 20px; margin-bottom: -2px;  }
 
 .jobs__headline--description-list {margin-bottom: 30px;}
+
+
