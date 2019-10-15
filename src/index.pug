@@ -1,12 +1,13 @@
 include ./mixins.pug
 
 <!DOCTYPE html>
-html(lang="en")
+html(lang="ru")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title Portfolio | main page
+    link(rel="shortcut icon" href="src/images/content/Favicon.png" type="image/png")
   body
     .wrapper
       .wallpaper.wallpaper--mountain
@@ -18,6 +19,8 @@ html(lang="en")
         include sections/feedback.pug
         include sections/contacts.pug
       include sections/footer.pug
+
+      include sections/popup.pug
 
       
 
