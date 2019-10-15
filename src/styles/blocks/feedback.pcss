@@ -68,6 +68,15 @@ margin-left: 25px;}
 
 @include tablets {.quotes-list{margin-left: 0;}}
 
+@media screen and (max-width: 600px) {
+.quotes-list__item{
+    display:none;
+    margin-left: 0;
+}
+
+.quotes-list__item--active{
+display: flex; align-items:center; flex-direction:column; width: 100%}}
+
 @include phones {
     .feedback__article {display: grid;
      grid-template-columns: 1fr 1fr;
@@ -85,6 +94,6 @@ margin-left: 0; }
     &::before{display: none}
     &:first-child {margin-left: 0;}
 }
-.quotes-list__item--active{display: block;
+.quotes-list__item--active{
 display: flex; align-items:center; flex-direction:column; width: 100%}
 .quotes-list__speaker-info{width:100%; justify-content: center;}}

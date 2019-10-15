@@ -39,11 +39,11 @@ height: 100%;
 
 .why-me__text {color: rgba(#464e63, 0.5); margin-bottom: 40px;}
 
-.skills-list {margin-left: 70px;}
-.why-me__list-item {position: relative; margin-right: 20px; width: 25%; height: 25%;}
+.skills-list {margin-left: 30px;}
+.why-me__list-item {position: relative; width: 25%; height: 25%;}
 .why-me__list-item:last-child{margin-right: 0;}
 
-.why-me__skills-list {display: flex; color: #a2a6b0; margin-bottom: 30px; }
+.why-me__skills-list {display: flex; color: #a2a6b0; margin-bottom: 30px; justify-content: space-evenly }
 
 .percentage {display: inline-block; height: 100%; width: 100%;
     transform: rotate(180deg) 
@@ -77,10 +77,32 @@ to {stroke-dashoffset: 0}
     top: 0;
 }
 
+@include desktop {
+    .backpack-picture
+    {
+    grid-area: backpack;
+    justify-self: center;
+    align-self: center;
+    background: url("~images\content\backpack.png") no-repeat 100%;
+    background-size: 150%;
+    width: 100%;
+    height: 100%;
+    }
+}
+
 
 @include tablets {
 .why-me
  {text-align:center;}
+ .backpack-picture {
+    grid-area: backpack;
+    justify-self: center; align-self: center;
+
+background:url("~images\content\backpack.png") no-repeat center ;
+background-size: contain;
+width: 100%;
+height: 100%;
+}
 .container--skills
  {display: grid;
     grid-template-columns: 1fr;
@@ -110,4 +132,4 @@ to {stroke-dashoffset: 0}
 .why-me__text {text-align: left}
 .why-me__headline--skills-list {text-align: center}
 .why-me__skills-list {flex-wrap: wrap;}
-.why-me__list-item{width: 45%} }
+.why-me__list-item{width: 40%} }
