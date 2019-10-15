@@ -15,7 +15,7 @@ align-items: center}
 
 .navigation {display:flex}
 
-.navigation__item {margin-left: 55px; transition:0.3s;border-bottom: 2px solid transparent;
+.navigation__item {margin-left: 35px; transition:0.3s;border-bottom: 2px solid transparent;
     &:hover {border-bottom: 2px solid #414c63}
  }
 .navigation__item:first-child{margin-left: 0;}
@@ -43,7 +43,7 @@ transition:0.3s;
 &:hover {color:#fff}
 }
 
-.title {text-align: center;
+.title {text-align: center; width: 100%;
 }
 
 
@@ -54,17 +54,30 @@ fill: #464d62;
 
 }
 
-.button--scroll {margin: 0 auto;
-margin-bottom: 15px;
+.container--introduction  {height: 100%; display: flex; align-items: center; position: relative;}
+
+.button--scroll { position: absolute;
+    bottom: 20px;
+width: 100%;
 display: flex;
 align-items: center;
 transition: 0.3s;
+justify-content: center;
 &:hover{font-weight:bold;
     .icon-scroll{width: 30px; }}
     
 }
 
 @include tablets {.navigation {display: none}}
+@include phones {
+    .socials{display:none}
+   .button--scroll{display:none}
+
+
+
+
+
+} 
 
 
 

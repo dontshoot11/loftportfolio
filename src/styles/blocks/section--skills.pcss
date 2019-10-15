@@ -84,9 +84,30 @@ to {stroke-dashoffset: 0}
 .container--skills
  {display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1.5fr;
+    grid-template-rows: 1fr 1fr 0.7fr;
     grid-template-areas: 
     "skills-list"
     "skills-list"
     "backpack";}
-.skills-list {margin-left: 0;}}
+.skills-list {margin-left: 0;}
+.skills {position: relative;
+    &::before {content: "";
+        position: absolute;
+        top: -110px;
+        left: 0;
+        border-bottom: 100px solid #fff;
+        
+        border-right: 49.9vw solid transparent}
+    &::after {content: "";
+        position: absolute;
+        top: -110px;
+        right: 0;
+        border-bottom: 100px solid #fff;
+        
+        border-left: 49.9vw solid transparent}}}
+
+@include phones {.why-me__headline {text-align: left;}
+.why-me__text {text-align: left}
+.why-me__headline--skills-list {text-align: center}
+.why-me__skills-list {flex-wrap: wrap;}
+.why-me__list-item{width: 45%} }

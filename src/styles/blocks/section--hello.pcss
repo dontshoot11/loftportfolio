@@ -18,3 +18,14 @@ font-size: 36px; font-weight: 700 }
 
 .welcome-card__upper-part {margin-bottom: 90px;}
 
+.welcome-card__text--cursive {font-style: italic;
+ font-weight: 400}
+
+ 
+
+@include phones { .welcome-card {display:flex; flex-direction:column; align-items: center}
+.welcome-card__info {margin-right: 0;}
+.welcome-card__textcontent {margin-top: 35px}
+.welcome-card__headline{font-size: 52px}
+.welcome-card__upper-part {margin-bottom: 30px;}}
+

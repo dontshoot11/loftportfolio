@@ -7,7 +7,8 @@ color: #67696f}
     grid-template-rows: 2fr; 
     grid-template-areas: "left center right right right right right"
     "left center rightb rightb rightb rightb rightb";
-    justify-items: start
+    justify-items: start;
+    grid-gap: 5px 20px;
 }
 
     .footer__element--copyright{grid-area: left}
@@ -15,7 +16,7 @@ color: #67696f}
     .footer__element--navigation {grid-area: right;}
     .footer__description {grid-area: rightb}
     
-    .footer__description{display:flex; margin-top: 22px;}
+    .footer__description{display:flex; margin-top: 22px; max-width: 90%;}
     .footer__text {margin-top: 25px;}
     .footer__description-block--socials {margin-right: 120px;}
     
@@ -79,14 +80,18 @@ font-style: italic}
         grid-template-rows: fit-content 1fr ; 
         grid-template-areas: "left  right right  "
         "leftb rightb rightb";
+        
       
     
         align-items: start; 
+       
     
 }
+
+
 .footer__element--description{grid-area: leftb}
 
-.navigation--footer {grid-area: right; display: flex; flex-wrap: wrap}
+.navigation--footer {grid-area: right; display: flex; flex-wrap: wrap; }
 .navigation__item--footer {width: 25%; margin-left: 0;}
 .footer__description {grid-area: rightb; display: flex; flex-direction: column;
 
@@ -94,6 +99,34 @@ font-style: italic}
 .socials--footer {flex-direction:row}
 .footer__description--school{margin-top: 0;}
 .footer__element--name {margin-top: 25px;}
+
+
+
+}
+
+@include phones {
+    .container--footer {
+        
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: fit-content fit-content fit-content fit-content ; 
+        grid-template-areas: "copy"
+        "name"
+        "navigation"
+        "socials";
+        
+       }
+        .footer__element--copyright {margin-left: 0px;
+        grid-area: copy; font-size: 56px}
+        .footer__element--description {grid-area: name; width: 100%}
+        .footer__element--navigation {grid-area: navigation; display: flex; flex-wrap: wrap; margin-left: 0px;
+        margin-top: 25px;}
+        .navigation__item--footer {width: 50%}
+        .footer__description {grid-area: socials}
+        
+
+
+
 
 
 }
