@@ -9,18 +9,41 @@ html(lang="ru")
     title Portfolio | main page
     link(rel="shortcut icon" href="src/images/content/Favicon.png" type="image/png")
   body
+    
+
+
+
     .wrapper
+      
+          
       .wallpaper.wallpaper--mountain
-        include sections/header.pug
-        include sections/hello.pug
+        .parallax.parallax--1
+        .parallax.parallax--2
+        .parallax.parallax--3
+        .parallax.parallax--4
+        .parallax.parallax--5
+        .parallax.parallax--6
+        .parallax-content
+          include sections/header.pug
+          include sections/hello.pug
       include sections/skills.pug
       include sections/jobs.pug
       .wallpaper.wallpaper--shangrila
-        include sections/feedback.pug
-        include sections/contacts.pug
+        
+        .parallax-s.parallax-s--2
+        .parallax-s.parallax-s--1
+        .parallax-s.parallax-s--3
+        .parallax-s.parallax-s--4
+       
+        .parallax-s-content
+          include sections/feedback.pug
+          include sections/contacts.pug
       include sections/footer.pug
-
       include sections/popup.pug
+ 
+      
+      
+    script(src="src/main.js")
 
       
 

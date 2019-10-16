@@ -1,4 +1,81 @@
-.wallpaper--mountain {background:url("~images\content\mountain.png") no-repeat ;
-  background-size: cover;}
-.wallpaper--shangrila {background:url("~images\content\Budda.png") no-repeat ;
-  background-size: cover; margin-top: 100px;}
+.wallpaper--mountain {background:url("~images\content\p1.png") no-repeat ;
+  background-size: cover; position: relative; height: 200vh; width: 100%;
+  overflow: hidden;
+  
+}
+
+
+
+
+.parallax--1 {background:url("~images\content\p2.png") center no-repeat;;
+height: 100%; width: 100%; background-size:contain; position: absolute; bottom:-15%; right: 0;
+}
+.parallax--2 {background:url("~images\content\p3.png") center no-repeat;
+  height: 150px; width: 100px; background-size:contain; position: absolute; bottom:55%; right: 20%; }
+.parallax--3 {background:url("~images\content\p4.png") center no-repeat;
+
+
+
+
+    height: 50%;
+    width: 100%;
+    background-size: contain;
+    position: absolute;
+    bottom: 15%;}
+.parallax--4 {background:url("~images\content\p5.png") center no-repeat;
+    height:70%; width:70%; background-size:contain; position: absolute; bottom:-15%; left: -200px
+    }
+
+.parallax--5 {background:url("~images\content\p6.png") center no-repeat;;
+      height: 100%; width: 100%; background-size:contain; position: absolute; bottom:-25%; right: 0
+      }
+       .parallax--6 {background:url("~images\content\p7.png") center no-repeat;
+        height: 2000px; width:100%; background-size:cover; position: absolute; bottom:-1500px; right: 0
+        }
+      
+
+   
+
+
+
+
+.parallax-content {position: absolute; top:0; height: 100%; width:100%; }
+
+@include tablets {
+  .parallax--6 {background:url("~images\content\p7.png") center no-repeat;
+  height: 2000px; width:100%; background-size:cover; position: absolute; bottom:-1300px; right: 0
+  }}
+@include phones {.wallpaper--mountain {height: 250vh;}
+.parallax--6 {background:url("~images\content\p7.png") center no-repeat;
+  height: 2000px; width:100%; background-size:cover; position: absolute; bottom:-1400px; right: 0
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.wallpaper--shangrila {background:url("~images\content\shangrila-b.png") no-repeat ;
+ margin-top: 100px; background-size: cover; position: relative; height: 175vh; width: 100%;
+  overflow: hidden}
+  .parallax-s-content {position: absolute; top:0; height: 100%; width:100%; }
+
+  .parallax-s--1 {background:url("~images\content\Budda.png") center no-repeat;;
+    height: 650px; width: 500px; background-size:contain; position: absolute; bottom:-55%; right: 10%;
+    }
+    .parallax-s--2 {background:url("~images\content\Budda-cloud1.png") center no-repeat;;
+      height: 100%; width: 100%; background-size:contain; position: absolute; bottom:-13%; right: -15%;
+      }
+      .parallax-s--3 {background:url("~images\content\Budda-cloud2.png") center no-repeat;;
+        height: 100%; width: 100%; background-size:contain; position: absolute; bottom:-63%; right: 0;
+        }
+        .parallax-s--4 {background:url("~images\content\Budda-cloud3.png") center no-repeat;;
+          height: 100%; width: 100%; background-size:contain; position: absolute; bottom:-185%; right: 0;
+          }
+@include phones {.parallax-s--1 {display: none
+  }}

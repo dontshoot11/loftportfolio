@@ -78,9 +78,10 @@ margin-left: 25px;}
 display: flex; align-items:center; flex-direction:column; width: 100%}}
 
 @include phones {
+    .container--feedback {padding-top: 110px;}
     .feedback__article {display: grid;
      grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: fit-content fit-content;
 grid-template-areas: "text text"
 "left right";
 grid-gap: 10px 20px;
@@ -88,6 +89,7 @@ margin-left: 0; }
 .feedback__headline {grid-area: text}
 .feedback__button--left{grid-area: left; justify-self: right}
 .feedback__button--right{grid-area: right; justify-self: left}
+.quotes-list {margin-top: 25px;}
 .quotes-list__item{
     display:none;
     margin-left: 0;
