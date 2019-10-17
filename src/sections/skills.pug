@@ -6,22 +6,38 @@ section(id='skills').section.skills
           p.why-me__text Этот сайт я сделал в рамках обучения в Школе онлайн образования<br> Loftschool. Чуть позже я освежу в нём свой контент. А пока <br> посмотрите, как тут всё классно и красиво!
           #skills-container--frontend.skills-list
           #skills-container--wf.skills-list
+         
 
 script#skill(type='x-template')
- .why-me__list-item
-    svg(viewbox = '0 0 100 100', preserveAspectRatio = 'none', ).percentage
-      circle(cx ='50', cy = '50', r = '40').circle.circle__under
-      circle(cx ='50', cy = '50', r = '40' :style="{animationDelay: `-${percent}s`}").circle.circle__above 
+ li.why-me__list-item
+    svg(viewBox="0 0 100 100").percentage
+      circle.circle.circle__under
+      circle(:style="{animationDelay: `-${percent}s`}").circle.circle__above 
     span.why-me__skill-name {{name}}
 
 script#skills-list(type="x-template")
-  .skill
+  .why-me__skills-branch
     h2.h2.why-me__headline.why-me__headline--skills-list {{section}}
-    .why-me__skills-list 
+    ul.why-me__skills-list 
       skill(
         v-for="skill in skills" 
         :name='skill.name'     
         :percent='skill.value'
          )
+
+
+
+
+
+        
+        
+        
+          
+
+        
+        
+   
+      
+  
 
 
