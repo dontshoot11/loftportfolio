@@ -2,53 +2,63 @@ import Vue from 'vue';
 import { endianness } from 'os';
 
 
+
 const skill = {
     template: "#skill",
     props: {
-        name: {
-            type: String,
-            default: '',
-        },
-        percent: {
-            type: Number,
-            default: 0,
-        },
+        name: '',
+        percent: ''
     }
 
 
 
 };
 
-new Vue({
-    el: '#skills-container--frontend',
+const branch = {
+
     template: '#skills-list',
     components: {
         skill,
     },
-    data: {
-        section: 'Front-end',
-        skills: [
-            { name: 'HTML5', value: 80 },
-            { name: 'CSS3', value: 75 },
-            { name: 'Javascript', value: 15 },
-            { name: 'Jqery и Vue.js', value: 30 },
-        ]
+    props: [
+        "section",
+        "skills"
+    ],
+
+
+
+
+}
+
+const branches = {
+    template: "#branches",
+    components: { branch },
+    data: () => ({
+
+        skills: []
+
+
+
+
+
+    }),
+    created() {
+        const data = require("../jsons/skills.json");
+        this.skills = data
     }
-})
+
+
+
+
+}
 
 new Vue({
-    el: '#skills-container--wf',
-    template: '#skills-list',
+    el: '#skills',
+
     components: {
-        skill,
+
+        branches,
+
     },
-    data: {
-        section: 'Workflow',
-        skills: [
-            { name: 'GIT', value: 70 },
-            { name: 'Terminal', value: 40 },
-            { name: 'Gulp', value: 15 },
-            { name: 'Webpack', value: 30 },
-        ]
-    }
+
 })

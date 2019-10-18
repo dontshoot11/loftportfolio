@@ -4,26 +4,43 @@ section(id='skills').section.skills
         .why-me
           h2.h2.why-me__headline Чем я могу быть полезен вам
           p.why-me__text Этот сайт я сделал в рамках обучения в Школе онлайн образования<br> Loftschool. Чуть позже я освежу в нём свой контент. А пока <br> посмотрите, как тут всё классно и красиво!
-          #skills-container--frontend.skills-list
-          #skills-container--wf.skills-list
-         
+          branches
+          
+          
+
+
+script#branches(type='x-template')
+  .skills-widget 
+    branch(v-for="branch in skills" :section ="branch.section" :skills = "branch.skills")
+
+    
+
+
+
+  
+   
+
+script#skills-list(type="x-template")
+  
+  .why-me__skills-branch
+    
+      h2.h2.why-me__headline.why-me__headline--skills-list {{section}}
+      ul.why-me__skills-list 
+       li.why-me__list-item(v-for="(value, name) in skills" )
+        skill(
+        
+          :name='name'     
+          :percent='value'
+           )
+
 
 script#skill(type='x-template')
- li.why-me__list-item
+  .skillbox
+ 
     svg(viewBox="0 0 100 100").percentage
       circle.circle.circle__under
       circle(:style="{animationDelay: `-${percent}s`}").circle.circle__above 
     span.why-me__skill-name {{name}}
-
-script#skills-list(type="x-template")
-  .why-me__skills-branch
-    h2.h2.why-me__headline.why-me__headline--skills-list {{section}}
-    ul.why-me__skills-list 
-      skill(
-        v-for="skill in skills" 
-        :name='skill.name'     
-        :percent='skill.value'
-         )
 
 
 
