@@ -27,11 +27,7 @@ script#skills-list(type="x-template")
       h2.h2.why-me__headline.why-me__headline--skills-list {{section}}
       ul.why-me__skills-list 
        li.why-me__list-item(v-for="(value, name) in skills" )
-        skill(
-        
-          :name='name'     
-          :percent='value'
-           )
+        skill(:name='name' :percent='value')
 
 
 script#skill(type='x-template')

@@ -5,10 +5,7 @@ import { endianness } from 'os';
 
 const skill = {
     template: "#skill",
-    props: {
-        name: '',
-        percent: ''
-    }
+    props: ["name", "percent"]
 
 
 
