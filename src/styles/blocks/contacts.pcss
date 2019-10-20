@@ -12,7 +12,8 @@ margin-right: 50px;
 &:last-child{margin-right: 0;}}
 
 
-.form__input {border: none;
+.form__input {
+border: none;
 border-bottom: 1px solid #464e63; width:100%;
 background: transparent;
 font-weight: 700; 
@@ -23,7 +24,6 @@ padding: 10px 70px;
 &:-moz-placeholder           {   color: #464e63; }
 &::-moz-placeholder          {   color: #464e63; }
 &:-ms-input-placeholder      {   color: #464e63; } 
-
 }
 .form__input:focus{outline:none
 }
@@ -35,10 +35,11 @@ padding: 10px 70px;
 position: absolute;
 left: 0;
 bottom: 5px;
-
 padding:10px;
 background: #000;
 }
+
+.form__input--textarea {resize: none}
 
 
 
@@ -69,4 +70,32 @@ background-size: contain;}
 
 .form__label {color: rgba(#464e63, 0.4);
 margin-bottom: 10px; margin-left: 70px;}
+
+@include tablets{
+  .form
+  {width: 100%; margin-left: 0;}
+  .form__headline
+  {width:100%; text-align: center;}
+  .form__row--button
+  {display: flex;
+  justify-content: center;}
+}
+
+@include phones {
+  .form__col--name::before{display: none}
+  .form__col--message::before{display: none}
+  .form__col--mail::before{display: none}
+.form__input{padding: 5px 20px;}
+.form__label{margin-left: 50px;}
+.form__col--name{margin-right: 0;margin-bottom: 20px;}
+.form__row{flex-direction:column; margin-bottom: 20px;}
+.form__button {width:100%}
+.form__input--textarea {height: 6em; padding: 0px 20px
+}
+.container--contacts {padding-top: 50px;}
+}
+
+
+
+
   
