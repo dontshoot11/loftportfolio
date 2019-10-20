@@ -1,32 +1,38 @@
 header.header
-        .container.container--header
-         a(href="#").logo-link на 
-         ul.navigation
-           li.navigation__item
+      .container.container--header
+        a(href="#").logo-link на 
+        ul.navigation
+          li.navigation__item
             a(href="#").navigation__link Главная
-           li.navigation__item
+          li.navigation__item
             a(href="#hello").navigation__link Обо мне
-           li.navigation__item
+          li.navigation__item
             a(href="#skills").navigation__link Навыки
-           li.navigation__item
+          li.navigation__item
             a(href="#jobs").navigation__link Работы
-           li.navigation__item
+          li.navigation__item
             a(href="#feedback").navigation__link Отзывы
-           li.navigation__item
-            a(href="#contacts").navigation__link Связаться
-         ul.socials
-          li.socials__item
-           a(href="https://www.instagram.com/tema.nikitin/").socials__link
-            +icon ('insta')
-          li.socials__item
-           a(href="https://vk.com/bestintheworldatwhathedoes").socials__link
-            +icon ('vk')
-          li.socials__item  
-           a(href="https://github.com/dontshoot11").socials__link
-            +icon ('github')
-        .container  
-         .title
-          p.text-alpha Личный сайт <br> веб разработчика
-          h1.headline Никитин Артём
-        a(href="#").button.button--scroll Скролл
-         +icon ('scroll', 'icon-scroll')
+          li.navigation__item
+              a(href="#contacts").navigation__link Связаться
+        .buttons
+          ul.socials
+            li.socials__item
+              a(href="https://www.instagram.com/tema.nikitin/").socials__link
+                +icon ('insta')
+            li.socials__item
+              a(href="https://vk.com/bestintheworldatwhathedoes").socials__link
+                +icon ('vk')
+            li.socials__item  
+              a(href="https://github.com/dontshoot11").socials__link
+                +icon ('github')
+          button(type ="button").button-burger
+            span.button-burger__element
+            span.button-burger__element
+            span.button-burger__element
+      .container.container--introduction  
+        .title
+          p.text-alpha.text-aplha--header Личный сайт <br> веб разработчика
+          h1.headline.headline--title Никитин 
+            span.span.span--title Артём
+          a(href="#").button.button--scroll Скролл
+            +icon ('scroll', 'icon-scroll')

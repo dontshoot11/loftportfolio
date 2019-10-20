@@ -1,12 +1,19 @@
 
-.jobs__content {display: flex; margin-top: 50px;}
-.jobs__preview {position: relative; max-width: 975px}
-.jobs__small-previews {position: absolute; right: 0; bottom: 50px; width: 17%;
+.container--jobs {margin-top: 50px;}
+.jobs__content {display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "slider slider description"; 
+    margin-top: 50px;}
+    .jobs__slider {grid-area: slider; position: relative;margin-right: 120px ;}
+    .jobs__description{grid-area: description}
+.jobs__preview {position: relative; max-width: 975px;}
+.jobs__small-previews {position: absolute; right: 0; bottom: 0; width: 17%;
 }
 .jobs__small-preview {&:hover{transform:translateX(-20%); width: 125%}}
 .jobs__button {overflow: hidden;}
 .jobs__button--active {border: 3px solid #dc9322}
-.jobs__arrows {display: flex; width: 100%; justify-content: flex-end; color: #fff}
+.jobs__arrows {display: flex; width: 100%; justify-content: flex-end; color: #fff; position: absolute; bottom: -50px}
 .jobs__arrow {background: svg-load('arrow-down.svg', fill = #5d6471, width = 75%, height = 75% ) no-repeat center;
     background-color: #353e4e; height: 50px; width: 50px;
     padding: 20px;
@@ -21,9 +28,10 @@
         
         
 }
+.bigPreview{position: relative;}
 .jobs__arrow--down {transform:rotate(90deg);}
 .jobs__arrow--up {transform:rotate(270deg);}
-.jobs__description {margin-left: 120px;}
+
 
 .tech-list {display: flex; margin-bottom: 30px;}
 .tech-list__item {background: #f3f5f9;
@@ -44,5 +52,29 @@ font-weight: 900; border-bottom: 2px solid transparent; transition: 0.3s;
 .jobs__icon-link {fill: #586fd3; height: 0.9rem; margin-right: 20px; margin-bottom: -2px;  }
 
 .jobs__headline--description-list {margin-bottom: 30px;}
+
+.jobs__number-box {position: absolute;
+right:0; margin-right: -110px; top: 0; height: 100%; display: flex; align-items: center; }
+.jobs__number {font-size: 300px; font-weight: 800; color: #f8f8fa }
+
+@include tablets {
+    .container--jobs{width: 100%;}
+    .jobs__content 
+    {display: grid;
+    grid-template-columns: 1fr ;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "slider"
+    "description"; 
+    align-items: center;
+    margin-top: 50px;}
+    .jobs__description {text-align: center; margin-left: 0; margin-top: 50px;}
+    .tech-list {width: 100%; justify-content: center;}
+    .jobs__headline{text-align: center; width: 100%;}
+}
+
+@include phones {.jobs__small-previews {display: none}
+.jobs__slider {margin-right: 0;}
+.jobs__arrows {position: absolute;
+bottom: 0}}
 
 
