@@ -5,14 +5,16 @@ section(id="feedback").section.feedback
             button.feedback__button.feedback__button--left
             button.feedback__button.feedback__button--right 
           ul.quotes-list
-            quote(v-for = "wisdom in quotes" :name="wisdom.name", :text="wisdom.text", :position="wisdom.position")
+            swiper(ref="mySwiper" :options="swiperOption")
+              quote(v-for = "wisdom in quotes" :name="wisdom.name", :text="wisdom.text", :position="wisdom.position", :photo="wisdom.photo")
 
 script#quote(type="x-template")
-  li.quotes-list__item
-              p.quotes-list__text {{text}}
-              .quotes-list__speaker-info
-                .quotes-list__speaker-photo
-                  img.quotes-list__speaker-png(:src="photo")
-                .quotes-list__speaker-textcontent
-                  .quotes-list__speaker-name {{name}}
-                  .quotes-list__speaker-position {{position}}
+  swiper-slide
+    li.quotes-list__item
+      p.quotes-list__text {{text}}
+      .quotes-list__speaker-info
+        .quotes-list__speaker-photo
+          img.quotes-list__speaker-png(:src="photo")
+        .quotes-list__speaker-textcontent
+          .quotes-list__speaker-name {{name}}
+          .quotes-list__speaker-position {{position}}
