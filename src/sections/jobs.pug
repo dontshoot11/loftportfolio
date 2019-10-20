@@ -3,24 +3,31 @@ section(id='jobs').section.jobs
         h2.h2.jobs__headline Мои работы
         .jobs__content
           .jobs__slider
-           .jobs__preview
-            +image('content/bigPreview.png','bigPreview')
-            ul.jobs__small-previews
-              li.jobs__small-preview
-               button.jobs__button.jobs__button--active
-                +image('content/smallPreview1.png', 'smallPreview')
-              li.jobs__small-preview
-                button.jobs__button
-                  +image('content/smallPreview2.png', 'smallPreview')
-              li.jobs__small-preview 
-                button.jobs__button
-                  +image('content/smallPreview3.png', 'smallPreview')
-              li.jobs__small-preview
-                button.jobs__button
-                  +image('content/smallPreview4.png', 'smallPreview')
-            .jobs__arrows
-              button.jobs__arrow.jobs__arrow--up
-              button.jobs__arrow.jobs__arrow--down 
+           
+            .jobs__preview
+              .jobs__number-box
+                span.jobs__number 4
+              
+              +image('content/bigPreview.png','bigPreview')
+              ul.jobs__small-previews
+                li.jobs__small-preview
+                  button.jobs__button.jobs__button--active
+                    +image('content/smallPreview1.png', 'smallPreview')
+                li.jobs__small-preview
+                  button.jobs__button
+                    +image('content/smallPreview2.png', 'smallPreview')
+                li.jobs__small-preview 
+                  button.jobs__button
+                    +image('content/smallPreview3.png', 'smallPreview')
+                li.jobs__small-preview
+                  button.jobs__button
+                    +image('content/smallPreview4.png', 'smallPreview')
+           
+              
+              .jobs__arrows
+                button.jobs__arrow.jobs__arrow--up
+                button.jobs__arrow.jobs__arrow--down 
+              
                 
           .jobs__description 
             ul.tech-list

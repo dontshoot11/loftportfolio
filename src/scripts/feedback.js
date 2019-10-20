@@ -9,7 +9,7 @@ console.log('все ок')
 
 const quote = {
     template: "#quote",
-    props: ["text", "name", "position", "photo"],
+    props: ["wisdom"],
     components: { swiperSlide }
 }
 

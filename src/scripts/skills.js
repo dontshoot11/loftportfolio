@@ -18,8 +18,7 @@ const branch = {
         skill,
     },
     props: [
-        "section",
-        "skills"
+        "branch"
     ],
 
 
