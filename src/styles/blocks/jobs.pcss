@@ -7,12 +7,12 @@
     margin-top: 50px;}
     .jobs__slider {grid-area: slider; position: relative;margin-right: 120px ;}
     .jobs__description{grid-area: description}
-.jobs__preview {position: relative; max-width: 975px;}
+.jobs__preview {position: relative; width: 100%;}
 .jobs__small-previews {position: absolute; right: 0; bottom: 0; width: 17%;
 }
 .jobs__small-preview {&:hover{transform:translateX(-20%); width: 125%}}
-.jobs__button {overflow: hidden;}
-.jobs__button--active {border: 3px solid #dc9322}
+.jobs__button {overflow: hidden; border: 3px solid transparent}
+.active {border: 3px solid #dc9322}
 .jobs__arrows {display: flex; width: 100%; justify-content: flex-end; color: #fff; position: absolute; bottom: -50px}
 .jobs__arrow {background: svg-load('arrow-down.svg', fill = #5d6471, width = 75%, height = 75% ) no-repeat center;
     background-color: #353e4e; height: 50px; width: 50px;
@@ -33,10 +33,15 @@
 .jobs__arrow--up {transform:rotate(270deg);}
 
 
-.tech-list {display: flex; margin-bottom: 30px;}
+.tech-list {display: flex; margin-bottom: 30px; flex-wrap: wrap; width: 100%;}
 .tech-list__item {background: #f3f5f9;
 border-radius: 15px;
 padding: 5px 10px;
+max-width: 33%;
+display: flex;
+align-items: center;
+text-align: center;
+
 
 margin-right: 20px;
 &:last-child {margin-right: 0;}}
@@ -75,6 +80,7 @@ right:0; margin-right: -110px; top: 0; height: 100%; display: flex; align-items:
 @include phones {.jobs__small-previews {display: none}
 .jobs__slider {margin-right: 0;}
 .jobs__arrows {position: absolute;
-bottom: 0}}
+bottom: 0}
+.jobs__content{align-items: start}}
 
 
