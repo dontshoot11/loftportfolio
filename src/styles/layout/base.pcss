@@ -26,6 +26,33 @@ body {
   position: relative;
 }
 
+a{text-decoration: none; color: inherit; display: block}
+h1, h2, h3, h4, h5 {font-size: inherit; font-style: inherit; margin: 0; padding: 0}
+input {padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: inherit;
+  &:active{border: none; outline: none};
+  &:focus{border: none; outline: none}}
+ul{list-style:none;
+margin: 0;
+padding: 0}
+button{padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  &:active{border: none; outline: none};
+  &:focus{border: none; outline: none}
+  }
+  textarea{ resize: none}
+
+  p {margin-block-start: 0;
+    margin-block-end: 0;}
+img {display: block; max-width: 100%}
+
 .container {
   margin: 0 auto;
   max-width: 1480px;
