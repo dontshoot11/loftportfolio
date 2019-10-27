@@ -562,8 +562,8 @@ export default {
 
 
 
-  newSkillName: function(value){return Validator.value(value).required()}},
-  percent: function(value){return Validator.value(value).required()},
+  newSkillName: function(value){return Validator.value(value).required()},
+  percent: function(value){return Validator.value(value).required()}}
    
 
 
