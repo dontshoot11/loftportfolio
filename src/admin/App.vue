@@ -25,28 +25,28 @@
           button(type='button').button.button--plus Добавить группу
         section.section--skills
           .skills-card.section-block 
-            form.skills-form.skill-form--name 
-              input( required placeholder="Название новой группы").skill-name.skill-name--editing
+            form.skills-form.skill-form--name(@submit.prevent = 'newGroup') 
+              input( placeholder="Название новой группы" v-model = "branchName").skill-name.skill-name--editing
               .form-yesno-buttons
                 button(type="submit").button.button--green 
                 button(type="reset").button.button--cross 
 
-            form.skills-form.skills-form--newskill  
+            form.skills-form.skills-form--newskill(@submit.prevent = 'newSkill') 
             
-              input(required placeholder="Новый навык").new-skill
-              input(required type="number" placeholder="100%").skill-value
+              input( placeholder="Новый навык" v-model = "newSkillName" ).new-skill
+              input( type="number" max = "100" placeholder="100%" v-model ="percent").skill-value
               button(type="submit").button.button--big 
           .skills-card.section-block 
-              form.skills-form.skill-form--name 
+              form.skills-form.skill-form--name(@submit.prevent = 'editSkillBranchName') 
                 p.skill-name Workflow
                 .form-yesno-buttons
-                  button(type="button").button.button--edit
-              form.skills-form.skills-form--oldskill 
+                  button(type="submit").button.button--edit
+              form.skills-form.skills-form--oldskill(@submit.prevent = 'editSkill')  
             
-               p.old-skill git
+                p.old-skill git
                 p.skill-value.skill-value--edited 30%
                 .form-yesno-buttons
-                 button(type="submit").button.button--edit
+                  button(type="submit").button.button--edit
                   button(type="button").button.button--delete
               form.skills-form.skills-form--oldskill
             
@@ -55,7 +55,7 @@
                 .form-yesno-buttons
                   button(type="submit").button.button--edit
                   button(type="button").button.button--delete
-              form.skills-form.skills-form--oldskill
+              form.skills-form.skills-form--oldskill(@submit.prevent = 'editSkill')  
             
                 p.old-skill memes
                 p.skill-value.skill-value--edited 90%
@@ -65,13 +65,13 @@
         
                 
 
-              form.skills-form.skills-form--newskill  
+              form.skills-form.skills-form--newskill(@submit.prevent = 'newSkill')   
             
                 input(required placeholder="Новый навык").new-skill
                 input(required type="number" placeholder="100%").skill-value
                 button(type="submit").button.button--big 
         section.section--works
-          form.section-block.edit-card.edit-card--works
+          form.section-block.edit-card.edit-card--works(@submit.prevent = 'newWork') 
             h2.edit-card__name Редактирование работы
             .edit-card__download-area
               input.inputfile(type="file" required name="file" id="file") 
@@ -140,7 +140,7 @@
 
 
 
-          form.section-block.edit-card.edit-card--feedback
+          form.section-block.edit-card.edit-card--feedback(@submit.prevent = "feedbackEdit")
             h2.edit-card__name Добавить отзыв
             .edit-card__download-area.edit-card__download-area--feedback
               input.inputfile(type="file" required name="file" id="userpic") 
@@ -186,7 +186,7 @@
                   button(type="button").button.button--delete-edited Удалить
   .popup
     .container.container--popup
-      form.form-login
+      form.form-login(@submit.prevent="login")
         h2.form-login__headline Авторизация
         label.form-login__label.form-login__label--login Логин
           input(required).form-login__input
@@ -487,7 +487,7 @@ border-bottom: 1px solid #414d63;
 .form-login__label--login:before{content:''; position: absolute; height: 30px; width: 30px; 
  background: svg-load('avatar.svg', fill = #d3d4d9, width = 100%, height = 100% ) no-repeat center; bottom: 5px; left: 0}
 
-.form-login__label--password:before{content:''; position: absolute; height: 30px; width: 30px;  background: url('../images/icons/key.png') no-repeat center; background-size: contain; bottom: 5px; left: 0}
+.form-login__label--password:before{content:''; position: absolute; height: 30px; width: 30px; background: svg-load('key.svg', fill = #d3d4d9, width = 100%, height = 100% ) no-repeat center; bottom: 5px; left: 0}
 
 
 
@@ -521,6 +521,57 @@ border-bottom: 1px solid #414d63;
 
 
 </style>
+
+
+
+<script> 
+import { Validator } from 'simple-vue-validator';
+
+
+export default {
+  data: function () {
+      return {
+        branchName: '',
+        newSkillName:'',
+        percent:'',
+
+
+      };
+    },
+  methods: {newGroup() {this.$validate().then(function(sucess) {if (sucess) {console.log('Тут форма должна полететь на сервер')}
+  else {console.log ('Валидация не прошла')}})},
+  
+  
+  
+  
+  
+  
+  
+   newSkill() {this.$validate().then(function(sucess) {if (sucess) {console.log('Тут форма должна полететь на сервер')}
+  else {console.log ('Валидация не прошла')}})},
+
+
+
+
+   editSkill: function(e) { console.log("Редактирование скила") },
+   editSkillBranchName: function(e) { console.log("Редактирование названия ветки скиллов") },
+   newWork: function(e){console.log ("Редактирование работы")},
+   login: function(e) {console.log ("Попытка логина")},
+   feedbackEdit: function(e) {console.log ("Редактирование карточки с отзывом")} },
+  validators: {branchName: function(value){return Validator.value(value).required()},
+
+
+
+  newSkillName: function(value){return Validator.value(value).required()}},
+  percent: function(value){return Validator.value(value).required()},
+   
+
+
+
+}
+
+
+</script>
 
 
 
