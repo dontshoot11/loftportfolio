@@ -23,7 +23,9 @@ font-size: 36px; font-weight: 700 }
 
  
 
-@include phones {.container--hello (padding-top: 0;) .welcome-card {display:flex; flex-direction:column; align-items: center;}
+@include phones {
+    .container--hello {padding-top: 0}
+     .welcome-card {display:flex; flex-direction:column; align-items: center;}
 .welcome-card__info {margin-right: 0;}
 .welcome-card__textcontent {margin-top: 35px}
 .welcome-card__headline{font-size: 52px}
