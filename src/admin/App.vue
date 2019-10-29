@@ -189,9 +189,9 @@
       form.form-login(@submit.prevent="login")
         h2.form-login__headline Авторизация
         label.form-login__label.form-login__label--login Логин
-          input(required).form-login__input
+          input(required v-model = "user.name").form-login__input
         label.form-login__label.form-login__label--password Пароль
-          input(required).form-login__input
+          input(required v-model = "user.password").form-login__input
         button(type= "submit").button.button-login-submit Отправить
         button(type = "button").button.button-login-exit 
 
@@ -526,14 +526,18 @@ border-bottom: 1px solid #414d63;
 
 <script> 
 import { Validator } from 'simple-vue-validator';
+import axios from 'axios';
+const baseUrl ='https://webdev-api.loftschool.com/';
 
 
 export default {
   data: function () {
       return {
+        
         branchName: '',
         newSkillName:'',
         percent:'',
+        user: {},
 
 
       };
@@ -556,8 +560,9 @@ export default {
    editSkill: function(e) { console.log("Редактирование скила") },
    editSkillBranchName: function(e) { console.log("Редактирование названия ветки скиллов") },
    newWork: function(e){console.log ("Редактирование работы")},
-   login: function(e) {console.log ("Попытка логина")},
+   login: function(e) {axios.post(baseUrl+'login',this.user).then(response => {console.log(response.data)}).catch(error=>{console.log(error.response.data)})},
    feedbackEdit: function(e) {console.log ("Редактирование карточки с отзывом")} },
+
   validators: {branchName: function(value){return Validator.value(value).required()},
 
 
