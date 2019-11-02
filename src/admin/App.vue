@@ -19,179 +19,20 @@
           li.navigation__item
             a(href="#").navigation__link Отзывы
     main.maincontent
-      .container.container--maincontent
-        .section-name
-          h1.section-name__text Блок &laquo Обо мне &raquo
-          button(type='button').button.button--plus Добавить группу
-        section.section--skills
-          .skills-card.section-block 
-            form.skills-form.skill-form--name(@submit.prevent = 'newGroup') 
-              input( placeholder="Название новой группы" v-model = "branchName").skill-name.skill-name--editing
-              .form-yesno-buttons
-                button(type="submit").button.button--green 
-                button(type="reset").button.button--cross 
-
-            form.skills-form.skills-form--newskill(@submit.prevent = 'newSkill') 
-            
-              input( placeholder="Новый навык" v-model = "newSkillName" ).new-skill
-              input( type="number" max = "100" placeholder="100%" v-model ="percent").skill-value
-              button(type="submit").button.button--big 
-          .skills-card.section-block 
-              form.skills-form.skill-form--name(@submit.prevent = 'editSkillBranchName') 
-                p.skill-name Workflow
-                .form-yesno-buttons
-                  button(type="submit").button.button--edit
-              form.skills-form.skills-form--oldskill(@submit.prevent = 'editSkill')  
-            
-                p.old-skill git
-                p.skill-value.skill-value--edited 30%
-                .form-yesno-buttons
-                  button(type="submit").button.button--edit
-                  button(type="button").button.button--delete
-              form.skills-form.skills-form--oldskill
-            
-                p.old-skill webpack
-                p.skill-value.skill-value--edited 45%
-                .form-yesno-buttons
-                  button(type="submit").button.button--edit
-                  button(type="button").button.button--delete
-              form.skills-form.skills-form--oldskill(@submit.prevent = 'editSkill')  
-            
-                p.old-skill memes
-                p.skill-value.skill-value--edited 90%
-                .form-yesno-buttons
-                  button(type="submit").button.button--edit
-                  button(type="button").button.button--delete
-        
-                
-
-              form.skills-form.skills-form--newskill(@submit.prevent = 'newSkill')   
-            
-                input(required placeholder="Новый навык").new-skill
-                input(required type="number" placeholder="100%").skill-value
-                button(type="submit").button.button--big 
-        section.section--works
-          form.section-block.edit-card.edit-card--works(@submit.prevent = 'newWork') 
-            h2.edit-card__name Редактирование работы
-            .edit-card__download-area
-              input.inputfile(type="file" required name="file" id="file") 
-              label.inputfile__label(for="file")
-                .inputfile__text Перетащите или нажмите для загрузки изображения
-                .button.button--submit загрузить
-            .edit-card__content
-              label.edit-card__label Название
-                input( required placeholder = "Сайт для авто салона Porsche").edit-card__input
-              label.edit-card__label Ссылка
-                input(required placeholder = "www.leningrad.spb.ru").edit-card__input
-              label.edit-card__label Описание
-                textarea( rows="5" required placeholder="Оооо вот этот сайт Порше всем сайтам Порше сайт Порше").edit-card__textarea
-              label.edit-card__label Добавление тега
-                input(required placeholder = "HTML,").edit-card__input
-              ul.edit-card__taglist
-                li.edit-card__tag
-                  p.edit-card__description HTML
-                  button(type="button").button.edit-card__cross 
-                li.edit-card__tag
-                  p.edit-card__description CSS
-                  button(type="button").button.edit-card__cross 
-                li.edit-card__tag
-                  p.edit-card__description Javascript
-                  button(type="button").button.edit-card__cross 
-              .edit-card__buttons
-                button(type = "reset").edit-card__reset Отмена
-                button(type = "submit").button.button--submit.button--edit-submit сохранить
-          .edited-blocks
-            button.button.button--add-card
-              .button__pic +
-              p.button__name Добавить работу
-            .section-block.edited-card
-              .edited-card__picture-box
-                img(src='../images/content/works/1.png').edited-card__picture
-              .edited-card__description
-                .edited-card__name Сайт школы образования
-                .edited-card__text Вот это сайт ай да сайт, такой технологичный и красивый. Нет, это не соринка в глаз попала, это я прослезился, когда писал описание этого сайта.
-                a(href="#").edited-card__link http://leningrad.spb.ru
-                .edited-card__buttons
-                  button(type="button").button.button--edit-edited Править
-                  button(type="button").button.button--delete-edited Удалить
-            .section-block.edited-card
-              .edited-card__picture-box
-                img(src='../images/content/works/1.png').edited-card__picture
-              .edited-card__description
-                .edited-card__name Сайт школы образования
-                .edited-card__text Вот это сайт ай да сайт, такой технологичный и красивый. Нет, это не соринка в глаз попала, это я прослезился, когда писал описание этого сайта.
-                a(href="#").edited-card__link http://leningrad.spb.ru
-                .edited-card__buttons
-                  button(type="button").button.button--edit-edited Править
-                  button(type="button").button.button--delete-edited Удалить
-            .section-block.edited-card
-              .edited-card__picture-box
-                img(src='../images/content/works/1.png').edited-card__picture
-              .edited-card__description
-                .edited-card__name Сайт школы образования
-                .edited-card__text Вот это сайт ай да сайт, такой технологичный и красивый. Нет, это не соринка в глаз попала, это я прослезился, когда писал описание этого сайта.
-                a(href="#").edited-card__link http://leningrad.spb.ru
-                .edited-card__buttons
-                  button(type="button").button.button--edit-edited Править
-                  button(type="button").button.button--delete-edited Удалить
-        section.section--feedback
-
-
-
-
-
-          form.section-block.edit-card.edit-card--feedback(@submit.prevent = "feedbackEdit")
-            h2.edit-card__name Добавить отзыв
-            .edit-card__download-area.edit-card__download-area--feedback
-              input.inputfile(type="file" required name="file" id="userpic") 
-              label.inputfile__label(for="userpic")
-                .userpic-bg
-                  .userpic-svg
-              
-                .button.button--link Добавить фото
-            .edit-card__content
-              .edit-card__row
-                label.edit-card__label.edit-card__label--feedback Имя автора
-                  input( required placeholder = "Мастер Сплинтер").edit-card__input.edit-card__input--feedback
-                label.edit-card__label.edit-card__label--feedback Титул
-                  input(required placeholder = "Учитель боевых искусств").edit-card__input.edit-card__input--feedback
-              label.edit-card__label Отзыв
-                textarea( rows="5" required placeholder="Мы не жалкие букашки, панцирь носим, как рубашки").edit-card__textarea.edit-card__textarea--feedback
-            
-              .edit-card__buttons
-                button(type = "reset").edit-card__reset Отмена
-                button(type = "submit").button.button--submit.button--edit-submit сохранить
-
-          .edited-blocks
-            button.button.button--add-card
-              .button__pic +
-              p.button__name Добавить отзыв
-            .section-block.edited-card.edited-card--feedback
-              .edited-card__speaker-info
-                .edited-card__speaker-picture-box
-                  img(src='../images/content/mentors/stark.jpeg').edited-card__speaker-picture
-                .edited-card__speaker-textinfo
-                  p.edited-card__speaker-name Тони Старк Мл.
-                  p.edited-card__speaker-position Железный Человек
-              
-             
-              .edited-card__description.edited-card__description--feedback
-              
-                .edited-card__text Быть или не быть — вот в чём вопрос. Достойно ли терпеть безропотно позор судьбы, иль нужно оказать сопротивленье?
-
-
-            
-                .edited-card__buttons
-                  button(type="button").button.button--edit-edited Править
-                  button(type="button").button.button--delete-edited Удалить
+      aboutme(@newGroup = "newGroup" :categories = "categories" @newSkill="newSkill" @deleteSkill = "deleteSkill")
+      works
+      feedback
+      
+       
+       
   .popup
     .container.container--popup
       form.form-login(@submit.prevent="login")
         h2.form-login__headline Авторизация
-        label.form-login__label.form-login__label--login Логин
+        label.form-login__label.form-login__label--login {{loginError.user}}
           input(required v-model = "user.name").form-login__input
-        label.form-login__label.form-login__label--password Пароль
-          input(required v-model = "user.password").form-login__input
+        label.form-login__label.form-login__label--password {{loginError.pass}}
+          input(required v-model = "user.password" type = "password").form-login__input
         button(type= "submit").button.button-login-submit Отправить
         button(type = "button").button.button-login-exit 
 
@@ -208,6 +49,90 @@
         
 
 </template>
+
+
+
+
+<script> 
+import { Validator } from 'simple-vue-validator';
+import axios from 'axios';
+import aboutme from './components/aboutme';
+import works from './components/works';
+import feedback from './components/feedback';
+const baseUrl ='https://webdev-api.loftschool.com/';
+let token = localStorage.getItem("token");
+axios.defaults.baseURL = baseUrl;
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+
+
+export default {
+  data: function () {
+      return {
+        
+        branchName: '',
+        newSkillName:'',
+        percent:'',
+        user: {},
+        loginError: {user: "Имя пользователя", pass: "Введите пароль"},
+        categories: [],
+
+
+      };
+    },
+  components: {aboutme, works, feedback},
+ 
+  methods: {
+  newGroup(branchName){axios.post("/categories",{title: branchName}).then(response=>{this.fetchGroups()})},
+  newSkill(skill){axios.post('/skills', skill)},
+  deleteSkill(skillId){axios.delete(`/skills/${skillId}`)},
+  fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data})},
+ 
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+   editSkill: function(e) { console.log("Редактирование скила") },
+   editSkillBranchName: function(e) { console.log("Редактирование названия ветки скиллов") },
+   newWork: function(e){console.log ("Редактирование работы")},
+   login: function(e) {axios.post(baseUrl+'login',this.user).then(response => {let token=response.data.token; localStorage.setItem("token", token); console.log ("токен "+ token)}).catch(error=>{this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
+   feedbackEdit: function(e) {console.log ("Редактирование карточки с отзывом")} },
+
+  updated(){this.fetchGroups()},
+  created(){this.fetchGroups()},
+
+  validators: {branchName: function(value){return Validator.value(value).required()},
+
+
+
+  newSkillName: function(value){return Validator.value(value).required()},
+  percent: function(value){return Validator.value(value).required()}}
+   
+
+
+
+}
+
+
+</script>
+
+
+
+
+
+
+
 <style lang = "postcss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 @import "normalize.css";
@@ -521,62 +446,6 @@ border-bottom: 1px solid #414d63;
 
 
 </style>
-
-
-
-<script> 
-import { Validator } from 'simple-vue-validator';
-import axios from 'axios';
-const baseUrl ='https://webdev-api.loftschool.com/';
-
-
-export default {
-  data: function () {
-      return {
-        
-        branchName: '',
-        newSkillName:'',
-        percent:'',
-        user: {},
-
-
-      };
-    },
-  methods: {newGroup() {this.$validate().then(function(sucess) {if (sucess) {console.log('Тут форма должна полететь на сервер')}
-  else {console.log ('Валидация не прошла')}})},
-  
-  
-  
-  
-  
-  
-  
-   newSkill() {this.$validate().then(function(sucess) {if (sucess) {console.log('Тут форма должна полететь на сервер')}
-  else {console.log ('Валидация не прошла')}})},
-
-
-
-
-   editSkill: function(e) { console.log("Редактирование скила") },
-   editSkillBranchName: function(e) { console.log("Редактирование названия ветки скиллов") },
-   newWork: function(e){console.log ("Редактирование работы")},
-   login: function(e) {axios.post(baseUrl+'login',this.user).then(response => {console.log(response.data)}).catch(error=>{console.log(error.response.data)})},
-   feedbackEdit: function(e) {console.log ("Редактирование карточки с отзывом")} },
-
-  validators: {branchName: function(value){return Validator.value(value).required()},
-
-
-
-  newSkillName: function(value){return Validator.value(value).required()},
-  percent: function(value){return Validator.value(value).required()}}
-   
-
-
-
-}
-
-
-</script>
 
 
 
