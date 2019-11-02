@@ -86,10 +86,13 @@ export default {
   newGroup(branchName){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.fetchGroups()})},
   newSkill(skill){axios.post('/skills', skill).then(response=>{this.fetchGroups()})},
   deleteSkill(skillId){axios.delete(`/skills/${skillId}`).then(response=>{this.fetchGroups()})},
-  fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data})},
+  
   deleteCat(catId){axios.delete(`categories/${catId}`).then(response=>{this.fetchGroups()})},
   editSkill(editedSkill){axios.post(`/skills/${editedSkill.id}`, editedSkill).then(response=>{this.fetchGroups()})},
-  editCat(editedCat){axios.post(`/categories/${editedCat.id}`, editedCat).then(response=>{this.fetchGroups()})   },
+  editCat(editedCat){axios.post(`/categories/${editedCat.id}`, editedCat).then(response=>{this.fetchGroups()})},
+
+  fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data})},
+  
 
  
   
@@ -105,24 +108,12 @@ export default {
 
 
 
+ },
+
+created(){this.fetchGroups()},
 
 
-
-   editSkillBranchName: function(e) { console.log("Редактирование названия ветки скиллов") },
-   newWork: function(e){console.log ("Редактирование работы")},
-   login: function(e) {axios.post(baseUrl+'login',this.user).then(response => {let token=response.data.token; localStorage.setItem("token", token); console.log ("токен "+ token)}).catch(error=>{this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
-   feedbackEdit: function(e) {console.log ("Редактирование карточки с отзывом")} },
-
-  created(){this.fetchGroups()},
-
-  validators: {branchName: function(value){return Validator.value(value).required()},
-
-
-
-  newSkillName: function(value){return Validator.value(value).required()},
-  percent: function(value){return Validator.value(value).required()}}
-   
-
+  
 
 
 }

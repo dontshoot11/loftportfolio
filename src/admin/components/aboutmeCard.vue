@@ -3,7 +3,7 @@
               form.skills-form.skill-form--name(@submit.prevent = 'editCat' :class="{ editing: this.isEditMode}") 
                 
                 
-                input(v-model="cat.category").skill-name
+                input(v-model="cat.category" required).skill-name
                
                 .form-yesno-buttons
               
@@ -37,29 +37,35 @@
 import addSkill from "./aboutmeAddSkill"
 import skill from './aboutmeSkill'
 
+
 export default {
   data(){return{
     isEditMode: false,
+   
+   
   }},
   props: {cat:{}},
   methods: {
-  newSkill(skill){this.$emit("newSkill", skill), console.log('эбаут ми олд')},
-  editSkill(editedSkill){this.$emit('editSkill', editedSkill)},
+  newSkill(skill){this.$emit("newSkill", skill), console.log('эбаут ми олд');this.isEditMode = false},
+  editSkill(editedSkill){this.$emit('editSkill', editedSkill);this.isEditMode = false},
 
-  deleteSkill(skillId){this.$emit('deleteSkill', skillId)},
-  deleteCat(){this.$emit('deleteCat', this.cat.id)},
+  deleteSkill(skillId){this.$emit('deleteSkill', skillId);this.isEditMode = false},
+  deleteCat(){this.$emit('deleteCat', this.cat.id);this.isEditMode = false},
   editModeOn(){this.isEditMode = true},
   editModeOff(){this.isEditMode = false},
-  editCat(){let editedCat ={...this.cat}; editedCat.title = this.cat.category; this.$emit('editCat', editedCat); this.isEditMode = false}
+  editCat(){let editedCat ={...this.cat}; editedCat.title = this.cat.category; this.$emit('editCat', editedCat); this.isEditMode = false},
+
   
   
   
   
   
   },
-  updated(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
+  updated(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "};},
   created(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
-  components: {skill, addSkill}
+  components: {skill, addSkill},
+  
+ 
 }
 </script>
 

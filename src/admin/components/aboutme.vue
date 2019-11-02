@@ -5,7 +5,7 @@
           button(type='button' @click="newGroup").button.button--plus Добавить группу
         section.section--skills
             
-            aboutmeCard(@newSkill = "newSkill" @editCat = "editCat" @deleteSkill = "deleteSkill" @editSkill="editSkill" @deleteCat = "deleteCat" v-for = "cat in categories", :cat = "cat")
+            aboutmeCard(@newSkill = "newSkill" @editCat = "editCat" @deleteSkill = "deleteSkill" @editSkill="editSkill" @deleteCat = "deleteCat" v-for = "cat in categories", :cat = "cat" :catName = "cat.category")
           
             
 </template>
@@ -20,7 +20,7 @@ export default {
 
 
 
-    components: { aboutmeCard},
+    components: {aboutmeCard},
     methods: {
     newGroup(branchName){this.$emit('newGroup', branchName)},
     newSkill(skill){console.log('эбаут ми'), this.$emit('newSkill', skill)},
