@@ -7,11 +7,13 @@ section(id='skills').section.skills
           branches
           
           
+          
 
 
 script#branches(type='x-template')
   .skills-widget 
     branch(v-for="branch in skills" :branch = "branch")
+    
 
     
 
@@ -24,10 +26,10 @@ script#skills-list(type="x-template")
   
   .why-me__skills-branch
     
-      h2.h2.why-me__headline.why-me__headline--skills-list {{branch.section}}
+      h2.h2.why-me__headline.why-me__headline--skills-list {{branch.category}}
       ul.why-me__skills-list 
-       li.why-me__list-item(v-for="(value, name) in branch.skills" )
-        skill(:name='name' :percent='value')
+       li.why-me__list-item(v-for="skill in branch.skills" )
+        skill(:name='skill.title' :percent='skill.percent')
 
 
 script#skill(type='x-template')

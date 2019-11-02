@@ -19,7 +19,7 @@
           li.navigation__item
             a(href="#").navigation__link Отзывы
     main.maincontent
-      aboutme(@newGroup = "newGroup" :categories = "categories" @newSkill="newSkill" @deleteSkill = "deleteSkill")
+      aboutme(@newGroup = "newGroup" :categories = "categories" @newSkill="newSkill" @deleteSkill = "deleteSkill" @deleteCat="deleteCat")
       works
       feedback
       
@@ -87,6 +87,7 @@ export default {
   newSkill(skill){axios.post('/skills', skill)},
   deleteSkill(skillId){axios.delete(`/skills/${skillId}`)},
   fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data})},
+  deleteCat(catId){axios.delete(`categories/${catId}`)},
  
   
  

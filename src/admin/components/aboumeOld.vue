@@ -5,6 +5,7 @@
                
                 .form-yesno-buttons
                   button(type="submit").button.button--edit
+                  button(type="button" @click = "deleteCat").button.button--delete
               oldSkill(:skill="skill" v-for = "skill in cat.skills" @deleteSkill = "deleteSkill")
               skill(:id = "cat.id", @newSkill = "newSkill" )
 
@@ -34,7 +35,13 @@ export default {
   methods: {
   newSkill(skill){this.$emit("newSkill", skill), console.log('эбаут ми олд')},
 
-  deleteSkill(skillId){this.$emit('deleteSkill', skillId)}},
+  deleteSkill(skillId){this.$emit('deleteSkill', skillId)},
+  deleteCat(){this.$emit('deleteCat', this.cat.id)}
+  
+  
+  
+  
+  },
   components: {skill, oldSkill}
 }
 </script>

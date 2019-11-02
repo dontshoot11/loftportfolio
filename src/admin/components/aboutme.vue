@@ -5,7 +5,7 @@
           button(type='button').button.button--plus Добавить группу
         section.section--skills
             aboutmeAdd(@newGroup = "newGroup",)
-            aboutmeOld(@newSkill = "newSkill", @deleteSkill = "deleteSkill", v-for = "cat in categories", :cat = "cat")
+            aboutmeOld(@newSkill = "newSkill", @deleteSkill = "deleteSkill", @deleteCat = "deleteCat", v-for = "cat in categories", :cat = "cat")
           
             
 </template>
@@ -24,7 +24,8 @@ export default {
     methods: {
     newGroup(branchName){this.$emit('newGroup', branchName)},
     newSkill(skill){console.log('эбаут ми'), this.$emit('newSkill', skill)},
-    deleteSkill(skillId){this.$emit('deleteSkill', skillId)}
+    deleteSkill(skillId){this.$emit('deleteSkill', skillId)},
+    deleteCat(catId){this.$emit('deleteCat', catId)}
     
     
     
