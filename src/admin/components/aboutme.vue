@@ -2,17 +2,17 @@
     .container.container--maincontent
         .section-name
           h1.section-name__text Блок &laquo Обо мне &raquo
-          button(type='button').button.button--plus Добавить группу
+          button(type='button' @click="newGroup").button.button--plus Добавить группу
         section.section--skills
-            aboutmeAdd(@newGroup = "newGroup",)
-            aboutmeOld(@newSkill = "newSkill" @editCat = "editCat" @deleteSkill = "deleteSkill" @editSkill="editSkill" @deleteCat = "deleteCat" v-for = "cat in categories", :cat = "cat")
+            
+            aboutmeCard(@newSkill = "newSkill" @editCat = "editCat" @deleteSkill = "deleteSkill" @editSkill="editSkill" @deleteCat = "deleteCat" v-for = "cat in categories", :cat = "cat")
           
             
 </template>
 
 <script>
-import aboutmeAdd from "./aboutmeAdd";
-import aboutmeOld from "./aboumeOld";
+
+import aboutmeCard from "./aboutmeCard";
 
 export default {
 
@@ -20,7 +20,7 @@ export default {
 
 
 
-    components: {aboutmeAdd, aboutmeOld},
+    components: { aboutmeCard},
     methods: {
     newGroup(branchName){this.$emit('newGroup', branchName)},
     newSkill(skill){console.log('эбаут ми'), this.$emit('newSkill', skill)},

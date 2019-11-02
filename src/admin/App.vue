@@ -83,7 +83,7 @@ export default {
   components: {aboutme, works, feedback},
  
   methods: {
-  newGroup(branchName){axios.post("/categories",{title: branchName}).then(response=>{this.fetchGroups()})},
+  newGroup(branchName){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.fetchGroups()})},
   newSkill(skill){axios.post('/skills', skill).then(response=>{this.fetchGroups()})},
   deleteSkill(skillId){axios.delete(`/skills/${skillId}`).then(response=>{this.fetchGroups()})},
   fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data})},

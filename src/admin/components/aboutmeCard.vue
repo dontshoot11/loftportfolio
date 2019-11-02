@@ -12,8 +12,8 @@
                   button(type="submit" v-if="isEditMode").button.button--green 
                   button(type="button" v-if="isEditMode" @click="editModeOff").button.button--cross 
                   button(type="button" v-if="isEditMode" @click = "deleteCat").button.button--delete
-              oldSkill(:skill="skill" v-for = "skill in cat.skills" @deleteSkill = "deleteSkill" @editSkill = "editSkill")
-              skill(:id = "cat.id", @newSkill = "newSkill"  )
+              skill(:skill="skill" v-for = "skill in cat.skills" @deleteSkill = "deleteSkill" @editSkill = "editSkill")
+              addSkill(:id = "cat.id", @newSkill = "newSkill"  )
 
               
             
@@ -34,8 +34,9 @@
 </template>
 
 <script>
-import skill from "./aboutmeSkill"
-import oldSkill from './aboutmeOldSkill'
+import addSkill from "./aboutmeAddSkill"
+import skill from './aboutmeSkill'
+
 export default {
   data(){return{
     isEditMode: false,
@@ -56,7 +57,9 @@ export default {
   
   
   },
-  components: {skill, oldSkill}
+  updated(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
+  created(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
+  components: {skill, addSkill}
 }
 </script>
 
