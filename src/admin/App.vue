@@ -84,10 +84,10 @@ export default {
  
   methods: {
   newGroup(branchName){axios.post("/categories",{title: branchName}).then(response=>{this.fetchGroups()})},
-  newSkill(skill){axios.post('/skills', skill)},
-  deleteSkill(skillId){axios.delete(`/skills/${skillId}`)},
+  newSkill(skill){axios.post('/skills', skill).then(response=>{this.fetchGroups()})},
+  deleteSkill(skillId){axios.delete(`/skills/${skillId}`).then(response=>{this.fetchGroups()})},
   fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data})},
-  deleteCat(catId){axios.delete(`categories/${catId}`)},
+  deleteCat(catId){axios.delete(`categories/${catId}`).then(response=>{this.fetchGroups()})},
  
   
  
@@ -110,7 +110,6 @@ export default {
    login: function(e) {axios.post(baseUrl+'login',this.user).then(response => {let token=response.data.token; localStorage.setItem("token", token); console.log ("токен "+ token)}).catch(error=>{this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
    feedbackEdit: function(e) {console.log ("Редактирование карточки с отзывом")} },
 
-  updated(){this.fetchGroups()},
   created(){this.fetchGroups()},
 
   validators: {branchName: function(value){return Validator.value(value).required()},
