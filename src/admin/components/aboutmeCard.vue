@@ -40,17 +40,19 @@ import skill from './aboutmeSkill'
 
 export default {
   data(){return{
+    
+  
     isEditMode: false,
    
    
   }},
   props: {cat:{}},
   methods: {
-  newSkill(skill){this.$emit("newSkill", skill), console.log('эбаут ми олд');this.isEditMode = false},
+  newSkill(skill){this.$emit("newSkill", skill);this.isEditMode = false;},
   editSkill(editedSkill){this.$emit('editSkill', editedSkill);this.isEditMode = false},
 
   deleteSkill(skillId){this.$emit('deleteSkill', skillId);this.isEditMode = false},
-  deleteCat(){this.$emit('deleteCat', this.cat.id);this.isEditMode = false},
+  deleteCat(){this.$emit('deleteCat', this.cat.id);this.isEditMode = false;},
   editModeOn(){this.isEditMode = true},
   editModeOff(){this.isEditMode = false},
   editCat(){let editedCat ={...this.cat}; editedCat.title = this.cat.category; this.$emit('editCat', editedCat); this.isEditMode = false},
@@ -61,7 +63,7 @@ export default {
   
   
   },
-  updated(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "};},
+  updated(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "} },
   created(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
   components: {skill, addSkill},
   

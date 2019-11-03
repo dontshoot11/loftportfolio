@@ -83,15 +83,17 @@ export default {
   components: {aboutme, works, feedback},
  
   methods: {
-  newGroup(branchName){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.fetchGroups()})},
-  newSkill(skill){axios.post('/skills', skill).then(response=>{this.fetchGroups()})},
+  newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.categories.unshift(response.data), console.log(response.data)})},
+  newSkill(skill){axios.post('/skills', skill).then(response=>{})},
+
   deleteSkill(skillId){axios.delete(`/skills/${skillId}`).then(response=>{this.fetchGroups()})},
   
-  deleteCat(catId){axios.delete(`categories/${catId}`).then(response=>{this.fetchGroups()})},
+  deleteCat(catId){axios.delete(`categories/${catId}`).then(response=>{this.categories = this.categories.filter(category=>category.id !== catId)})},
   editSkill(editedSkill){axios.post(`/skills/${editedSkill.id}`, editedSkill).then(response=>{this.fetchGroups()})},
   editCat(editedCat){axios.post(`/categories/${editedCat.id}`, editedCat).then(response=>{this.fetchGroups()})},
 
   fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data})},
+  login: function(e) {axios.post(baseUrl+'login',this.user).then(response => {let token=response.data.token; localStorage.setItem("token", token); console.log ("токен "+ token)}).catch(error=>{this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
   
 
  

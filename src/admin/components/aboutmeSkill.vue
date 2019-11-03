@@ -3,11 +3,11 @@
 
             
             
-                input(v-model="skill.title").old-skill
+                input(v-model="title").old-skill
                 
               
                 
-                input.skill-value.skill-value--edited(v-model="skill.percent")
+                input.skill-value.skill-value--edited(v-model="percent")
                 .form-yesno-buttons
                   button(type="button" @click="editModeOn" v-if="!isEditMode").button.button--edit
                   button(type="button" @click = "deleteSkill" v-if="!isEditMode").button.button--delete
@@ -20,6 +20,8 @@
 export default {
     props:{skill:{}},
     data(){return{
+        title: this.skill.title,
+        percent: this.skill.percent,
         
         isEditMode: false,
         
@@ -31,7 +33,8 @@ export default {
         editSkill(){let editedSkill = {...this.skill}; editedSkill.title = this.title; editedSkill.percent = this.percent; this.isEditMode = false
         ; this.$emit('editSkill', editedSkill)},
          
-    }
+    },
+    
     
 
      
