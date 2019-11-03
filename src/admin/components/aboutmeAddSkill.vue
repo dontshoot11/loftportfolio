@@ -20,7 +20,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 export default {
     
-    props: {id:"", title:""},
+    props: {id:""},
     data(){return{
 
         skill:{

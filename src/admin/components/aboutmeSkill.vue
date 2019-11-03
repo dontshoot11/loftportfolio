@@ -34,13 +34,15 @@ export default {
         isEditMode: false,
         
     }},
+
+
     methods: {
         deleteSkill(){axios.delete(`/skills/${this.skill.id}`).then(this.removeSkill(this.skill))},
         editModeOn(){this.isEditMode = true},
         editModeOff(){this.isEditMode = false},
         editSkill(){let editedSkill = {...this.skill}; editedSkill.title = this.title; editedSkill.percent = this.percent; this.isEditMode = false
-        ; this.$emit('editSkill', editedSkill)},
-            ...mapMutations(['removeSkill'])
+        ; axios.post(`/skills/${editedSkill.id}`, editedSkill).then(response =>{this.redactSkill(editedSkill)})},
+            ...mapMutations(['removeSkill','redactSkill'])
          
     }
     

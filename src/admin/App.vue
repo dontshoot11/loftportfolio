@@ -20,7 +20,7 @@
             a(href="#").navigation__link Отзывы
     main.maincontent
     
-      aboutme(@editCat = "editCat"  @editSkill  ="editSkill")
+      aboutme
       works
       feedback
       
@@ -98,11 +98,13 @@ export default {
   
   
 
-  editSkill(editedSkill){axios.post(`/skills/${editedSkill.id}`, editedSkill).then(response=>{this.fetchGroups()})},
-  editCat(editedCat){axios.post(`/categories/${editedCat.id}`, editedCat).then(response=>{this.fetchGroups()})},
+
+
 
   fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data, this.getCategories(response.data)})},
-  login: function(e) {axios.post(baseUrl+'login',this.user).then(response => {let token=response.data.token; localStorage.setItem("token", token); console.log ("токен "+ token)}).catch(error=>{this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
+  login: function(e) {axios.post(baseUrl+'login',this.user).then(
+    response => {let token=response.data.token; localStorage.setItem("token", token)}).catch(error=>{
+      this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
 
 
 

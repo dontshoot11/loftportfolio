@@ -12,8 +12,8 @@
                   button(type="submit" v-if="isEditMode").button.button--green 
                   button(type="button" v-if="isEditMode" @click="editModeOff").button.button--cross 
                   button(type="button" v-if="isEditMode" @click = "deleteCat").button.button--delete
-              skill(:skill="skill" v-for = "skill in cat.skills"  @editSkill = "editSkill")
-              addSkill(:id = "cat.id",   )
+              skill(:skill="skill" v-for = "skill in cat.skills" )
+              addSkill(:id = "cat.id")
 
               
             
@@ -59,13 +59,14 @@ export default {
   props: {cat:{}},
   methods: {
   
-  editSkill(editedSkill){this.$emit('editSkill', editedSkill);this.isEditMode = false},
+
 
 
   deleteCat(){this.isEditMode = false;axios.delete(`categories/${this.cat.id}`).then(this.removeCat(this.cat))},
   editModeOn(){this.isEditMode = true},
   editModeOff(){this.isEditMode = false},
-  editCat(){let editedCat ={...this.cat}; editedCat.title = this.cat.category; this.$emit('editCat', editedCat); this.isEditMode = false},
+  editCat(){let editedCat ={...this.cat}; editedCat.title = this.cat.category; this.isEditMode = false;
+  axios.post(`/categories/${editedCat.id}`, editedCat)},
     ...mapMutations(['removeCat'])
 
   
@@ -76,6 +77,7 @@ export default {
   },
   
   created(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
+  updated(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
   components: {skill, addSkill},
 
   

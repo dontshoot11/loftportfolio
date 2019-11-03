@@ -6,7 +6,7 @@
         section.section--skills
         pre {{compts}}
             
-            aboutmeCard( @editCat = "editCat" @editSkill="editSkill" v-for = "cat in compts.categories", :cat = "cat" :catName = "cat.category")
+            aboutmeCard( v-for = "cat in compts.categories", :cat = "cat" :catName = "cat.category")
           
             
 </template>
@@ -34,10 +34,9 @@ export default {
     newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.addCategory(response.data)})},
 
    
- 
-    editSkill(editedSkill){this.$emit('editSkill', editedSkill)},
+
   
-    editCat(editedCat){console.log(editedCat), this.$emit('editCat', editedCat)},
+
      ...mapMutations(['addCategory']),
     
     
