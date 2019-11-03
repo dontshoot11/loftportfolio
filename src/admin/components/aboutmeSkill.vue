@@ -16,6 +16,14 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
+import {mapMutations} from 'vuex';
+import axios from 'axios';
+const baseUrl ='https://webdev-api.loftschool.com/';
+let token = localStorage.getItem("token");
+axios.defaults.baseURL = baseUrl;
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
 
 export default {
     props:{skill:{}},
@@ -27,11 +35,12 @@ export default {
         
     }},
     methods: {
-        deleteSkill(){this.$emit('deleteSkill', this.skill)},
+        deleteSkill(){axios.delete(`/skills/${this.skill.id}`).then(this.removeSkill(this.skill))},
         editModeOn(){this.isEditMode = true},
         editModeOff(){this.isEditMode = false},
         editSkill(){let editedSkill = {...this.skill}; editedSkill.title = this.title; editedSkill.percent = this.percent; this.isEditMode = false
         ; this.$emit('editSkill', editedSkill)},
+            ...mapMutations(['removeSkill'])
          
     }
     

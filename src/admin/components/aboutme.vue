@@ -6,7 +6,7 @@
         section.section--skills
         pre {{compts}}
             
-            aboutmeCard(@newSkill = "newSkill" @editCat = "editCat" @deleteSkill = "deleteSkill" @editSkill="editSkill" @deleteCat = "deleteCat" v-for = "cat in compts.categories", :cat = "cat" :catName = "cat.category")
+            aboutmeCard( @editCat = "editCat" @editSkill="editSkill" v-for = "cat in compts.categories", :cat = "cat" :catName = "cat.category")
           
             
 </template>
@@ -15,6 +15,12 @@
 
 import aboutmeCard from "./aboutmeCard";
 import {mapState} from 'vuex';
+import axios from 'axios';
+import {mapMutations} from 'vuex';
+const baseUrl ='https://webdev-api.loftschool.com/';
+let token = localStorage.getItem("token");
+axios.defaults.baseURL = baseUrl;
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 export default {
 
@@ -25,12 +31,14 @@ export default {
     components: {aboutmeCard},
     computed:{...mapState({compts: state => state.skills})},
     methods: {
-    newGroup(branchName){this.$emit('newGroup', branchName)},
-    newSkill(skill){this.$emit('newSkill', skill)},
-    deleteSkill(skillId){this.$emit('deleteSkill', skillId)},
+    newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.addCategory(response.data)})},
+
+   
+ 
     editSkill(editedSkill){this.$emit('editSkill', editedSkill)},
-    deleteCat(cat){this.$emit('deleteCat', cat)},
-    editCat(editedCat){console.log(editedCat), this.$emit('editCat', editedCat)}
+  
+    editCat(editedCat){console.log(editedCat), this.$emit('editCat', editedCat)},
+     ...mapMutations(['addCategory']),
     
     
     

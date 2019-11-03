@@ -12,8 +12,8 @@
                   button(type="submit" v-if="isEditMode").button.button--green 
                   button(type="button" v-if="isEditMode" @click="editModeOff").button.button--cross 
                   button(type="button" v-if="isEditMode" @click = "deleteCat").button.button--delete
-              skill(:skill="skill" v-for = "skill in cat.skills" @deleteSkill = "deleteSkill" @editSkill = "editSkill")
-              addSkill(:id = "cat.id", @newSkill = "newSkill"  )
+              skill(:skill="skill" v-for = "skill in cat.skills"  @editSkill = "editSkill")
+              addSkill(:id = "cat.id",   )
 
               
             
@@ -38,6 +38,11 @@ import addSkill from "./aboutmeAddSkill"
 import skill from './aboutmeSkill'
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
+import axios from 'axios';
+const baseUrl ='https://webdev-api.loftschool.com/';
+let token = localStorage.getItem("token");
+axios.defaults.baseURL = baseUrl;
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 
 export default {
@@ -53,11 +58,11 @@ export default {
   computed:{...mapState({compts: state => state.skills})},
   props: {cat:{}},
   methods: {
-  newSkill(skill){this.$emit("newSkill", skill);this.isEditMode = false;},
+  
   editSkill(editedSkill){this.$emit('editSkill', editedSkill);this.isEditMode = false},
 
-  deleteSkill(skillId){this.$emit('deleteSkill', skillId);this.isEditMode = false},
-  deleteCat(){this.$emit('deleteCat', this.cat);this.isEditMode = false; this.removeCat(this.cat)},
+
+  deleteCat(){this.isEditMode = false;axios.delete(`categories/${this.cat.id}`).then(this.removeCat(this.cat))},
   editModeOn(){this.isEditMode = true},
   editModeOff(){this.isEditMode = false},
   editCat(){let editedCat ={...this.cat}; editedCat.title = this.cat.category; this.$emit('editCat', editedCat); this.isEditMode = false},
@@ -69,7 +74,7 @@ export default {
   
   
   },
-  updated(){ this.card = this.cat},
+  
   created(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
   components: {skill, addSkill},
 

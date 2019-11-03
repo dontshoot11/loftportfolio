@@ -20,7 +20,7 @@
             a(href="#").navigation__link Отзывы
     main.maincontent
     
-      aboutme(@newGroup = "newGroup" @editCat = "editCat" @newSkill="newSkill" @deleteSkill = "deleteSkill" @editSkill  ="editSkill" @deleteCat="deleteCat")
+      aboutme(@editCat = "editCat"  @editSkill  ="editSkill")
       works
       feedback
       
@@ -56,12 +56,15 @@
 
 <script> 
 import { Validator } from 'simple-vue-validator';
-import {mapMutations} from 'vuex';
-import {mapState} from 'vuex';
-import axios from 'axios';
+
+
 import aboutme from './components/aboutme';
 import works from './components/works';
 import feedback from './components/feedback';
+
+import {mapMutations} from 'vuex';
+import {mapState} from 'vuex';
+import axios from 'axios';
 const baseUrl ='https://webdev-api.loftschool.com/';
 let token = localStorage.getItem("token");
 axios.defaults.baseURL = baseUrl;
@@ -88,11 +91,11 @@ export default {
   components: {aboutme, works, feedback},
  
   methods: {
-  newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.addCategory(response.data)})},
-  deleteCat(cat){axios.delete(`categories/${cat.id}`).then(response=>{this.categories = this.categories.filter(category=>category !== cat)})},
+
+
   
-  newSkill(skill){axios.post('/skills', skill).then(response=>{skill=response.data,this.categories = this.categories.map(function(a){if(a.id === skill.category){a.skills.push(skill), console.log(a.id,skill.category)}return a})})},
-  deleteSkill(skillId){axios.delete(`/skills/${skillId.id}`).then(response=>{this.categories = this.categories.map(function(a){if(a.id === skillId.category){a.skills = a.skills.filter(function(skill){return skill !== skillId}), console.log(a.id,skillId.category)}return a})})},
+  
+  
   
 
   editSkill(editedSkill){axios.post(`/skills/${editedSkill.id}`, editedSkill).then(response=>{this.fetchGroups()})},
@@ -105,7 +108,7 @@ export default {
 
 
   ...mapMutations(['getCategories']),
-  ...mapMutations(['addCategory']),
+ 
   
   
 
