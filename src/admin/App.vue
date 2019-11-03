@@ -19,7 +19,8 @@
           li.navigation__item
             a(href="#").navigation__link Отзывы
     main.maincontent
-      aboutme(@newGroup = "newGroup" :categories = "categories" @editCat = "editCat" @newSkill="newSkill" @deleteSkill = "deleteSkill" @editSkill  ="editSkill" @deleteCat="deleteCat")
+    
+      aboutme(@newGroup = "newGroup" @editCat = "editCat" @newSkill="newSkill" @deleteSkill = "deleteSkill" @editSkill  ="editSkill" @deleteCat="deleteCat")
       works
       feedback
       
@@ -55,6 +56,8 @@
 
 <script> 
 import { Validator } from 'simple-vue-validator';
+import {mapMutations} from 'vuex';
+import {mapState} from 'vuex';
 import axios from 'axios';
 import aboutme from './components/aboutme';
 import works from './components/works';
@@ -75,15 +78,17 @@ export default {
         percent:'',
         user: {},
         loginError: {user: "Имя пользователя", pass: "Введите пароль"},
-        categories: [],
+        categories: [''],
 
 
       };
+    
     },
+    
   components: {aboutme, works, feedback},
  
   methods: {
-  newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.categories.unshift(response.data)})},
+  newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.addCategory(response.data)})},
   deleteCat(cat){axios.delete(`categories/${cat.id}`).then(response=>{this.categories = this.categories.filter(category=>category !== cat)})},
   
   newSkill(skill){axios.post('/skills', skill).then(response=>{skill=response.data,this.categories = this.categories.map(function(a){if(a.id === skill.category){a.skills.push(skill), console.log(a.id,skill.category)}return a})})},
@@ -93,8 +98,15 @@ export default {
   editSkill(editedSkill){axios.post(`/skills/${editedSkill.id}`, editedSkill).then(response=>{this.fetchGroups()})},
   editCat(editedCat){axios.post(`/categories/${editedCat.id}`, editedCat).then(response=>{this.fetchGroups()})},
 
-  fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data})},
+  fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data, this.getCategories(response.data)})},
   login: function(e) {axios.post(baseUrl+'login',this.user).then(response => {let token=response.data.token; localStorage.setItem("token", token); console.log ("токен "+ token)}).catch(error=>{this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
+
+
+
+
+  ...mapMutations(['getCategories']),
+  ...mapMutations(['addCategory']),
+  
   
 
  
@@ -114,6 +126,7 @@ export default {
  },
 
 created(){this.fetchGroups()},
+
 
 
   

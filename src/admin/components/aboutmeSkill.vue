@@ -33,7 +33,7 @@ export default {
         editSkill(){let editedSkill = {...this.skill}; editedSkill.title = this.title; editedSkill.percent = this.percent; this.isEditMode = false
         ; this.$emit('editSkill', editedSkill)},
          
-    },
+    }
     
     
 
