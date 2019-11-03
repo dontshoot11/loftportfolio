@@ -26,7 +26,7 @@ export default {
     newSkill(skill){console.log('эбаут ми'), this.$emit('newSkill', skill)},
     deleteSkill(skillId){this.$emit('deleteSkill', skillId)},
     editSkill(editedSkill){this.$emit('editSkill', editedSkill)},
-    deleteCat(catId){this.$emit('deleteCat', catId)},
+    deleteCat(cat){this.$emit('deleteCat', cat)},
     editCat(editedCat){console.log(editedCat), this.$emit('editCat', editedCat)}
     
     

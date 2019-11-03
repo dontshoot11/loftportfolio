@@ -29,6 +29,7 @@ export default {
 
     }},
     methods:{newSkill(){this.$emit('newSkill', this.skill, this.skill = {title: '', percent: ''})}},
+    created(){this.skill.category = this.id},
 
     updated(){this.skill.category = this.id}
 }

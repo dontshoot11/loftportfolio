@@ -27,7 +27,7 @@ export default {
         
     }},
     methods: {
-        deleteSkill(){this.$emit('deleteSkill', this.skill.id)},
+        deleteSkill(){this.$emit('deleteSkill', this.skill)},
         editModeOn(){this.isEditMode = true},
         editModeOff(){this.isEditMode = false},
         editSkill(){let editedSkill = {...this.skill}; editedSkill.title = this.title; editedSkill.percent = this.percent; this.isEditMode = false

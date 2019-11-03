@@ -83,12 +83,13 @@ export default {
   components: {aboutme, works, feedback},
  
   methods: {
-  newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.categories.unshift(response.data), console.log(response.data)})},
-  newSkill(skill){axios.post('/skills', skill).then(response=>{})},
-
-  deleteSkill(skillId){axios.delete(`/skills/${skillId}`).then(response=>{this.fetchGroups()})},
+  newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.categories.unshift(response.data)})},
+  deleteCat(cat){axios.delete(`categories/${cat.id}`).then(response=>{this.categories = this.categories.filter(category=>category !== cat)})},
   
-  deleteCat(catId){axios.delete(`categories/${catId}`).then(response=>{this.categories = this.categories.filter(category=>category.id !== catId)})},
+  newSkill(skill){axios.post('/skills', skill).then(response=>{skill=response.data,this.categories = this.categories.map(function(a){if(a.id === skill.category){a.skills.push(skill), console.log(a.id,skill.category)}return a})})},
+  deleteSkill(skillId){axios.delete(`/skills/${skillId.id}`).then(response=>{this.categories = this.categories.map(function(a){if(a.id === skillId.category){a.skills = a.skills.filter(function(skill){return skill !== skillId}), console.log(a.id,skillId.category)}return a})})},
+  
+
   editSkill(editedSkill){axios.post(`/skills/${editedSkill.id}`, editedSkill).then(response=>{this.fetchGroups()})},
   editCat(editedCat){axios.post(`/categories/${editedCat.id}`, editedCat).then(response=>{this.fetchGroups()})},
 

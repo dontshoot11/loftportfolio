@@ -3,7 +3,7 @@
               form.skills-form.skill-form--name(@submit.prevent = 'editCat' :class="{ editing: this.isEditMode}") 
                 
                 
-                input(v-model="cat.category" required).skill-name
+                input(v-model="this.cat.category" required).skill-name
                
                 .form-yesno-buttons
               
@@ -52,7 +52,7 @@ export default {
   editSkill(editedSkill){this.$emit('editSkill', editedSkill);this.isEditMode = false},
 
   deleteSkill(skillId){this.$emit('deleteSkill', skillId);this.isEditMode = false},
-  deleteCat(){this.$emit('deleteCat', this.cat.id);this.isEditMode = false;},
+  deleteCat(){this.$emit('deleteCat', this.cat);this.isEditMode = false;},
   editModeOn(){this.isEditMode = true},
   editModeOff(){this.isEditMode = false},
   editCat(){let editedCat ={...this.cat}; editedCat.title = this.cat.category; this.$emit('editCat', editedCat); this.isEditMode = false},
