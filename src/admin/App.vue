@@ -83,6 +83,7 @@ export default {
         user: {},
         loginError: {user: "Имя пользователя", pass: "Введите пароль"},
         categories: [''],
+        worksList: [''],
         isLoggedIn: false,
         currentMenu:'aboutme'
 
@@ -106,18 +107,19 @@ export default {
 
   fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data, this.getCategories(response.data)})},
   login: function(e) {axios.post(baseUrl+'login',this.user).then(
-    response => {let token=response.data.token; console.log(response.data), localStorage.setItem("token", token), this.isLoggedIn = true,
+    response => {let token=response.data.token; localStorage.setItem("token", token), this.isLoggedIn = true,
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;}).catch(error=>{
       this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
   logout(){this.isLoggedIn = false, axios.defaults.headers.common['Authorization'] = ``;},
   aboutme(){this.currentMenu = 'aboutme'},
     works(){this.currentMenu = 'works'},
       feedback(){this.currentMenu = 'feedback'},
+  fetchWorks(){axios.get('/works/190').then(response=>{this.getWorks(response.data)})},
 
 
 
 
-  ...mapMutations(['getCategories']),
+  ...mapMutations(['getCategories', 'getWorks']),
  
   
   
@@ -138,7 +140,7 @@ export default {
 
  },
 
-created(){this.fetchGroups()},
+created(){this.fetchGroups(), this.fetchWorks()},
 
 
 
@@ -337,7 +339,9 @@ grid-template-rows: 1fr;
     margin-bottom: 20px;
     }
 
-.edited-card { padding: 0 0}
+.edited-card { padding: 0 0; display: grid; grid-template-rows: 1fr 1fr}
+.edited-card__picture-box {display:flex; justify-content: center; align-items: center}
+
 
 .edited-card__picture{max-width: 100%}
 

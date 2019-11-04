@@ -45,7 +45,7 @@ const branches = {
     created() {
         this.fetchGroups()
     },
-    methods: { fetchGroups() { axios.get('/categories/190').then(response => { this.skills = response.data, console.log(this.skills) }) } }
+    methods: { fetchGroups() { axios.get('/categories/190').then(response => { this.skills = response.data }) } }
 
 
 
