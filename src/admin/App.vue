@@ -8,25 +8,25 @@
             img(src="../images/content/me.jpg" class='userjpg' alt="мое лицо")
           .userpic__username Никитин Артём
         .location Панель администрирования
-        a(href="#").exit Выйти
+        a(href="#" @click = "logout").exit Выйти
     nav.navigation
       .container.container--navigation
         ul.navigation__list
-          li.navigation__item.navigation__item--active
-            a(href="#").navigation__link Обо мне
-          li.navigation__item
-            a(href="#").navigation__link  Работы
-          li.navigation__item
-            a(href="#").navigation__link Отзывы
+          li.navigation__item(:class="{ active: this.currentMenu==='aboutme'}")
+            a(href="#" @click = "aboutme").navigation__link Обо мне
+          li.navigation__item(:class="{ active: this.currentMenu==='works'}")
+            a(href="#" @click = "works").navigation__link  Работы
+          li.navigation__item(:class="{ active: this.currentMenu==='feedback'}")
+            a(href="#" @click = "feedback").navigation__link Отзывы
     main.maincontent
     
-      aboutme
-      works
-      feedback
+      aboutme(v-if ="currentMenu ==='aboutme'")
+      works(v-if ="currentMenu === 'works'")
+      feedback(v-if ="currentMenu === 'feedback'")
       
        
        
-  .popup
+  .popup(v-if = "!isLoggedIn")
     .container.container--popup
       form.form-login(@submit.prevent="login")
         h2.form-login__headline Авторизация
@@ -68,7 +68,8 @@ import axios from 'axios';
 const baseUrl ='https://webdev-api.loftschool.com/';
 let token = localStorage.getItem("token");
 axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+axios.defaults.headers.common['Authorization'] = ``;
+
 
 
 
@@ -82,6 +83,8 @@ export default {
         user: {},
         loginError: {user: "Имя пользователя", pass: "Введите пароль"},
         categories: [''],
+        isLoggedIn: false,
+        currentMenu:'aboutme'
 
 
       };
@@ -103,8 +106,13 @@ export default {
 
   fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data, this.getCategories(response.data)})},
   login: function(e) {axios.post(baseUrl+'login',this.user).then(
-    response => {let token=response.data.token; localStorage.setItem("token", token)}).catch(error=>{
+    response => {let token=response.data.token; console.log(response.data), localStorage.setItem("token", token), this.isLoggedIn = true,
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;}).catch(error=>{
       this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
+  logout(){this.isLoggedIn = false, axios.defaults.headers.common['Authorization'] = ``;},
+  aboutme(){this.currentMenu = 'aboutme'},
+    works(){this.currentMenu = 'works'},
+      feedback(){this.currentMenu = 'feedback'},
 
 
 
@@ -170,6 +178,7 @@ created(){this.fetchGroups()},
   .wrapper__filter {background: rgba(255,255,255, 0.7);}
 
   .container {@include phones{width:100%}}
+.maincontent {min-height: 100vh}
 
 
 
@@ -189,7 +198,7 @@ grid-template-areas: 'userpic location . exit'}
 .navigation__list {display: flex; list-style: none;  color:#60697c; padding: 0}
 .navigation__item {border-bottom: 2px solid transparent; padding: 15px;
 }
-.navigation__item--active {border-bottom: 2px solid #383ace; color: #383ace}
+.active {border-bottom: 2px solid #383ace; color: #383ace}
 .section-name {display: flex;}
 @include phones {
   .section-name{flex-direction: column;
@@ -405,7 +414,7 @@ grid-template-columns: 1fr 2fr 0.25fr;
 
 
 .popup {height: 100vh; width: 100%; background: url('../images/content/admin/admin-wp.png') no-repeat center;
-background-size: cover;}
+background-size: cover; position: fixed; top:0; left: 0}
 
 
 

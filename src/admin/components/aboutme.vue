@@ -4,7 +4,7 @@
           h1.section-name__text Блок &laquo Обо мне &raquo
           button(type='button' @click="newGroup").button.button--plus Добавить группу
         section.section--skills
-        pre {{compts}}
+        
             
             aboutmeCard( v-for = "cat in compts.categories", :cat = "cat" :catName = "cat.category")
           

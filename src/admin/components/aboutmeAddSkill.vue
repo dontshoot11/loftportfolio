@@ -40,7 +40,7 @@ export default {
     }},
     methods:{newSkill(){axios.post('/skills', this.skill).then(response => {this.skill = response.data, this.addSkill(this.skill), this.skill = {title: '', percent: ''}})},
      ...mapMutations(['addSkill'])},
-    created(){this.skill.category = this.id},
+
 
     updated(){this.skill.category = this.id}
 }
