@@ -2,7 +2,7 @@
 .workCard
     .section-block.edited-card(v-if="!isEditMode")
             .edited-card__picture-box
-                img(:src='picture' v-if="!isEditMode").edited-card__picture
+                img(:src='picture' ).edited-card__picture
                 .edited-card__tags {{work.techs}}
             
             
@@ -10,14 +10,14 @@
             .edited-card__description
                 .edited-card__name {{work.title}}
                
-                .edited-card__text(v-if="!isEditMode") {{work.description}}
+                .edited-card__text {{work.description}}
                
                
-                a(:href="work.link" v-if="!isEditMode").edited-card__link {{work.link}}
+                a(:href="work.link" ).edited-card__link {{work.link}}
                 
                 .edited-card__buttons
-                    button(type="button" @click = "editWork" v-if="!isEditMode").button.button--edit-edited Править
-                    button(type="button" @click="deleteWork" v-if="!isEditMode").button.button--delete
+                    button(type="button" @click = "editWork" ).button.button--edit-edited Править
+                    button(type="button" @click="deleteWork" ).button.button--delete
          
 
     form.section-block.edit-card.edit-card--works(@submit.prevent = 'confirmChanges' v-if="isEditMode") 
@@ -70,7 +70,17 @@ export default {
      editWork(){this.isEditMode=true},
      closeEditor(){this.isEditMode=false},
      processFile(e){const file = e.target.files[0]},
-     confirmChanges(){axios.post(`/works/${this.work.id}`,this.work); this.isEditMode=false}}
+     confirmChanges(){
+       const formData = new FormData(); 
+    formData.append('title', this.work.title);
+    formData.append('link', this.work.link);
+    formData.append('techs', this.work.techs);
+    formData.append('description', this.work.description);
+    formData.append('photo', this.work.photo);
+       
+       
+       
+       axios.post(`/works/${this.work.id}`,formData); this.isEditMode=false}}
 
     
 

@@ -115,11 +115,12 @@ export default {
     works(){this.currentMenu = 'works'},
       feedback(){this.currentMenu = 'feedback'},
   fetchWorks(){axios.get('/works/190').then(response=>{this.getWorks(response.data)})},
+  fetchFeedback(){axios.get('/reviews/190').then(response=>{console.log(response.data), this.getFeedback(response.data)})},
 
 
 
 
-  ...mapMutations(['getCategories', 'getWorks']),
+  ...mapMutations(['getCategories', 'getWorks', 'getFeedback']),
  
   
   
@@ -140,7 +141,7 @@ export default {
 
  },
 
-created(){this.fetchGroups(), this.fetchWorks()},
+created(){this.fetchGroups(), this.fetchWorks(), this.fetchFeedback()},
 
 
 

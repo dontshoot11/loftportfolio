@@ -51,14 +51,8 @@ export default {
     formData.append('author', this.review.author);
     formData.append('occ', this.review.occ);
     formData.append('text', this.review.text);
-    axios.post('/reviews', formData).then(response=>{console.log(response.data)})
-
-
-
-
-
-
-    }
+    axios.post('/reviews', formData).then(response=>{this.addReview(response.data);this.closeEditor()})},
+    ...mapMutations(['addReview']),
     
     
     
