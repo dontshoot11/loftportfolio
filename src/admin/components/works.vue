@@ -1,7 +1,7 @@
 <template lang="pug">
      section.section--works
       editor(v-if = "this.openEditor" @closeEditor = "closeEditor" )
-      pre {{compts}}
+   
       .edited-blocks
             button.button.button--add-card(@click = "edit" v-if="!openEditor")
               .button__pic +

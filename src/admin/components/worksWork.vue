@@ -26,7 +26,7 @@
               input.inputfile(type="file"  name="file" id="file" @change="processFile") 
               label.inputfile__label(for="file")
                 .inputfile__text Перетащите или нажмите для загрузки изображения
-                .button.button--submit загрузить
+                
             .edit-card__content
               label.edit-card__label Название
                 input(required placeholder = "Сайт для авто салона Porsche" v-model = "work.title").edit-card__input
@@ -91,6 +91,8 @@ export default {
 <style lang="postcss" scoped>
 .edited-card__picture-box{position: relative}
 .edited-card__tags{position: absolute; bottom:0; left: 0; background:grey; border-radius: 20px; padding: 5px; color:#000}
+.edit-card__download-area{padding:5px; cursor:pointer; width: 100%}
+.inputfile__text{cursor: pointer;}
 
 //.edit-card--works{position:absolute; top:0; left:0; width:100%; height: 100%}
 </style>
