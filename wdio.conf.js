@@ -10,23 +10,18 @@ const shared = {
     maxInstances: 1
 };
 
-
+exports.firefox = {
+    ...shared,
+    desiredCapabilities: {
+        browserName: 'firefox'
+    }
+};
 
 exports.chrome = {
     ...shared,
     desiredCapabilities: {
         browserName: 'chrome',
         chromeOptions: {
-            args: ["disable-gpu", 'no-sandbox', 'disable-setuid-sandbox', 'incognito', 'disable-dev-shm-usage']
-        }
-    }
-};
-
-exports.opera = {
-    ...shared,
-    desiredCapabilities: {
-        browserName: 'opera',
-        operaOptions: {
             args: ["disable-gpu", 'no-sandbox', 'disable-setuid-sandbox', 'incognito', 'disable-dev-shm-usage']
         }
     }

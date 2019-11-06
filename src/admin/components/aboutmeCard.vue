@@ -1,9 +1,11 @@
 <template lang="pug">
   .skills-card.section-block 
+              pre {{cat}} вот эта категория
               form.skills-form.skill-form--name(@submit.prevent = 'editCat' :class="{ editing: this.isEditMode}") 
+              
                 
                 
-                input(v-model="cat.category" required).skill-name
+                input(v-model="currentCat.category" required).skill-name
                
                 .form-yesno-buttons
               
@@ -12,8 +14,8 @@
                   button(type="submit" v-if="isEditMode").button.button--green 
                   button(type="button" v-if="isEditMode" @click="editModeOff").button.button--cross 
                   button(type="button" v-if="isEditMode" @click = "deleteCat").button.button--delete
-              skill(:skill="skill" v-for = "skill in cat.skills" )
-              addSkill(:id = "cat.id")
+              skill(:skill="skill" v-for = "skill in currentCat.skills" )
+              addSkill(:id = "currentCat.id")
 
               
             
@@ -47,6 +49,8 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 export default {
   data(){return{
+  
+    
     
     
     isEditMode: false,
@@ -55,17 +59,19 @@ export default {
    
    
   }},
-  computed:{...mapState({compts: state => state.skills})},
+
+   computed:{currentCat: function(){return this.cat}},
+
   props: {cat:{}},
   methods: {
   
 
 
 
-  deleteCat(){this.isEditMode = false;axios.delete(`categories/${this.cat.id}`).then(this.removeCat(this.cat))},
+  deleteCat(){this.isEditMode = false;axios.delete(`categories/${this.currentCat.id}`).then(this.removeCat(this.cat))},
   editModeOn(){this.isEditMode = true},
   editModeOff(){this.isEditMode = false},
-  editCat(){let editedCat ={...this.cat}; editedCat.title = this.cat.category; this.isEditMode = false;
+  editCat(){let editedCat ={...this.currentCat}; editedCat.title = this.currentCat.category; this.isEditMode = false;
   axios.post(`/categories/${editedCat.id}`, editedCat)},
     ...mapMutations(['removeCat'])
 

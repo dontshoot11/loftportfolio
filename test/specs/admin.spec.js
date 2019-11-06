@@ -11,7 +11,7 @@ beforeAll(() => {
 
 test('на странице есть кнопка "открыть"', () => {
     return client
-        .isExisting('.openOverlay')
+        .isExisting('.button-login-submit')
         .then(browsers => {
             for (const browserName in browsers) {
                 expect(browsers[browserName]).toBe(true);

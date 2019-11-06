@@ -1,5 +1,6 @@
 <template lang="pug">
     .container.container--maincontent
+        
         .section-name
           h1.section-name__text Блок &laquo Обо мне &raquo
           button(type='button' @click="newGroup").button.button--plus Добавить группу
@@ -23,6 +24,7 @@ axios.defaults.baseURL = baseUrl;
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 export default {
+   
 
 
 
@@ -31,7 +33,9 @@ export default {
     components: {aboutmeCard},
     computed:{...mapState({compts: state => state.skills})},
     methods: {
-    newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{this.addCategory(response.data)})},
+    newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{
+        let category = response.data; category['skills'] = [];
+         this.addCategory(category)})},
 
    
 

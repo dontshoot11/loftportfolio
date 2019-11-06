@@ -1,13 +1,15 @@
 <template lang="pug">
     form(:class="{ editing: this.isEditMode}" @submit.prevent = "editSkill").skills-form.skills-form--oldskill
+        pre {{newSkill}} Вот этот скилл
 
             
             
-                input(v-model="title").old-skill
+                input(v-model="newSkill.title").old-skill
+                
                 
               
                 
-                input.skill-value.skill-value--edited(v-model="percent")
+                input.skill-value.skill-value--edited(v-model="newSkill.percent")
                 .form-yesno-buttons
                   button(type="button" @click="editModeOn" v-if="!isEditMode").button.button--edit
                   button(type="button" @click = "deleteSkill" v-if="!isEditMode").button.button--delete
@@ -28,20 +30,21 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 export default {
     props:{skill:{}},
     data(){return{
-        title: this.skill.title,
-        percent: this.skill.percent,
+       
+
         
         isEditMode: false,
         
     }},
+    computed:{newSkill: function(){return this.skill}},
 
 
     methods: {
-        deleteSkill(){axios.delete(`/skills/${this.skill.id}`).then(this.removeSkill(this.skill))},
+        deleteSkill(){axios.delete(`/skills/${this.newSkill.id}`).then(this.removeSkill(this.skill))},
         editModeOn(){this.isEditMode = true},
         editModeOff(){this.isEditMode = false},
-        editSkill(){let editedSkill = {...this.skill}; editedSkill.title = this.title; editedSkill.percent = this.percent; this.isEditMode = false
-        ; axios.post(`/skills/${editedSkill.id}`, editedSkill).then(response =>{this.redactSkill(editedSkill)})},
+        editSkill(){this.isEditMode = false;
+        ; axios.post(`/skills/${this.newSkill.id}`, this.newSkill).then(response =>{this.redactSkill(this.newSkill)})},
             ...mapMutations(['removeSkill','redactSkill'])
          
     }
