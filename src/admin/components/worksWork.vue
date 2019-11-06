@@ -3,7 +3,7 @@
     .section-block.edited-card(v-if="!isEditMode")
             .edited-card__picture-box
                 img(:src='picture').edited-card__picture
-                .edited-card__tags {{work.techs}}
+                tag(v-for="tag in tags" :tag="tag").edited-card__tags
             
             
                 
@@ -56,6 +56,7 @@
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
 import axios from 'axios';
+import tag from "./worksTag"
 const baseUrl ='https://webdev-api.loftschool.com/';
 let token = localStorage.getItem("token");
 axios.defaults.baseURL = baseUrl;
@@ -63,10 +64,13 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 export default {
   data(){return{isEditMode:false}},
     props: {work:{}},
+    components:{tag},
 
     computed:{
  
-    picture: function(){return `https://webdev-api.loftschool.com/${this.work.photo}` }},
+    picture: function(){return `https://webdev-api.loftschool.com/${this.work.photo}` },
+    tags: function(){let re = /\s*,\s*/;
+return this.work.techs.split(re)}},
 
     methods:{
     deleteWork(){axios.delete(`works/${this.work.id}`).then(this.removeWork(this.work))},
@@ -84,7 +88,8 @@ export default {
        
        
        
-       axios.post(`/works/${this.work.id}`,formData); this.isEditMode=false}}
+    axios.post(`/works/${this.work.id}`,formData); this.isEditMode=false}},
+   
 
     
 

@@ -1,6 +1,6 @@
 <template lang="pug">
   .skills-card.section-block 
-              pre {{cat}} вот эта категория
+              //pre {{cat}} вот эта категория
               form.skills-form.skill-form--name(@submit.prevent = 'editCat' :class="{ editing: this.isEditMode}") 
               
                 

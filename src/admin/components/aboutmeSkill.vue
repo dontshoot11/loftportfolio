@@ -1,6 +1,6 @@
 <template lang="pug">
     form(:class="{ editing: this.isEditMode}" @submit.prevent = "editSkill").skills-form.skills-form--oldskill
-        pre {{newSkill}} Вот этот скилл
+ 
 
             
             

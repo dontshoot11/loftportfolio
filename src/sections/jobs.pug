@@ -43,7 +43,7 @@ script#tag(type = "x-template")
 script#work(type = "x-template")
 
   li(@click = "selectPreview"  :index = "index" :iindex="iindex" :class="{active: this.index === this.iindex }").jobs__small-preview
-    //pre {{job}}
+    pre {{job}}
     
     
     button().jobs__button

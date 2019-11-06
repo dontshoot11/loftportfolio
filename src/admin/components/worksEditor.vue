@@ -14,17 +14,9 @@
               label.edit-card__label Описание
                 textarea( rows="5" required placeholder="Оооо вот этот сайт Порше всем сайтам Порше сайт Порше" v-model="work.description").edit-card__textarea
               label.edit-card__label Добавление тега
-                input(required placeholder = "HTML," v-model = "work.techs").edit-card__input
+                input( placeholder = "HTML" @keyup.space = "pushTech" v-model = "tech").edit-card__input
               ul.edit-card__taglist
-                li.edit-card__tag
-                  p.edit-card__description HTML
-                  button(type="button").button.edit-card__cross 
-                li.edit-card__tag
-                  p.edit-card__description CSS
-                  button(type="button").button.edit-card__cross 
-                li.edit-card__tag
-                  p.edit-card__description Javascript
-                  button(type="button").button.edit-card__cross 
+                tag(v-for = "tag in techArray" :tag = "tag")
               .edit-card__buttons
                 button(type = "reset" @click = "closeEditor").edit-card__reset Отмена
                 button(type = "submit").button.button--submit.button--edit-submit сохранить
@@ -34,6 +26,7 @@
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
 import axios from 'axios';
+import tag from "./worksTag";
 const baseUrl ='https://webdev-api.loftschool.com/';
 let token = localStorage.getItem("token");
 axios.defaults.baseURL = baseUrl;
@@ -43,17 +36,24 @@ export default {
         return{
         work:{title: "",
         link:"",
-        techs: "",
+        techs: this.techString,
         description:"",
-        photo:""}
+        photo:""},
+        techArray:[],
+        tech:""
 
 
     }},
+    components:{tag},
+    computed:{
+ 
+    techString: function(){return this.techArray.join() }},
     methods:{closeEditor(){this.$emit('closeEditor')},
-    newWork(){const formData = new FormData(); 
+    pushTech(){this.techArray.push(this.tech); this.tech = ""; console.log(this.work.techs)},
+    newWork(){console.log(this.techs); const formData = new FormData(); 
     formData.append('title', this.work.title);
     formData.append('link', this.work.link);
-    formData.append('techs', this.work.techs);
+    formData.append('techs', this.techString);
     formData.append('description', this.work.description);
     formData.append('photo', this.work.photo);
 
