@@ -51,8 +51,15 @@ let token = localStorage.getItem("token");
 axios.defaults.baseURL = baseUrl;
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 export default {
-    data(){return{picture:`https://webdev-api.loftschool.com/${this.review.photo}`,
-    isEditMode: false}},
+  data(){return{    isEditMode: false}},
+
+
+
+     computed:{
+ 
+    picture: function(){return `https://webdev-api.loftschool.com/${this.review.photo}` }},
+
+
     props:{review:{},
     },
     methods:{deleteReview(){axios.delete(`reviews/${this.review.id}`).then(this.removeReview(this.review))},

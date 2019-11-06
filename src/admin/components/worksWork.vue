@@ -2,7 +2,7 @@
 .workCard
     .section-block.edited-card(v-if="!isEditMode")
             .edited-card__picture-box
-                img(:src='picture' ).edited-card__picture
+                img(:src='picture').edited-card__picture
                 .edited-card__tags {{work.techs}}
             
             
@@ -61,11 +61,15 @@ let token = localStorage.getItem("token");
 axios.defaults.baseURL = baseUrl;
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 export default {
+  data(){return{isEditMode:false}},
     props: {work:{}},
-    data(){return{picture:`https://webdev-api.loftschool.com/${this.work.photo}`,
-    isEditMode:false}
-    },
-    methods:{deleteWork(){axios.delete(`works/${this.work.id}`).then(this.removeWork(this.work))},
+
+    computed:{
+ 
+    picture: function(){return `https://webdev-api.loftschool.com/${this.work.photo}` }},
+
+    methods:{
+    deleteWork(){axios.delete(`works/${this.work.id}`).then(this.removeWork(this.work))},
      ...mapMutations(['removeWork']),
      editWork(){this.isEditMode=true},
      closeEditor(){this.isEditMode=false},
