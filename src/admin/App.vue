@@ -310,13 +310,18 @@ grid-template-rows: 0.5fr 3fr 3fr; grid-template-areas: "name name"
 	z-index: -1;}
 .inputfile__text {margin-bottom: 20px; color: #b9c0cd}
 
-.edit-card__content {grid-area: content; display: flex; flex-direction: column; font-weight: 600}
+.edit-card__content {grid-area: content; display: flex; flex-direction: column; font-weight: 600; position:relative}
 
 .edit-card__label {display: flex; flex-direction: column; margin-bottom: 20px;}
 .edit-card__input {padding: 10px; border-bottom: 1px solid #414c63; &:focus{border-bottom: 1px solid #414c63}}
 .edit-card__textarea {padding: 20px;    margin: 20px 5px;}
 
-.edit-card__taglist {display: flex}
+.edit-card__taglist {display: flex;   position: relative;
+   
+}
+.edited-card__taglist {display: flex;   position: absolute;
+    bottom: 0;
+    left: 0;}
 .edit-card__tag {margin-right: 10px; background: #f4f4f4; padding: 5px 15px; border-radius: 30px; display: flex; align-items: center}
 .edit-card__cross {height: 10px; width: 10px; background: svg-load('cross.svg', fill = #414c63, width = 100%, height = 100% ) no-repeat center; margin-left: 10px;}
 

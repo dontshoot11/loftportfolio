@@ -5,13 +5,13 @@ section(id='jobs').section.jobs
         
         
         
-        .jobs__content
+        .jobs__content(v-if="works.length>0")
           .jobs__slider
            
             .jobs__preview
               .jobs__number-box
                 span.jobs__number {{currentIndex+1}}
-              img(:src=`url+works[currentIndex].photo` class = "bigPreview")
+              img(:src="url+works[currentIndex].photo" class = "bigPreview")
               
               
               ul.jobs__small-previews
@@ -29,7 +29,7 @@ section(id='jobs').section.jobs
                 
           .jobs__description 
             ul.tech-list
-              tag( :tag = "works[currentIndex].techs" )
+              tag( :tag = "tag" v-for ="tag in techArray")
             h2.h2.jobs__headline.jobs__headline--description-list  {{works[currentIndex].title}}
             p.jobs__paragraph {{works[currentIndex].description}}
             a(:href="works[currentIndex].link").jobs__link 
@@ -43,10 +43,10 @@ script#tag(type = "x-template")
 script#work(type = "x-template")
 
   li(@click = "selectPreview"  :index = "index" :iindex="iindex" :class="{active: this.index === this.iindex }").jobs__small-preview
-    pre {{job}}
+    
     
     
     button().jobs__button
-      img(:src=`url+job.photo` class = "smallPreview" )
+      img(:src="url+job.photo" class = "smallPreview" )
       
 

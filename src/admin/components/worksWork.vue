@@ -3,7 +3,8 @@
     .section-block.edited-card(v-if="!isEditMode")
             .edited-card__picture-box
                 img(:src='picture').edited-card__picture
-                tag(v-for="tag in tags" :tag="tag").edited-card__tags
+                ul.edited-card__taglist
+                  tag.edited-card__tags(v-for ="tag in techArray" :tag ="tag")
             
             
                 
@@ -36,16 +37,9 @@
                 textarea( rows="5" required placeholder="Оооо вот этот сайт Порше всем сайтам Порше сайт Порше" v-model="work.description").edit-card__textarea
               label.edit-card__label Добавление тега
                 input(required placeholder = "HTML," v-model = "work.techs").edit-card__input
+              pre {{techArray}}
               ul.edit-card__taglist
-                li.edit-card__tag
-                  p.edit-card__description HTML
-                  button(type="button").button.edit-card__cross 
-                li.edit-card__tag
-                  p.edit-card__description CSS
-                  button(type="button").button.edit-card__cross 
-                li.edit-card__tag
-                  p.edit-card__description Javascript
-                  button(type="button").button.edit-card__cross 
+                buttonTag(v-for = "tag in techArray" :tag = "tag" @deleteTag= "deleteTag")
               .edit-card__buttons
                 button(type = "reset" @click = "closeEditor").edit-card__reset Отмена
                 button(type = "submit").button.button--submit.button--edit-submit сохранить
@@ -57,20 +51,26 @@ import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
 import axios from 'axios';
 import tag from "./worksTag"
+import buttonTag from "./worksTagButton"
 const baseUrl ='https://webdev-api.loftschool.com/';
 let token = localStorage.getItem("token");
 axios.defaults.baseURL = baseUrl;
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 export default {
-  data(){return{isEditMode:false}},
-    props: {work:{}},
-    components:{tag},
+  data(){return{isEditMode:false,
+  splitter : /\s*,\s*/}},
+    props: {job:{}},
+    components:{buttonTag, tag},
+    
+
 
     computed:{
+    work: function(){return this.job},
+    techArray(){return this.work.techs.split(this.splitter)},
  
-    picture: function(){return `https://webdev-api.loftschool.com/${this.work.photo}` },
-    tags: function(){let re = /\s*,\s*/;
-return this.work.techs.split(re)}},
+    picture: function(){return `https://webdev-api.loftschool.com/${this.work.photo}` },},
+
+  
 
     methods:{
     deleteWork(){axios.delete(`works/${this.work.id}`).then(this.removeWork(this.work))},
@@ -88,7 +88,20 @@ return this.work.techs.split(re)}},
        
        
        
-    axios.post(`/works/${this.work.id}`,formData); this.isEditMode=false}},
+    axios.post(`/works/${this.work.id}`,formData); this.isEditMode=false},
+    deleteTag(tag){
+      let fakeArray = this.techArray;
+      console.log(fakeArray);
+      fakeArray=fakeArray.filter(function(a){return a!==tag});
+      console.log(fakeArray);
+      let fakeString = fakeArray.join(', ');
+      console.log (fakeString);
+      this.work.techs = fakeString
+    
+      
+      
+      
+    }},
    
 
     
@@ -109,7 +122,7 @@ return this.work.techs.split(re)}},
 
 <style lang="postcss" scoped>
 .edited-card__picture-box{position: relative}
-.edited-card__tags{position: absolute; bottom:0; left: 0; background:grey; border-radius: 20px; padding: 5px; color:#000}
+
 .edit-card__download-area{padding:5px; cursor:pointer; width: 100%}
 .inputfile__text{cursor: pointer;}
 

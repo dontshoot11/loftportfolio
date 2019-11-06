@@ -15,6 +15,8 @@ const work = {
     template: '#work',
 
     props: {
+
+
         job: {},
         index: "",
         iindex: "",
@@ -26,6 +28,7 @@ const work = {
 
         }
     },
+
     methods: {
         selectPreview: function() {
             let i = this.index;
@@ -50,9 +53,14 @@ new Vue({
         return {
             works: [],
             currentIndex: 0,
-            url: baseUrl
+            url: baseUrl,
+            splitter: /\s*,\s*/,
         }
     },
+    computed: {
+        techArray() { return this.works[this.currentIndex].techs.split(this.splitter) }
+    },
+
     created() {
         this.fetchGroups();
 
@@ -69,13 +77,7 @@ new Vue({
         buttonDown: function(e) { if (this.currentIndex < this.works.length - 1) { this.currentIndex++ } },
         buttonUp: function(e) { if (this.currentIndex > 0) { this.currentIndex-- } },
 
-        /*addImagePaths(works) {
-            return works.map(el => {
-                let picture = require(`../images/content/works/${el.picture}`);
-                el.picture = picture
-                return el
-            })
-        },*/
+
         previewSelect(i) { this.currentIndex = i },
 
 
