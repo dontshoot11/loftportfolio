@@ -61,7 +61,7 @@ export default {
         user: {},
         loginError: {user: "Имя пользователя", pass: "Введите пароль"},
      
-        isLoggedIn: false,
+        isLoggedIn: true,
         currentMenu:'aboutme',
 
       };
@@ -126,7 +126,24 @@ export default {
               );
              this.isLoggedIn = true;
               $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
+                $axios.get(
+                  '/user'
+                  )
+                  .then(
+                    response=>{
+                      let userId=response.data.user.id;
+                      console.log(userId);
+                       this.fetchGroups(
+                         userId
+                         );
+                       this.fetchWorks(
+                         userId
+                         ); 
+                       this.fetchFeedback(
+                         userId
+                         )
+                         }
+                         ) 
                 }
     )
     .catch(
@@ -152,6 +169,14 @@ export default {
   feedback(){
     this.currentMenu = 'feedback'}, //блок навигации по меню
 
+  getUserId(){$axios.get('/user').then(resp => {
+      const userId = resp.data.user.id;
+      this.isLoggedIn=true;
+      this.fetchGroups(userId);
+      this.fetchWorks(userId); 
+      this.fetchFeedback(userId)
+   }).catch(this.isLoggedIn=false);},
+
 
 
 
@@ -168,7 +193,7 @@ export default {
       this.fetchGroups(userId);
       this.fetchWorks(userId); 
       this.fetchFeedback(userId)
-   });
+   }).catch(this.isLoggedIn=false);
  }
 
 
@@ -208,7 +233,7 @@ export default {
   background: url('../images/content/admin/admin-wp.png') no-repeat center;
   background-size: cover;}
 
-  .wrapper__filter {background: rgba(255,255,255, 0.7);}
+  .wrapper__filter {background: rgba(255,255,255, 0.7); }
 
   .container {@include phones{width:100%}}
 .maincontent {min-height: 100vh}
@@ -442,7 +467,7 @@ grid-template-columns: 1fr 2fr 0.25fr;
 
 
 .popup {height: 100vh; width: 100%; background: url('../images/content/admin/admin-wp.png') no-repeat center;
-background-size: cover; position: fixed; top:0; left: 0}
+background-size: cover; position: fixed; top: 0; left: 0}
 
 
 
