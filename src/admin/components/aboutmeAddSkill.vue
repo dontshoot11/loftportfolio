@@ -9,11 +9,7 @@
 <script>
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
-import axios from 'axios';
-const baseUrl ='https://webdev-api.loftschool.com/';
-let token = localStorage.getItem("token");
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+import $axios from "../requests";
 
 
 
@@ -21,27 +17,47 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 export default {
     
     props: {id:""},
-    data(){return{
+    data(){
+        return{
 
-        skill:{
+        skill:
+        {
         title: "",
         percent: '',
         category: this.id
         },
-    computed:{...mapState({compts: state => state.skills})},
-     
-       
         
+    computed:
+    {
+        ...mapState(
+            {
+                compts: state => state.skills
+                }
+            )
+        },
+    }
+    },
+    methods:{
+        newSkill(){
+            $axios.post(
+                '/skills', this.skill)
+                .then(
+                    response => {
+                        this.skill = response.data, this.addSkill(
+                            this.skill),
+                             this.skill = {
+                                 title: '', percent: ''
+                                 }
+                                 }
+                                 )
+                                 },
+
+        ...mapMutations(['addSkill'])
+    },
 
 
-
-
-
-    }},
-    methods:{newSkill(){axios.post('/skills', this.skill).then(response => {this.skill = response.data, this.addSkill(this.skill), this.skill = {title: '', percent: ''}})},
-     ...mapMutations(['addSkill'])},
-
-
-    updated(){this.skill.category = this.id}
+    updated(){
+        this.skill.category = this.id
+        }
 }
 </script>

@@ -18,10 +18,27 @@ export default {
   data(){return{
     openEditor:false,
 }},
-  components:{editor, work},
-   computed:{...mapState({compts: works => works.works})},
-  methods:{edit(){this.openEditor = true},
-  closeEditor(){this.openEditor = false},
+
+  components:{
+    editor, work
+    },
+
+  computed:{
+    ...mapState(
+      {
+        compts: works => works.works
+        }
+        )
+        },
+
+  methods:{
+    edit(){
+      this.openEditor = true
+      },
+
+  closeEditor(){
+    this.openEditor = false
+    },
   }
 }
 </script>

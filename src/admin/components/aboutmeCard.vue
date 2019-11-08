@@ -1,7 +1,7 @@
 <template lang="pug">
   .skills-card.section-block 
-              //pre {{cat}} вот эта категория
-              form.skills-form.skill-form--name(@submit.prevent = 'editCat' :class="{ editing: this.isEditMode}") 
+              
+              form.skills-form.skill-form--name(@submit.prevent='editCat' :class="{editing: this.isEditMode}") 
               
                 
                 
@@ -16,23 +16,6 @@
                   button(type="button" v-if="isEditMode" @click = "deleteCat").button.button--delete
               skill(:skill="skill" v-for = "skill in currentCat.skills" )
               addSkill(:id = "currentCat.id")
-
-              
-            
-              
-            
-                
-              
-        
-                
-
-              
-
-
-
-
-
-    
 </template>
 
 <script>
@@ -40,54 +23,76 @@ import addSkill from "./aboutmeAddSkill"
 import skill from './aboutmeSkill'
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
-import axios from 'axios';
-const baseUrl ='https://webdev-api.loftschool.com/';
-let token = localStorage.getItem("token");
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+import $axios from "../requests";
 
 
 export default {
-  data(){return{
-  
-    
-    
-    
-    isEditMode: false,
-    
-    
-   
-   
-  }},
+  data()
+  {return{
 
-   computed:{currentCat: function(){return this.cat}},
-
-  props: {cat:{}},
-  methods: {
-  
-
-
-
-  deleteCat(){this.isEditMode = false;axios.delete(`categories/${this.currentCat.id}`).then(this.removeCat(this.cat))},
-  editModeOn(){this.isEditMode = true},
-  editModeOff(){this.isEditMode = false},
-  editCat(){let editedCat ={...this.currentCat}; editedCat.title = this.currentCat.category; this.isEditMode = false;
-  axios.post(`/categories/${editedCat.id}`, editedCat)},
-    ...mapMutations(['removeCat'])
-
-  
-  
-  
-  
-  
+   isEditMode: false,
+  }
   },
-  
-  created(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
-  updated(){if (this.cat.category === "Введите название тут"){this.isEditMode = true, this.cat.category = " "}},
-  components: {skill, addSkill},
 
+  computed:{
+    currentCat: function(){
+      return this.cat
+      }
+      },
+
+  props: {
+    cat:{}
+  },
+
+  methods: {
+    deleteCat(){
+     this.isEditMode=false;
+     $axios.delete(
+       `categories/${this.currentCat.id}`
+       )//удаляем с сервера
+      .then(
+        this.removeCat(
+          this.cat
+          )
+          )
+  },//удаляем из хранилища
+
+    editModeOn(){
+      this.isEditMode=true
+    },
+
+    editModeOff(){
+     this.isEditMode=false
+    }, //переключатель режима редактирования
+
+    editCat(){
+      let editedCat={
+        ...this.currentCat
+        }; //создаем копию изменяемой категории
+      editedCat.title=this.currentCat.category; //меняем в копии заголовок
+     this.isEditMode = false; //выключаем редактор
+      $axios.post(
+        `/categories/${editedCat.id}`, editedCat
+        )
+        },//отправляем на сервер измененную категорию
+    ...mapMutations(['removeCat'])
+    },
   
- 
+   created(){
+    if (this.cat.category === "Введите название тут"){
+      this.isEditMode = true, this.cat.category = " "}
+    }, 
+
+    updated(){
+      if (this.cat.category === "Введите название тут"){
+       this.isEditMode = true, this.cat.category = " "}
+    },
+       //эти две функции меняют имя-заглушку на пустую строку
+
+  components: {
+    skill, addSkill
+    },
+
 }
 </script>
 

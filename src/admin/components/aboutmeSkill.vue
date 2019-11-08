@@ -20,15 +20,13 @@
 <script>
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
-import axios from 'axios';
-const baseUrl ='https://webdev-api.loftschool.com/';
-let token = localStorage.getItem("token");
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+import $axios from "../requests";
 
 
 export default {
-    props:{skill:{}},
+    props:{
+        skill:{}
+        },
     data(){return{
        
 
@@ -36,16 +34,47 @@ export default {
         isEditMode: false,
         
     }},
-    computed:{newSkill: function(){return this.skill}},
+    computed:{newSkill: function(){
+        return this.skill
+        }
+        },
 
 
     methods: {
-        deleteSkill(){axios.delete(`/skills/${this.newSkill.id}`).then(this.removeSkill(this.skill))},
-        editModeOn(){this.isEditMode = true},
-        editModeOff(){this.isEditMode = false},
-        editSkill(){this.isEditMode = false;
-        ; axios.post(`/skills/${this.newSkill.id}`, this.newSkill).then(response =>{this.redactSkill(this.newSkill)})},
-            ...mapMutations(['removeSkill','redactSkill'])
+        deleteSkill(){
+            $axios.delete(
+                `/skills/${this.newSkill.id}`
+                )
+                .then(
+                    this.removeSkill(
+                        this.skill
+                        )
+                        )
+                        },
+
+        editModeOn(){
+            this.isEditMode = true
+            },
+
+        editModeOff(){
+            this.isEditMode = false
+            },
+
+        editSkill(){
+            this.isEditMode = false;
+            $axios.post(
+                `/skills/${this.newSkill.id}`, this.newSkill
+                )
+                .then(
+                    response =>{
+                        this.redactSkill(
+                            this.newSkill
+                            )
+                            }
+                            )
+                            },
+                            
+    ...mapMutations(['removeSkill','redactSkill'])
          
     }
     

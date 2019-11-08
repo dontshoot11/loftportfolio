@@ -44,35 +44,59 @@
 <script>
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
-import axios from 'axios';
-const baseUrl ='https://webdev-api.loftschool.com/';
-
-let token = localStorage.getItem("token");
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+import $axios from "../requests";
 export default {
-  data(){return{    isEditMode: false}},
-
-
-
-     computed:{
- 
-    picture: function(){return `https://webdev-api.loftschool.com/${this.review.photo}` }},
-
-
-    props:{review:{},
+  data(){return{
+    isEditMode: false
+    }
     },
-    methods:{deleteReview(){axios.delete(`reviews/${this.review.id}`).then(this.removeReview(this.review))},
-    editModeOn(){this.isEditMode=true},
-    closeEditor(){this.isEditMode=false},
-    processFile(e){const file = e.target.files[0]; this.review.photo = file},
+
+
+
+  computed:{
+ 
+    picture: function(){
+      return `https://webdev-api.loftschool.com/${this.review.photo}` 
+      }
+      },
+
+  props:{
+    review:{},
+    },
+
+  methods:{
+    deleteReview(){
+      $axios.delete(
+        `reviews/${this.review.id}`
+        ).then(
+          this.removeReview(
+            this.review
+            )
+            )
+            },
+
+    editModeOn(){
+      this.isEditMode=true
+      },
+
+    closeEditor(){
+      this.isEditMode=false
+      },
+
+    processFile(e){
+      const file = e.target.files[0]; this.review.photo = file},
+
     confirm(){
-    const formData = new FormData(); 
-    formData.append('photo', this.review.photo);
-    formData.append('author', this.review.author);
-    formData.append('occ', this.review.occ);
-    formData.append('text', this.review.text);
-    axios.post(`/reviews/${this.review.id}`,formData); this.isEditMode=false},
+      const formData = new FormData(); 
+      formData.append('photo', this.review.photo);
+      formData.append('author', this.review.author);
+      formData.append('occ', this.review.occ);
+      formData.append('text', this.review.text);
+      $axios.post(
+        `/reviews/${this.review.id}`,formData
+        );
+      this.isEditMode=false},
+      
     ...mapMutations(['removeReview'])}
 }
 </script>

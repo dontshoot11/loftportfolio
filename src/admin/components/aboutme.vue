@@ -7,7 +7,7 @@
         section.section--skills
         
             
-            aboutmeCard( v-for = "cat in compts.categories", :cat = "cat" :catName = "cat.category")
+            aboutmeCard(v-for="cat in compts.categories" :cat = "cat")
           
             
 </template>
@@ -16,12 +16,9 @@
 
 import aboutmeCard from "./aboutmeCard";
 import {mapState} from 'vuex';
-import axios from 'axios';
+import $axios from "../requests";
 import {mapMutations} from 'vuex';
-const baseUrl ='https://webdev-api.loftschool.com/';
-let token = localStorage.getItem("token");
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
 
 export default {
    
@@ -33,9 +30,11 @@ export default {
     components: {aboutmeCard},
     computed:{...mapState({compts: state => state.skills})},
     methods: {
-    newGroup(){axios.post("/categories",{title: "Введите название тут"}).then(response=>{
-        let category = response.data; category['skills'] = [];
-         this.addCategory(category)})},
+    newGroup(){$axios.post(
+        "/categories",{title: "Введите название тут"})
+            .then(response=>{
+                 let category = response.data; category['skills'] = [];
+                     this.addCategory(category)})}, //создание новой группы с именем-заглушкой (имя требует API)
 
    
 

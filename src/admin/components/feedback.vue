@@ -17,11 +17,31 @@ import review from "./feedbackReview";
 
 import {mapState} from 'vuex';
 export default {
-  data(){return{isEditorOpen:false}},
-  methods:{openEditor(){this.isEditorOpen=true},
-  closeEditor(){this.isEditorOpen=false}},
-  components:{editor, review},
-  computed:{...mapState({feedback: feedback => feedback.feedback})},
+  data(){
+    return{
+      isEditorOpen:false
+      }
+      },
+      
+  methods:{
+    openEditor(){
+      this.isEditorOpen=true
+      },
+
+    closeEditor(){
+      this.isEditorOpen=false
+      }
+      },
+
+components:{editor, review},
+
+computed:{
+    ...mapState(
+      {
+        feedback: feedback => feedback.feedback
+        }
+        )
+        },
 
 }
 </script>

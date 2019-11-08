@@ -49,13 +49,10 @@
 <script>
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
-import axios from 'axios';
+
 import tag from "./worksTag"
 import buttonTag from "./worksTagButton"
-const baseUrl ='https://webdev-api.loftschool.com/';
-let token = localStorage.getItem("token");
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+import $axios from "../requests";
 export default {
   data(){return{isEditMode:false,
   splitter : /\s*,\s*/}},
@@ -73,7 +70,7 @@ export default {
   
 
     methods:{
-    deleteWork(){axios.delete(`works/${this.work.id}`).then(this.removeWork(this.work))},
+    deleteWork(){$axios.delete(`works/${this.work.id}`).then(this.removeWork(this.work))},
      ...mapMutations(['removeWork']),
      editWork(){this.isEditMode=true},
      closeEditor(){this.isEditMode=false},
@@ -88,7 +85,7 @@ export default {
        
        
        
-    axios.post(`/works/${this.work.id}`,formData); this.isEditMode=false},
+    $axios.post(`/works/${this.work.id}`,formData); this.isEditMode=false},
     deleteTag(tag){
       let fakeArray = this.techArray;
       console.log(fakeArray);

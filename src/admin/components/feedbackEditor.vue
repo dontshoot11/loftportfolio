@@ -25,33 +25,52 @@
 <script>
 import {mapState} from 'vuex';
 import {mapMutations} from 'vuex';
-import axios from 'axios';
-const baseUrl ='https://webdev-api.loftschool.com/';
-let token = localStorage.getItem("token");
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+import $axios from "../requests";
+
 export default {
   data(){return{
-    review: {photo: "",
-    author: "",
-    occ: "",
-    text: "",
+    review: {
+      photo: "",
+      author: "",
+      occ: "",
+      text: "",
     }
 
 
 
 
   }},
-    methods:{
-    closeEditor(){this.$emit('closeEditor')},
-    processFile(e){const file = e.target.files[0]; this.review.photo = file},
+
+  methods:{
+    closeEditor(){
+      this.$emit(
+        'closeEditor'
+        )
+        },
+
+    processFile(e){
+      const file = e.target.files[0];
+      this.review.photo = file},
+
     confirm(){
-    const formData = new FormData(); 
-    formData.append('photo', this.review.photo);
-    formData.append('author', this.review.author);
-    formData.append('occ', this.review.occ);
-    formData.append('text', this.review.text);
-    axios.post('/reviews', formData).then(response=>{this.addReview(response.data);this.closeEditor()})},
+      const formData = new FormData(); 
+      formData.append('photo', this.review.photo);
+      formData.append('author', this.review.author);
+      formData.append('occ', this.review.occ);
+      formData.append('text', this.review.text);
+      $axios.post(
+        '/reviews', formData
+        )
+        .then(
+          response=>{
+            this.addReview(
+              response.data
+              );
+              this.closeEditor()
+              }
+              )
+              },
+
     ...mapMutations(['addReview']),
     
     

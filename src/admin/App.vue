@@ -35,19 +35,7 @@
         label.form-login__label.form-login__label--password {{loginError.pass}}
           input(required v-model = "user.password" type = "password").form-login__input
         button(type= "submit").button.button-login-submit Отправить
-        button(type = "button").button.button-login-exit 
-
-       
-
-
-
-
-        
-          
-      
-        
-    
-        
+        button(type = "button").button.button-login-exit
 
 </template>
 
@@ -55,22 +43,14 @@
 
 
 <script> 
-import { Validator } from 'simple-vue-validator';
+
 
 
 import aboutme from './components/aboutme';
 import works from './components/works';
 import feedback from './components/feedback';
-
 import {mapMutations} from 'vuex';
-import {mapState} from 'vuex';
-import axios from 'axios';
-const baseUrl ='https://webdev-api.loftschool.com/';
-let token = localStorage.getItem("token");
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = ``;
-
-
+import $axios from "./requests";
 
 
 export default {
@@ -85,37 +65,115 @@ export default {
         categories: [''],
         worksList: [''],
         isLoggedIn: false,
-        currentMenu:'aboutme'
-
+        currentMenu:'aboutme',
 
       };
     
     },
     
-  components: {aboutme, works, feedback},
+  components: {
+    aboutme, works, feedback
+    },
  
   methods: {
 
+    fetchGroups(user) {
+      $axios.get(
+        `/categories/${user}`
+      )
+      .then(
+        response=>{
+          this.categories = response.data,
+          this.getCategories(
+            response.data
+          )
+        }
+      )
+  }, //обновление данных по скиллам 
 
+  fetchWorks(user) {
+    $axios.get(
+      `/works/${user}`
+      )
+      .then(
+         response=>{
+            this.getWorks(
+              response.data
+            )
+          }
+      )
+  }, //обновление данных по портфолио работ 
   
-  
-  
-  
+  fetchFeedback(user){
+    $axios.get(
+      `/reviews/${user}`
+      )
+      .then(
+        response=>{
+          this.getFeedback(
+           response.data
+          )
+        }
+      )
+  }, //обновление данных по отзывам 
+            
+  login(){
+    $axios.post(
+      '/login',this.user
+    )
+    .then(
+      response => {
+          let token=response.data.token;
+            localStorage.setItem(
+              "token", token
+              );
+             this.isLoggedIn = true;
+              $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                $axios.get(
+                  '/user'
+                  )
+                  .then(
+                    response=>{
+                      let userId=response.data.user.id;
+                       this.fetchGroups(
+                         userId
+                         );
+                       this.fetchWorks(
+                         userId
+                         ); 
+                       this.fetchFeedback(
+                         userId
+                         )
+                         }
+                         ) //получаем userId, подставляем получаем данные пользователя
+                }
+    )
+    .catch(
+      error=>{
+       this.loginError.user = error.response.data.error,
+        this.loginError.pass = error.response.data.error
+        }
+         ),
+       this.user = {}
+    }, //функция логина, получает токен и вызывает функцию получения UserId
+
+  logout(){
+    this.isLoggedIn = false,
+     axios.defaults.headers.common['Authorization'] = ``;
+      localStorage.removeItem(
+        "token"
+        );
+  }, //выход из админки, удаляет токен из localStorage
+
+  aboutme(){
+    this.currentMenu = 'aboutme'},
+  works(){
+    this.currentMenu = 'works'},
+  feedback(){
+    this.currentMenu = 'feedback'}, //блок навигации по меню
 
 
 
-
-  fetchGroups() {axios.get('/categories/190').then(response=>{this.categories = response.data, this.getCategories(response.data)})},
-  login: function(e) {axios.post(baseUrl+'login',this.user).then(
-    response => {let token=response.data.token; localStorage.setItem("token", token), this.isLoggedIn = true,
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;}).catch(error=>{
-      this.loginError.user = error.response.data.error, this.loginError.pass = error.response.data.error}), this.user = {}},
-  logout(){this.isLoggedIn = false, axios.defaults.headers.common['Authorization'] = ``;},
-  aboutme(){this.currentMenu = 'aboutme'},
-    works(){this.currentMenu = 'works'},
-      feedback(){this.currentMenu = 'feedback'},
-  fetchWorks(){axios.get('/works/190').then(response=>{this.getWorks(response.data)})},
-  fetchFeedback(){axios.get('/reviews/190').then(response=>{console.log(response.data), this.getFeedback(response.data)})},
 
 
 
@@ -141,7 +199,7 @@ export default {
 
  },
 
-created(){this.fetchGroups(), this.fetchWorks(), this.fetchFeedback()},
+
 
 
 
