@@ -49,7 +49,7 @@
 import aboutme from './components/aboutme';
 import works from './components/works';
 import feedback from './components/feedback';
-import {mapMutations} from 'vuex';
+import {mapActions} from 'vuex';
 import $axios from "./requests";
 
 
@@ -178,7 +178,7 @@ export default {
 
 
 
-  ...mapMutations(['getCategories', 'getWorks', 'getFeedback']),
+  ...mapActions(['getCategories', 'getWorks', 'getFeedback']),
  
   
   
@@ -447,7 +447,7 @@ background: svg-load('cross.svg', fill = #c92e2e, width = 100%, height = 100% ) 
 
 .edited-card__speaker-info {display: flex; padding-bottom: 15px; border-bottom: 1px solid #b9bdc5; align-items: center; justify-content: center;}
 
-.edited-card__speaker-picture-box {border-radius: 50%; overflow: hidden; height: 100px; width: 100px; display: flex; justify-content: center; align-items: center;}
+.edited-card__speaker-picture-box {border-radius: 50%; overflow: hidden; height: 100px; width: 100px; display: flex; justify-content: center; }
 .edited-card__speaker-picture {max-width: 200%}
 
 .edited-card__speaker-textinfo {margin-left: 20px;}
@@ -527,15 +527,6 @@ border-bottom: 1px solid #414d63;
     &:hover {background: linear-gradient( 90deg, rgb(147,0,232) 60%, rgb(111,0,235) 100%); transition: 0.3s;}
    
   }
-
-
-
-
-
-
-
-
-
 
 </style>
 

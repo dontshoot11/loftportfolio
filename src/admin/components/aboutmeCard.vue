@@ -21,8 +21,7 @@
 <script>
 import addSkill from "./aboutmeAddSkill"
 import skill from './aboutmeSkill'
-import {mapState} from 'vuex';
-import {mapMutations} from 'vuex';
+import {mapState, mapActions} from 'vuex';
 import $axios from "../requests";
 
 
@@ -45,17 +44,13 @@ export default {
   },
 
   methods: {
+
     deleteCat(){
      this.isEditMode=false;
-     $axios.delete(
-       `categories/${this.currentCat.id}`
-       )//удаляем с сервера
-      .then(
-        this.removeCat(
+     this.removeCat(
           this.cat
           )
-          )
-  },//удаляем из хранилища
+    },
 
     editModeOn(){
       this.isEditMode=true
@@ -70,12 +65,10 @@ export default {
         ...this.currentCat
         }; //создаем копию изменяемой категории
       editedCat.title=this.currentCat.category; //меняем в копии заголовок
-     this.isEditMode = false; //выключаем редактор
-      $axios.post(
-        `/categories/${editedCat.id}`, editedCat
-        )
-        },//отправляем на сервер измененную категорию
-    ...mapMutations(['removeCat'])
+      this.isEditMode = false;
+      this.redactCat(editedCat) //выключаем редактор
+     },
+    ...mapActions(['removeCat', 'redactCat'])
     },
   
    created(){

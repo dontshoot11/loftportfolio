@@ -1,6 +1,12 @@
 const works = {
     state: { works: [] },
-    actions: {},
+
+    actions: {
+        getWorks(store, works) {
+            store.commit("getWorks", works)
+        }
+    },
+
     getters: {},
     mutations: {
         getWorks(state, works) {

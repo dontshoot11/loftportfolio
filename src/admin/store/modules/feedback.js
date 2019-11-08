@@ -1,6 +1,12 @@
+import {get } from "http"
+
 const feedback = {
     state: { feedback: [] },
-    actions: {},
+    actions: {
+        getFeedback(store, feedback) {
+            store.commit("getFeedback", feedback)
+        }
+    },
     getters: {},
     mutations: {
         getFeedback(state, feedback) { state.feedback = feedback },

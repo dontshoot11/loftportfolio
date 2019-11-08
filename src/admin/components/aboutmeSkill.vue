@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapActions} from 'vuex';
 import {mapMutations} from 'vuex';
 import $axios from "../requests";
 
@@ -42,15 +42,11 @@ export default {
 
     methods: {
         deleteSkill(){
-            $axios.delete(
-                `/skills/${this.newSkill.id}`
-                )
-                .then(
-                    this.removeSkill(
-                        this.skill
-                        )
-                        )
-                        },
+           this.removeSkill(
+                this.skill
+            )
+                        
+                },
 
         editModeOn(){
             this.isEditMode = true
@@ -62,19 +58,13 @@ export default {
 
         editSkill(){
             this.isEditMode = false;
-            $axios.post(
-                `/skills/${this.newSkill.id}`, this.newSkill
+            this.redactSkill(
+                this.newSkill
                 )
-                .then(
-                    response =>{
-                        this.redactSkill(
-                            this.newSkill
-                            )
-                            }
-                            )
                             },
+                          
                             
-    ...mapMutations(['removeSkill','redactSkill'])
+    ...mapActions(['removeSkill','redactSkill'])
          
     }
     

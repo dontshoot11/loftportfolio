@@ -15,32 +15,27 @@
 <script>
 
 import aboutmeCard from "./aboutmeCard";
-import {mapState} from 'vuex';
+
 import $axios from "../requests";
-import {mapMutations} from 'vuex';
+import {mapState, mapActions} from 'vuex';
 
 
 export default {
-   
-
-
-
-
-
-    components: {aboutmeCard},
-    computed:{...mapState({compts: state => state.skills})},
+    components: {
+        aboutmeCard
+        },
+    computed:{
+        ...mapState({compts: state => state.skills
+        }
+        )
+        },
     methods: {
-    newGroup(){$axios.post(
-        "/categories",{title: "Введите название тут"})
-            .then(response=>{
-                 let category = response.data; category['skills'] = [];
-                     this.addCategory(category)})}, //создание новой группы с именем-заглушкой (имя требует API)
+        
+    newGroup(){
+        this.addCat()
+        },
 
-   
-
-  
-
-     ...mapMutations(['addCategory']),
+    ...mapActions(['addCat'])
     
     
     

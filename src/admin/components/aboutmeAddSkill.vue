@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import {mapMutations} from 'vuex';
+import {mapState, mapActions} from 'vuex';
+
 import $axios from "../requests";
 
 
@@ -39,20 +39,16 @@ export default {
     },
     methods:{
         newSkill(){
-            $axios.post(
-                '/skills', this.skill)
-                .then(
-                    response => {
-                        this.skill = response.data, this.addSkill(
-                            this.skill),
-                             this.skill = {
-                                 title: '', percent: ''
+          this.createSkill(
+              this.skill
+              );
+            this.skill = {
+                title: '', percent: ''
                                  }
-                                 }
-                                 )
-                                 },
+        },
+                                
 
-        ...mapMutations(['addSkill'])
+        ...mapActions(['createSkill'])
     },
 
 
