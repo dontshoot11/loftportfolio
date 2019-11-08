@@ -1,6 +1,6 @@
 <template lang="pug">
 .wrapper
-  .wrapper__filter
+  .wrapper__filter(v-if="isLoggedIn")
     header.header
       .container.container--header
         .userpic
@@ -124,7 +124,7 @@ export default {
             localStorage.setItem(
               "token", token
               );
-             this.isLoggedIn = true;
+          
               $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 $axios.get(
                   '/user'
@@ -132,7 +132,7 @@ export default {
                   .then(
                     response=>{
                       let userId=response.data.user.id;
-                      console.log(userId);
+                     
                        this.fetchGroups(
                          userId
                          );
