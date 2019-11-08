@@ -6,7 +6,7 @@
             button.button.button--add-card(@click = "edit" v-if="!openEditor")
               .button__pic +
               p.button__name Добавить работу
-            work(v-for = "work in compts.works" :job = "work" closeEditor="closeEditor")
+            work(v-for = "work in compts.works" :job = "work" :key="work.id" closeEditor="closeEditor")
         
 </template>
 

@@ -4,7 +4,7 @@
             .edited-card__picture-box
                 img(:src='picture').edited-card__picture
                 ul.edited-card__taglist
-                  tag.edited-card__tags(v-for ="tag in techArray" :tag ="tag")
+                  tag.edited-card__tags(v-for ="tag in techArray" :tag ="tag" :key="tag")
             
             
                 
@@ -21,7 +21,7 @@
                     button(type="button" @click="deleteWork" ).button.button--delete
          
 
-    form.section-block.edit-card.edit-card--works(@submit.prevent = 'confirmChanges' v-if="isEditMode") 
+    form.section-block.edit-card.edit-card--works(@submit.prevent = "confirmChanges" v-if="isEditMode") 
             h2.edit-card__name Редактирование работы
             .edit-card__download-area
               input.inputfile(type="file"  name="file" id="file" @change="processFile") 
@@ -37,9 +37,9 @@
                 textarea( rows="5" required placeholder="Оооо вот этот сайт Порше всем сайтам Порше сайт Порше" v-model="work.description").edit-card__textarea
               label.edit-card__label Добавление тега
                 input(required placeholder = "HTML," v-model = "work.techs").edit-card__input
-              pre {{techArray}}
+              
               ul.edit-card__taglist
-                buttonTag(v-for = "tag in techArray" :tag = "tag" @deleteTag= "deleteTag")
+                buttonTag(v-for = "tag in techArray" :tag = "tag" @deleteTag= "deleteTag" :key="tag")
               .edit-card__buttons
                 button(type = "reset" @click = "closeEditor").edit-card__reset Отмена
                 button(type = "submit").button.button--submit.button--edit-submit сохранить
@@ -47,8 +47,8 @@
 
 
 <script>
-import {mapState} from 'vuex';
-import {mapMutations} from 'vuex';
+import {mapState, mapActions} from 'vuex';
+
 
 import tag from "./worksTag"
 import buttonTag from "./worksTagButton"
@@ -70,35 +70,35 @@ export default {
   
 
     methods:{
-    deleteWork(){$axios.delete(`works/${this.work.id}`).then(this.removeWork(this.work))},
-     ...mapMutations(['removeWork']),
-     editWork(){this.isEditMode=true},
-     closeEditor(){this.isEditMode=false},
-     processFile(e){const file = e.target.files[0]},
+    ...mapActions(['removeWork', 'redactWork']),
+
+    deleteWork(){this.removeWork(this.work)},
+
+    editWork(){this.isEditMode=true},
+
+    closeEditor(){this.isEditMode=false},
+
+    processFile(e){
+      const file = e.target.files[0];
+      this.work.photo = file},
+
      confirmChanges(){
-       const formData = new FormData(); 
-    formData.append('title', this.work.title);
-    formData.append('link', this.work.link);
-    formData.append('techs', this.work.techs);
-    formData.append('description', this.work.description);
-    formData.append('photo', this.work.photo);
-       
-       
-       
-    $axios.post(`/works/${this.work.id}`,formData); this.isEditMode=false},
-    deleteTag(tag){
+      this.redactWork(this.work); this.isEditMode=false;},
+
+     deleteTag(tag){
       let fakeArray = this.techArray;
-      console.log(fakeArray);
+     
       fakeArray=fakeArray.filter(function(a){return a!==tag});
-      console.log(fakeArray);
+
       let fakeString = fakeArray.join(', ');
-      console.log (fakeString);
+    
       this.work.techs = fakeString
     
       
       
       
     }},
+
    
 
     

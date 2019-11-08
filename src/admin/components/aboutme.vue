@@ -7,7 +7,7 @@
         section.section--skills
         
             
-            aboutmeCard(v-for="cat in compts.categories" :cat = "cat")
+            aboutmeCard(v-for="cat in compts.categories" :cat = "cat" :key="cat.id")
           
             
 </template>

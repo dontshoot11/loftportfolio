@@ -51,7 +51,7 @@ const skills = {
 
         },
 
-        removeSkill(store, removeSkill) {
+        removeSkill(store, skill) {
             $axios.delete(
                     `/skills/${skill.id}`
                 )
@@ -124,7 +124,7 @@ const skills = {
                     return a
                 })
         },
-        redactCat(state, cat) {}
+
     }
 
 }

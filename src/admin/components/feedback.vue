@@ -6,7 +6,7 @@
             button.button.button--add-card(@click = "openEditor" v-if="!isEditorOpen")
               .button__pic +
               p.button__name Добавить отзыв
-            review(v-for="review in feedback.feedback" :review="review")
+            review(v-for="review in feedback.feedback" :review="review" :key="review.id")
             
 </template>
 

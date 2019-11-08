@@ -57,13 +57,10 @@ export default {
   data: function () {
       return {
         
-        branchName: '',
-        newSkillName:'',
-        percent:'',
+    
         user: {},
         loginError: {user: "Имя пользователя", pass: "Введите пароль"},
-        categories: [''],
-        worksList: [''],
+     
         isLoggedIn: false,
         currentMenu:'aboutme',
 
@@ -129,23 +126,7 @@ export default {
               );
              this.isLoggedIn = true;
               $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                $axios.get(
-                  '/user'
-                  )
-                  .then(
-                    response=>{
-                      let userId=response.data.user.id;
-                       this.fetchGroups(
-                         userId
-                         );
-                       this.fetchWorks(
-                         userId
-                         ); 
-                       this.fetchFeedback(
-                         userId
-                         )
-                         }
-                         ) //получаем userId, подставляем получаем данные пользователя
+      
                 }
     )
     .catch(
@@ -155,14 +136,13 @@ export default {
         }
          ),
        this.user = {}
-    }, //функция логина, получает токен и вызывает функцию получения UserId
+    }, 
 
   logout(){
     this.isLoggedIn = false,
-     axios.defaults.headers.common['Authorization'] = ``;
-      localStorage.removeItem(
-        "token"
-        );
+     $axios.defaults.headers.common['Authorization'] = ``;
+      localStorage.clear();
+      console.log (localStorage)
   }, //выход из админки, удаляет токен из localStorage
 
   aboutme(){
@@ -180,24 +160,16 @@ export default {
 
   ...mapActions(['getCategories', 'getWorks', 'getFeedback']),
  
-  
-  
-
- 
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-
  },
+ created() {
+   $axios.get('/user').then(resp => {
+      const userId = resp.data.user.id;
+      this.isLoggedIn=true;
+      this.fetchGroups(userId);
+      this.fetchWorks(userId); 
+      this.fetchFeedback(userId)
+   });
+ }
 
 
 
@@ -312,18 +284,6 @@ box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
 
 @include phones {margin: 10px 0px; padding: 10px}}
 
-.skills-card {
-
-
-display: grid;
-grid-template-columns: 1fr;
-grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-grid-template-areas: "name"
-"old1"
-"old2"
-"old3"
-"new"
-}
 .skills-form {padding: 15px 0; border-bottom: 1px solid #dedee0; display: flex; justify-content: space-between; align-items: center}
 
 .skill-form--name {grid-area: name; align-items: center; color: #4e586d; font-size: 18px; font-weight: 700}

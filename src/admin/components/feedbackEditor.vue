@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import {mapMutations} from 'vuex';
+import {mapState, mapActions} from 'vuex';
+
 import $axios from "../requests";
 
 export default {
@@ -53,25 +53,11 @@ export default {
       this.review.photo = file},
 
     confirm(){
-      const formData = new FormData(); 
-      formData.append('photo', this.review.photo);
-      formData.append('author', this.review.author);
-      formData.append('occ', this.review.occ);
-      formData.append('text', this.review.text);
-      $axios.post(
-        '/reviews', formData
-        )
-        .then(
-          response=>{
-            this.addReview(
-              response.data
-              );
-              this.closeEditor()
-              }
-              )
-              },
+      this.addReview(this.review);
+      this.closeEditor()},
+           
 
-    ...mapMutations(['addReview']),
+    ...mapActions(['addReview']),
     
     
     

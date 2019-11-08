@@ -14,7 +14,7 @@
                   button(type="submit" v-if="isEditMode").button.button--green 
                   button(type="button" v-if="isEditMode" @click="editModeOff").button.button--cross 
                   button(type="button" v-if="isEditMode" @click = "deleteCat").button.button--delete
-              skill(:skill="skill" v-for = "skill in currentCat.skills" )
+              skill(:skill="skill" v-for = "skill in currentCat.skills" :key = "skill.id")
               addSkill(:id = "currentCat.id")
 </template>
 

@@ -42,8 +42,7 @@
                 button(type = "submit").button.button--submit.button--edit-submit сохранить
 </template>
 <script>
-import {mapState} from 'vuex';
-import {mapMutations} from 'vuex';
+import {mapState, mapActions} from 'vuex';
 import $axios from "../requests";
 export default {
   data(){return{
@@ -66,14 +65,9 @@ export default {
 
   methods:{
     deleteReview(){
-      $axios.delete(
-        `reviews/${this.review.id}`
-        ).then(
           this.removeReview(
-            this.review
-            )
-            )
-            },
+            this.review)
+           },
 
     editModeOn(){
       this.isEditMode=true
@@ -86,18 +80,10 @@ export default {
     processFile(e){
       const file = e.target.files[0]; this.review.photo = file},
 
-    confirm(){
-      const formData = new FormData(); 
-      formData.append('photo', this.review.photo);
-      formData.append('author', this.review.author);
-      formData.append('occ', this.review.occ);
-      formData.append('text', this.review.text);
-      $axios.post(
-        `/reviews/${this.review.id}`,formData
-        );
+    confirm(){this.redactReview(this.review);
       this.isEditMode=false},
       
-    ...mapMutations(['removeReview'])}
+    ...mapActions(['removeReview', 'redactReview'])}
 }
 </script>
 
