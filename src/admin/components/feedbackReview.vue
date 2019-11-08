@@ -56,11 +56,12 @@ export default {
  
     picture: function(){
       return `https://webdev-api.loftschool.com/${this.review.photo}` 
-      }
+      },
+      review: function(){return this.wisdom}
       },
 
   props:{
-    review:{},
+    wisdom:{},
     },
 
   methods:{

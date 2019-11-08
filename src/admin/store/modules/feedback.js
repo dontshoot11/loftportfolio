@@ -37,7 +37,8 @@ const feedback = {
                 `/reviews/${review.id}`, formData
             ).then(response => {
                 let review = response.data;
-                store.commit("redactReview", review)
+                store.commit("redactReview", review);
+                console.log(review)
             });
 
 

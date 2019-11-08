@@ -407,8 +407,8 @@ background: svg-load('cross.svg', fill = #c92e2e, width = 100%, height = 100% ) 
 
 .edited-card__speaker-info {display: flex; padding-bottom: 15px; border-bottom: 1px solid #b9bdc5; align-items: center; justify-content: center;}
 
-.edited-card__speaker-picture-box {border-radius: 50%; overflow: hidden; height: 100px; width: 100px; display: flex; justify-content: center; }
-.edited-card__speaker-picture {max-width: 200%}
+.edited-card__speaker-picture-box {border-radius: 50%; overflow: hidden; height: 100px; width: 100px; display: flex; justify-content: center; flex-shrink: 0 }
+.edited-card__speaker-picture {max-width: 200% }
 
 .edited-card__speaker-textinfo {margin-left: 20px;}
 
