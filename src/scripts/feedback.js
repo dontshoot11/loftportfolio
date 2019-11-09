@@ -1,16 +1,22 @@
 import Vue from "vue"
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import axios from "axios";
+
+const baseUrl = 'https://webdev-api.loftschool.com/';
+
+axios.defaults.baseURL = baseUrl;
 
 
-console.log('все ок')
+
 
 
 
 const quote = {
     template: "#quote",
     props: ["wisdom"],
-    components: { swiperSlide }
+    components: { swiperSlide },
+    data() { return { url: "https://webdev-api.loftschool.com/" } }
 }
 
 
@@ -50,13 +56,7 @@ new Vue({
     }),
 
     methods: {
-        addImagePaths(quotes) {
-            return quotes.map(el => {
-                let photo = require(`../images/content/mentors/${el.photo}`);
-                el.photo = photo
-                return el
-            })
-        }
+        fetchGroups() { axios.get('/reviews/190').then(response => { this.quotes = response.data }) }
     },
 
 
@@ -68,8 +68,7 @@ new Vue({
 
 
     created() {
-        const data = require("../jsons/quotes.json");
-        this.quotes = this.addImagePaths(data)
+        this.fetchGroups()
     }
 
 

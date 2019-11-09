@@ -1,5 +1,7 @@
 section(id="feedback").section.feedback 
         .container.container--feedback
+         
+          
           .feedback__article
             h2.h2.feedback__headline Что обо мне говорят
             button.feedback__button.feedback__button--left
@@ -7,6 +9,7 @@ section(id="feedback").section.feedback
           ul.quotes-list
             swiper(ref="mySwiper" :options="swiperOption")
               quote(v-for = "wisdom in quotes" :wisdom = "wisdom")
+               
 
 script#quote(type="x-template")
   swiper-slide
@@ -14,7 +17,7 @@ script#quote(type="x-template")
       p.quotes-list__text {{wisdom.text}}
       .quotes-list__speaker-info
         .quotes-list__speaker-photo
-          img.quotes-list__speaker-png(:src="wisdom.photo")
+          img.quotes-list__speaker-png(:src="url+wisdom.photo")
         .quotes-list__speaker-textcontent
-          .quotes-list__speaker-name {{wisdom.name}}
-          .quotes-list__speaker-position {{wisdom.position}}
+          .quotes-list__speaker-name {{wisdom.author}}
+          .quotes-list__speaker-position {{wisdom.occ}}

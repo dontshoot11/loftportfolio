@@ -1,6 +1,6 @@
 <template lang="pug">
 .wrapper
-  .wrapper__filter
+  .wrapper__filter(v-if="isLoggedIn")
     header.header
       .container.container--header
         .userpic
@@ -8,206 +8,213 @@
             img(src="../images/content/me.jpg" class='userjpg' alt="мое лицо")
           .userpic__username Никитин Артём
         .location Панель администрирования
-        a(href="#").exit Выйти
+        a(href="#" @click = "logout").exit Выйти
     nav.navigation
       .container.container--navigation
         ul.navigation__list
-          li.navigation__item.navigation__item--active
-            a(href="#").navigation__link Обо мне
-          li.navigation__item
-            a(href="#").navigation__link  Работы
-          li.navigation__item
-            a(href="#").navigation__link Отзывы
+          li.navigation__item(:class="{ active: this.currentMenu==='aboutme'}")
+            a(href="#" @click = "aboutme").navigation__link Обо мне
+          li.navigation__item(:class="{ active: this.currentMenu==='works'}")
+            a(href="#" @click = "works").navigation__link  Работы
+          li.navigation__item(:class="{ active: this.currentMenu==='feedback'}")
+            a(href="#" @click = "feedback").navigation__link Отзывы
     main.maincontent
-      .container.container--maincontent
-        .section-name
-          h1.section-name__text Блок &laquo Обо мне &raquo
-          button(type='button').button.button--plus Добавить группу
-        section.section--skills
-          .skills-card.section-block 
-            form.skills-form.skill-form--name(@submit.prevent = 'newGroup') 
-              input( placeholder="Название новой группы" v-model = "branchName").skill-name.skill-name--editing
-              .form-yesno-buttons
-                button(type="submit").button.button--green 
-                button(type="reset").button.button--cross 
-
-            form.skills-form.skills-form--newskill(@submit.prevent = 'newSkill') 
-            
-              input( placeholder="Новый навык" v-model = "newSkillName" ).new-skill
-              input( type="number" max = "100" placeholder="100%" v-model ="percent").skill-value
-              button(type="submit").button.button--big 
-          .skills-card.section-block 
-              form.skills-form.skill-form--name(@submit.prevent = 'editSkillBranchName') 
-                p.skill-name Workflow
-                .form-yesno-buttons
-                  button(type="submit").button.button--edit
-              form.skills-form.skills-form--oldskill(@submit.prevent = 'editSkill')  
-            
-                p.old-skill git
-                p.skill-value.skill-value--edited 30%
-                .form-yesno-buttons
-                  button(type="submit").button.button--edit
-                  button(type="button").button.button--delete
-              form.skills-form.skills-form--oldskill
-            
-                p.old-skill webpack
-                p.skill-value.skill-value--edited 45%
-                .form-yesno-buttons
-                  button(type="submit").button.button--edit
-                  button(type="button").button.button--delete
-              form.skills-form.skills-form--oldskill(@submit.prevent = 'editSkill')  
-            
-                p.old-skill memes
-                p.skill-value.skill-value--edited 90%
-                .form-yesno-buttons
-                  button(type="submit").button.button--edit
-                  button(type="button").button.button--delete
-        
-                
-
-              form.skills-form.skills-form--newskill(@submit.prevent = 'newSkill')   
-            
-                input(required placeholder="Новый навык").new-skill
-                input(required type="number" placeholder="100%").skill-value
-                button(type="submit").button.button--big 
-        section.section--works
-          form.section-block.edit-card.edit-card--works(@submit.prevent = 'newWork') 
-            h2.edit-card__name Редактирование работы
-            .edit-card__download-area
-              input.inputfile(type="file" required name="file" id="file") 
-              label.inputfile__label(for="file")
-                .inputfile__text Перетащите или нажмите для загрузки изображения
-                .button.button--submit загрузить
-            .edit-card__content
-              label.edit-card__label Название
-                input( required placeholder = "Сайт для авто салона Porsche").edit-card__input
-              label.edit-card__label Ссылка
-                input(required placeholder = "www.leningrad.spb.ru").edit-card__input
-              label.edit-card__label Описание
-                textarea( rows="5" required placeholder="Оооо вот этот сайт Порше всем сайтам Порше сайт Порше").edit-card__textarea
-              label.edit-card__label Добавление тега
-                input(required placeholder = "HTML,").edit-card__input
-              ul.edit-card__taglist
-                li.edit-card__tag
-                  p.edit-card__description HTML
-                  button(type="button").button.edit-card__cross 
-                li.edit-card__tag
-                  p.edit-card__description CSS
-                  button(type="button").button.edit-card__cross 
-                li.edit-card__tag
-                  p.edit-card__description Javascript
-                  button(type="button").button.edit-card__cross 
-              .edit-card__buttons
-                button(type = "reset").edit-card__reset Отмена
-                button(type = "submit").button.button--submit.button--edit-submit сохранить
-          .edited-blocks
-            button.button.button--add-card
-              .button__pic +
-              p.button__name Добавить работу
-            .section-block.edited-card
-              .edited-card__picture-box
-                img(src='../images/content/works/1.png').edited-card__picture
-              .edited-card__description
-                .edited-card__name Сайт школы образования
-                .edited-card__text Вот это сайт ай да сайт, такой технологичный и красивый. Нет, это не соринка в глаз попала, это я прослезился, когда писал описание этого сайта.
-                a(href="#").edited-card__link http://leningrad.spb.ru
-                .edited-card__buttons
-                  button(type="button").button.button--edit-edited Править
-                  button(type="button").button.button--delete-edited Удалить
-            .section-block.edited-card
-              .edited-card__picture-box
-                img(src='../images/content/works/1.png').edited-card__picture
-              .edited-card__description
-                .edited-card__name Сайт школы образования
-                .edited-card__text Вот это сайт ай да сайт, такой технологичный и красивый. Нет, это не соринка в глаз попала, это я прослезился, когда писал описание этого сайта.
-                a(href="#").edited-card__link http://leningrad.spb.ru
-                .edited-card__buttons
-                  button(type="button").button.button--edit-edited Править
-                  button(type="button").button.button--delete-edited Удалить
-            .section-block.edited-card
-              .edited-card__picture-box
-                img(src='../images/content/works/1.png').edited-card__picture
-              .edited-card__description
-                .edited-card__name Сайт школы образования
-                .edited-card__text Вот это сайт ай да сайт, такой технологичный и красивый. Нет, это не соринка в глаз попала, это я прослезился, когда писал описание этого сайта.
-                a(href="#").edited-card__link http://leningrad.spb.ru
-                .edited-card__buttons
-                  button(type="button").button.button--edit-edited Править
-                  button(type="button").button.button--delete-edited Удалить
-        section.section--feedback
-
-
-
-
-
-          form.section-block.edit-card.edit-card--feedback(@submit.prevent = "feedbackEdit")
-            h2.edit-card__name Добавить отзыв
-            .edit-card__download-area.edit-card__download-area--feedback
-              input.inputfile(type="file" required name="file" id="userpic") 
-              label.inputfile__label(for="userpic")
-                .userpic-bg
-                  .userpic-svg
-              
-                .button.button--link Добавить фото
-            .edit-card__content
-              .edit-card__row
-                label.edit-card__label.edit-card__label--feedback Имя автора
-                  input( required placeholder = "Мастер Сплинтер").edit-card__input.edit-card__input--feedback
-                label.edit-card__label.edit-card__label--feedback Титул
-                  input(required placeholder = "Учитель боевых искусств").edit-card__input.edit-card__input--feedback
-              label.edit-card__label Отзыв
-                textarea( rows="5" required placeholder="Мы не жалкие букашки, панцирь носим, как рубашки").edit-card__textarea.edit-card__textarea--feedback
-            
-              .edit-card__buttons
-                button(type = "reset").edit-card__reset Отмена
-                button(type = "submit").button.button--submit.button--edit-submit сохранить
-
-          .edited-blocks
-            button.button.button--add-card
-              .button__pic +
-              p.button__name Добавить отзыв
-            .section-block.edited-card.edited-card--feedback
-              .edited-card__speaker-info
-                .edited-card__speaker-picture-box
-                  img(src='../images/content/mentors/stark.jpeg').edited-card__speaker-picture
-                .edited-card__speaker-textinfo
-                  p.edited-card__speaker-name Тони Старк Мл.
-                  p.edited-card__speaker-position Железный Человек
-              
-             
-              .edited-card__description.edited-card__description--feedback
-              
-                .edited-card__text Быть или не быть — вот в чём вопрос. Достойно ли терпеть безропотно позор судьбы, иль нужно оказать сопротивленье?
-
-
-            
-                .edited-card__buttons
-                  button(type="button").button.button--edit-edited Править
-                  button(type="button").button.button--delete-edited Удалить
-  .popup
+    
+      aboutme(v-if ="currentMenu ==='aboutme'")
+      works(v-if ="currentMenu === 'works'")
+      feedback(v-if ="currentMenu === 'feedback'")
+      
+       
+       
+  .popup(v-if = "!isLoggedIn")
     .container.container--popup
       form.form-login(@submit.prevent="login")
         h2.form-login__headline Авторизация
-        label.form-login__label.form-login__label--login Логин
-          input(required).form-login__input
-        label.form-login__label.form-login__label--password Пароль
-          input(required).form-login__input
+        label.form-login__label.form-login__label--login {{loginError.user}}
+          input(required v-model = "user.name").form-login__input
+        label.form-login__label.form-login__label--password {{loginError.pass}}
+          input(required v-model = "user.password" type = "password").form-login__input
         button(type= "submit").button.button-login-submit Отправить
-        button(type = "button").button.button-login-exit 
-
-       
-
-
-
-
-        
-          
-      
-        
-    
-        
+        button(type = "button").button.button-login-exit
 
 </template>
+
+
+
+
+<script> 
+
+
+
+import aboutme from './components/aboutme';
+import works from './components/works';
+import feedback from './components/feedback';
+import {mapActions} from 'vuex';
+import $axios from "./requests";
+
+
+export default {
+  data: function () {
+      return {
+        
+    
+        user: {},
+        loginError: {user: "Имя пользователя", pass: "Введите пароль"},
+     
+        isLoggedIn: true,
+        currentMenu:'aboutme',
+
+      };
+    
+    },
+    
+  components: {
+    aboutme, works, feedback
+    },
+ 
+  methods: {
+
+    fetchGroups(user) {
+      $axios.get(
+        `/categories/${user}`
+      )
+      .then(
+        response=>{
+          this.categories = response.data,
+          this.getCategories(
+            response.data
+          )
+        }
+      )
+  }, //обновление данных по скиллам 
+
+  fetchWorks(user) {
+    $axios.get(
+      `/works/${user}`
+      )
+      .then(
+         response=>{
+            this.getWorks(
+              response.data
+            )
+          }
+      )
+  }, //обновление данных по портфолио работ 
+  
+  fetchFeedback(user){
+    $axios.get(
+      `/reviews/${user}`
+      )
+      .then(
+        response=>{
+          this.getFeedback(
+           response.data
+          )
+        }
+      )
+  }, //обновление данных по отзывам 
+            
+  login(){
+    $axios.post(
+      '/login',this.user
+    )
+    .then(
+      response => {
+          let token=response.data.token;
+            localStorage.setItem(
+              "token", token
+              ); 
+              this.isLoggedIn = true;
+          
+              $axios.defaults.headers['Authorization'] = `Bearer ${token}`;
+                $axios.get(
+                  '/user'
+                  )
+                  .then(
+                    response=>{
+                      let userId=response.data.user.id;
+                     
+                       this.fetchGroups(
+                         userId
+                         );
+                       this.fetchWorks(
+                         userId
+                         ); 
+                       this.fetchFeedback(
+                         userId
+                         )
+                         }
+                         ) 
+                }
+    )
+    .catch(
+      error=>{
+       this.loginError.user = error.response.data.error,
+        this.loginError.pass = error.response.data.error
+        }
+         ),
+       this.user = {}
+    }, 
+
+  logout(){
+    this.isLoggedIn = false,
+     $axios.defaults.headers['Authorization'] = ``;
+      localStorage.clear();
+      console.log (localStorage)
+  }, //выход из админки, удаляет токен из localStorage
+
+  aboutme(){
+    this.currentMenu = 'aboutme'},
+  works(){
+    this.currentMenu = 'works'},
+  feedback(){
+    this.currentMenu = 'feedback'}, //блок навигации по меню
+
+  getUserId(){$axios.get('/user').then(resp => {
+      const userId = resp.data.user.id;
+      this.isLoggedIn=true;
+      this.fetchGroups(userId);
+      this.fetchWorks(userId); 
+      this.fetchFeedback(userId)
+   }).catch(this.isLoggedIn=false);},
+
+
+
+
+
+
+
+  ...mapActions(['getCategories', 'getWorks', 'getFeedback']),
+ 
+ },
+ created() {
+   $axios.get('/user').then(resp => {
+      const userId = resp.data.user.id;
+      this.isLoggedIn=true;
+      this.fetchGroups(userId);
+      this.fetchWorks(userId); 
+      this.fetchFeedback(userId)
+   }).catch(this.isLoggedIn=false);
+ }
+
+
+
+
+
+  
+
+
+}
+
+
+</script>
+
+
+
+
+
+
+
 <style lang = "postcss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 @import "normalize.css";
@@ -227,9 +234,10 @@
   background: url('../images/content/admin/admin-wp.png') no-repeat center;
   background-size: cover;}
 
-  .wrapper__filter {background: rgba(255,255,255, 0.7);}
+  .wrapper__filter {background: rgba(255,255,255, 0.7); }
 
   .container {@include phones{width:100%}}
+.maincontent {min-height: 100vh}
 
 
 
@@ -249,7 +257,7 @@ grid-template-areas: 'userpic location . exit'}
 .navigation__list {display: flex; list-style: none;  color:#60697c; padding: 0}
 .navigation__item {border-bottom: 2px solid transparent; padding: 15px;
 }
-.navigation__item--active {border-bottom: 2px solid #383ace; color: #383ace}
+.active {border-bottom: 2px solid #383ace; color: #383ace}
 .section-name {display: flex;}
 @include phones {
   .section-name{flex-direction: column;
@@ -302,18 +310,6 @@ box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
 
 @include phones {margin: 10px 0px; padding: 10px}}
 
-.skills-card {
-
-
-display: grid;
-grid-template-columns: 1fr;
-grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-grid-template-areas: "name"
-"old1"
-"old2"
-"old3"
-"new"
-}
 .skills-form {padding: 15px 0; border-bottom: 1px solid #dedee0; display: flex; justify-content: space-between; align-items: center}
 
 .skill-form--name {grid-area: name; align-items: center; color: #4e586d; font-size: 18px; font-weight: 700}
@@ -358,13 +354,18 @@ grid-template-rows: 0.5fr 3fr 3fr; grid-template-areas: "name name"
 	z-index: -1;}
 .inputfile__text {margin-bottom: 20px; color: #b9c0cd}
 
-.edit-card__content {grid-area: content; display: flex; flex-direction: column; font-weight: 600}
+.edit-card__content {grid-area: content; display: flex; flex-direction: column; font-weight: 600; position:relative}
 
 .edit-card__label {display: flex; flex-direction: column; margin-bottom: 20px;}
 .edit-card__input {padding: 10px; border-bottom: 1px solid #414c63; &:focus{border-bottom: 1px solid #414c63}}
 .edit-card__textarea {padding: 20px;    margin: 20px 5px;}
 
-.edit-card__taglist {display: flex}
+.edit-card__taglist {display: flex;   position: relative;
+   
+}
+.edited-card__taglist {display: flex;   position: absolute;
+    bottom: 0;
+    left: 0;}
 .edit-card__tag {margin-right: 10px; background: #f4f4f4; padding: 5px 15px; border-radius: 30px; display: flex; align-items: center}
 .edit-card__cross {height: 10px; width: 10px; background: svg-load('cross.svg', fill = #414c63, width = 100%, height = 100% ) no-repeat center; margin-left: 10px;}
 
@@ -388,7 +389,9 @@ grid-template-rows: 1fr;
     margin-bottom: 20px;
     }
 
-.edited-card { padding: 0 0}
+.edited-card { padding: 0 0; display: grid; grid-template-rows: 1fr 1fr}
+.edited-card__picture-box {display:flex; justify-content: center; align-items: center}
+
 
 .edited-card__picture{max-width: 100%}
 
@@ -430,8 +433,8 @@ background: svg-load('cross.svg', fill = #c92e2e, width = 100%, height = 100% ) 
 
 .edited-card__speaker-info {display: flex; padding-bottom: 15px; border-bottom: 1px solid #b9bdc5; align-items: center; justify-content: center;}
 
-.edited-card__speaker-picture-box {border-radius: 50%; overflow: hidden; height: 100px; width: 100px; display: flex; justify-content: center; align-items: center;}
-.edited-card__speaker-picture {max-width: 200%}
+.edited-card__speaker-picture-box {border-radius: 50%; overflow: hidden; height: 100px; width: 100px; display: flex; justify-content: center; flex-shrink: 0 }
+.edited-card__speaker-picture {max-width: 200% }
 
 .edited-card__speaker-textinfo {margin-left: 20px;}
 
@@ -465,7 +468,7 @@ grid-template-columns: 1fr 2fr 0.25fr;
 
 
 .popup {height: 100vh; width: 100%; background: url('../images/content/admin/admin-wp.png') no-repeat center;
-background-size: cover;}
+background-size: cover; position: fixed; top: 0; left: 0}
 
 
 
@@ -511,67 +514,7 @@ border-bottom: 1px solid #414d63;
    
   }
 
-
-
-
-
-
-
-
-
-
 </style>
-
-
-
-<script> 
-import { Validator } from 'simple-vue-validator';
-
-
-export default {
-  data: function () {
-      return {
-        branchName: '',
-        newSkillName:'',
-        percent:'',
-
-
-      };
-    },
-  methods: {newGroup() {this.$validate().then(function(sucess) {if (sucess) {console.log('Тут форма должна полететь на сервер')}
-  else {console.log ('Валидация не прошла')}})},
-  
-  
-  
-  
-  
-  
-  
-   newSkill() {this.$validate().then(function(sucess) {if (sucess) {console.log('Тут форма должна полететь на сервер')}
-  else {console.log ('Валидация не прошла')}})},
-
-
-
-
-   editSkill: function(e) { console.log("Редактирование скила") },
-   editSkillBranchName: function(e) { console.log("Редактирование названия ветки скиллов") },
-   newWork: function(e){console.log ("Редактирование работы")},
-   login: function(e) {console.log ("Попытка логина")},
-   feedbackEdit: function(e) {console.log ("Редактирование карточки с отзывом")} },
-  validators: {branchName: function(value){return Validator.value(value).required()},
-
-
-
-  newSkillName: function(value){return Validator.value(value).required()},
-  percent: function(value){return Validator.value(value).required()}}
-   
-
-
-
-}
-
-
-</script>
 
 
 

@@ -3,17 +3,21 @@ section(id='jobs').section.jobs
         h2.h2.jobs__headline Мои работы
         
         
-        .jobs__content
+        
+        
+        .jobs__content(v-if="works.length>0")
           .jobs__slider
            
             .jobs__preview
               .jobs__number-box
                 span.jobs__number {{currentIndex+1}}
-              img(:src='works[currentIndex].picture' class = "bigPreview")
+              img(:src="url+works[currentIndex].photo" class = "bigPreview")
               
               
               ul.jobs__small-previews
-                work(v-for = "work in works" :iindex = "currentIndex" :work="work" :index = "works.indexOf(work)" @clickemmited = "previewSelect" )
+                work(v-for = "job in works" :iindex = "currentIndex" :job="job" :index = "works.indexOf(job)" @clickemmited = "previewSelect" )
+                
+                  
               
                   
                
@@ -25,22 +29,24 @@ section(id='jobs').section.jobs
                 
           .jobs__description 
             ul.tech-list
-              tag(v-for = "tag in works[currentIndex].tags" :tag = "tag" )
-            h2.h2.jobs__headline.jobs__headline--description-list  {{works[currentIndex].text.name}}
-            p.jobs__paragraph {{works[currentIndex].text.description}}
-            a(:href="works[currentIndex].text.link").jobs__link 
+              tag( :tag = "tag" v-for ="tag in techArray")
+            h2.h2.jobs__headline.jobs__headline--description-list  {{works[currentIndex].title}}
+            p.jobs__paragraph {{works[currentIndex].description}}
+            a(:href="works[currentIndex].link").jobs__link 
              +icon('link', 'jobs__icon-link')
              span.jobs__link Посмотреть сайт
 
 script#tag(type = "x-template")
   li.tech-list__item {{tag}}
+    
 
 script#work(type = "x-template")
-  li(@click = "selectPreview"  :index = "index" :iindex="iindex" ).jobs__small-preview
- 
-  
+
+  li(@click = "selectPreview"  :index = "index" :iindex="iindex" :class="{active: this.index === this.iindex }").jobs__small-preview
     
-    button(:class="{ active: this.index === this.iindex }").jobs__button
-      img(:src="work.picture" class = "smallPreview" )
+    
+    
+    button().jobs__button
+      img(:src="url+job.photo" class = "smallPreview" )
       
 

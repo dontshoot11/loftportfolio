@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import { endianness } from 'os';
+import axios from "axios";
+const baseUrl = 'https://webdev-api.loftschool.com/';
+
+axios.defaults.baseURL = baseUrl;
 
 
 
@@ -39,9 +43,9 @@ const branches = {
 
     }),
     created() {
-        const data = require("../jsons/skills.json");
-        this.skills = data
-    }
+        this.fetchGroups()
+    },
+    methods: { fetchGroups() { axios.get('/categories/190').then(response => { this.skills = response.data }) } }
 
 
 
