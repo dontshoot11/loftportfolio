@@ -123,9 +123,10 @@ export default {
           let token=response.data.token;
             localStorage.setItem(
               "token", token
-              );
+              ); 
+              this.isLoggedIn = true;
           
-              $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+              $axios.defaults.headers['Authorization'] = `Bearer ${token}`;
                 $axios.get(
                   '/user'
                   )
@@ -157,7 +158,7 @@ export default {
 
   logout(){
     this.isLoggedIn = false,
-     $axios.defaults.headers.common['Authorization'] = ``;
+     $axios.defaults.headers['Authorization'] = ``;
       localStorage.clear();
       console.log (localStorage)
   }, //выход из админки, удаляет токен из localStorage
