@@ -67,7 +67,7 @@ const works = {
             state.works = state.works.map(
                 function(a) {
                     if (a.id === work.id) {
-                        a === work
+                        a = work
                     }
                     return a
                 })

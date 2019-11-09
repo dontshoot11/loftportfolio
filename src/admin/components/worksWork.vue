@@ -4,7 +4,7 @@
             .edited-card__picture-box
                 img(:src='picture').edited-card__picture
                 ul.edited-card__taglist
-                  tag.edited-card__tags(v-for ="tag in techArray" :tag ="tag" :key="tag")
+                  tag.edited-card__tags(v-for ="(tag, ind) in techArray" :tag ="tag" :key="ind")
             
             
                 
@@ -39,7 +39,7 @@
                 input(required placeholder = "HTML," v-model = "work.techs").edit-card__input
               
               ul.edit-card__taglist
-                buttonTag(v-for = "tag in techArray" :tag = "tag" @deleteTag= "deleteTag" :key="tag")
+                buttonTag(v-for = "(tag, ind) in techArray" :tag = "tag" @deleteTag= "deleteTag" :key="ind")
               .edit-card__buttons
                 button(type = "reset" @click = "closeEditor").edit-card__reset Отмена
                 button(type = "submit").button.button--submit.button--edit-submit сохранить
@@ -63,7 +63,12 @@ export default {
 
     computed:{
     work: function(){return this.job},
-    techArray(){return this.work.techs.split(this.splitter)},
+
+    techArray: function(){
+        return this.work.techs.split(this.splitter)
+        .filter(function(a){
+          return  a.replace(/\s+/g, '')
+          })},
  
     picture: function(){return `https://webdev-api.loftschool.com/${this.work.photo}` },},
 

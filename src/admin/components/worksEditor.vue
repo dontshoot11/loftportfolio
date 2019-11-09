@@ -17,7 +17,7 @@
               label.edit-card__label Добавление тега
                 input( placeholder = "HTML"  v-model = "work.techs").edit-card__input
               ul.edit-card__taglist
-                buttonTag( v-for = "tag in techArray" :tag = "tag" @deleteTag="deleteTag" :key="tag" )
+                buttonTag( v-for = "(tag, ind) in techArray" :tag = "tag" @deleteTag="deleteTag" :key="ind" )
               .edit-card__buttons
                 button(type = "reset" @click = "closeEditor").edit-card__reset Отмена
                 button(type = "submit").button.button--submit.button--edit-submit сохранить

@@ -56,7 +56,7 @@ const feedback = {
             state.feedback = state.feedback.map(
                 function(a) {
                     if (a.id === review.id) {
-                        a === review
+                        a = review
                     }
                     return a
                 })
