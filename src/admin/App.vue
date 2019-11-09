@@ -217,7 +217,7 @@ export default {
 
 <style lang = "postcss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
-@import "normalize.css";
+@import "../styles/normalize.css";
 @import "../styles/mixins.pcss";
 @import "../styles/layout/*.pcss";
 
