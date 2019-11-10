@@ -1,11 +1,13 @@
 Сайт-портфолио. На главной - виджеты на Vue.js, админ-панель - SPA на Vue. Работает с сервером через API (серверная часть не моя).
 Реализованы анимации на ванильном JS (эффект параллакса).
 
-Хостится тут 
-https://dontshoot11.github.io/loftportfolio/
+Работающая версия тут
+
+https://dontshoot11.github.io/loftportfolio/dist
 
 Админ-панель тут
-https://dontshoot11.github.io/loftportfolio/admin
+
+https://dontshoot11.github.io/loftportfolio/dist/admin
 
 Чтобы скачать себе исходники:
 > Перед установкой зависимостей и запуском проекта убедитесь, что у вас установлена [последняя версия Node.js & NPM](https://nodejs.org/en/download/current/), а так же 
